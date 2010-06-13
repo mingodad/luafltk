@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="toluapp" />
+		<Option pch_mode="2" />
+		<Option compiler="gnu_gcc_compiler_tdmingw_console" />
+		<Build>
+			<Target title="withLua50_Debug Win32">
+				<Option output="bin\tolua++_d" prefix_auto="1" extension_auto="1" />
+				<Option object_output="Debug" />
+				<Option type="1" />
+				<Option compiler="gnu_gcc_compiler_tdmingw_console" />
+				<Compiler>
+					<Add option="/DWIN32" />
+					<Add option="/D_DEBUG" />
+					<Add option="/D_CONSOLE" />
+					<Add option="/W3" />
+					<Add option="/ZI" />
+					<Add option="/Od" />
+					<Add option="/MTd" />
+					<Add directory="include" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="include" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="/pdb:Debug\tolua++.pdb" />
+					<Add library="lua50" />
+					<Add directory="lib" />
+				</Linker>
+			</Target>
+			<Target title="withLua50_Release Win32">
+				<Option output="bin\tolua++" prefix_auto="1" extension_auto="1" />
+				<Option object_output="Release" />
+				<Option type="1" />
+				<Option compiler="gnu_gcc_compiler_tdmingw_console" />
+				<Compiler>
+					<Add option="/DWIN32" />
+					<Add option="/DNDEBUG" />
+					<Add option="/D_CONSOLE" />
+					<Add option="/W3" />
+					<Add option="/Zi" />
+					<Add option="/MT" />
+					<Add directory="include" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="include" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="/INCREMENTAL:NO" />
+					<Add library="lua50" />
+					<Add directory="lib" />
+				</Linker>
+			</Target>
+			<Target title="withLua51_Debug Win32">
+				<Option output="bin\tolua++_d" prefix_auto="1" extension_auto="1" />
+				<Option object_output="withLua51_Debug Win32" />
+				<Option type="1" />
+				<Option compiler="gnu_gcc_compiler_tdmingw_console" />
+				<Compiler>
+					<Add option="/DWIN32" />
+					<Add option="/D_DEBUG" />
+					<Add option="/D_CONSOLE" />
+					<Add option="/W3" />
+					<Add option="/ZI" />
+					<Add option="/Od" />
+					<Add option="/MTd" />
+					<Add directory="include" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="include" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="/pdb:withLua51_Debug Win32\tolua++.pdb" />
+					<Add library="Lua5.1" />
+					<Add directory="lib" />
+				</Linker>
+			</Target>
+			<Target title="withLua51_Release Win32">
+				<Option output="bin\tolua++" prefix_auto="1" extension_auto="1" />
+				<Option object_output="withLua51_Release Win32" />
+				<Option type="1" />
+				<Option compiler="gnu_gcc_compiler_tdmingw_console" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="..\lua-5.1.4" />
+					<Add directory="include" />
+					<Add directory="..\lua-5.1.4\src" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="..\tmp\c\lua-5.1.4\src" />
+					<Add directory="include" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="..\lua-5.1.4\liblua.a" />
+					<Add directory="..\tmp\c\lua-5.1.4\src" />
+					<Add directory="lib" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-D_WIN32" />
+		</Compiler>
+		<Unit filename="src\bin\tolua.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\bin\toluabind.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\lib\tolua_event.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\lib\tolua_event.h" />
+		<Unit filename="src\lib\tolua_is.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\lib\tolua_map.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\lib\tolua_push.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src\lib\tolua_to.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

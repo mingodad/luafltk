@@ -1,0 +1,10 @@
+
+This is a demonstration of the classic sliding puzzle game.
+Arrange the tiles by moving them one by one into the empty
+slot until the image is unscrambled.
+
+This is something I once built with Flash years ago, and have
+wanted to do the same with murgaLua for some time. Currently
+the positioning of parts of a single image onto separate tiles
+is beyond my abilities, so it may require having to create
+several individual images for the tiles.

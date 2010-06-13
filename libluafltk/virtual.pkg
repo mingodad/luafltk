@@ -1,0 +1,17 @@
+// mypackage.pkg
+
+$#include "tolua_base.h"
+
+class Widget {
+
+protected:
+   virtual bool input_event(Event* e);
+
+public:
+
+   virtual void add_child(Widget* child);
+
+   void close();
+
+   Widget(string p_name);
+};

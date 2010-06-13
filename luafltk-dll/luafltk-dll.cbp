@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="luafltk-dll" />
+		<Option pch_mode="2" />
+		<Option compiler="gnu_gcc_compiler_fltk" />
+		<Build>
+			<Target title="Debug">
+				<Option output="luafltk-dll" prefix_auto="1" extension_auto="1" />
+				<Option object_output="G:\c\lua\tolua++-1.0.93\src\fltk\luafltk-dll\\.objs" />
+				<Option type="3" />
+				<Option compiler="gnu_gcc_compiler_fltk" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-DBUILD_DLL" />
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add library="user32" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="luafltk-dll" prefix_auto="1" extension_auto="1" />
+				<Option object_output="G:\c\lua\tolua++-1.0.93\src\fltk\luafltk-dll\\.objs" />
+				<Option type="3" />
+				<Option compiler="gnu_gcc_compiler_fltk" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-DBUILD_DLL" />
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="user32" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add directory="..\..\..\include" />
+			<Add directory="..\..\..\..\..\murga\lua-5.1.4\src" />
+		</Compiler>
+		<Unit filename="..\..\..\include\tolua++.h" />
+		<Unit filename="..\fl_lua_misc.cpp" />
+		<Unit filename="..\fl_lua_misc.h" />
+		<Unit filename="..\fltk.pkg.cpp" />
+		<Unit filename="..\tolua_base.h" />
+		<Unit filename="..\..\lib\tolua_event.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\lib\tolua_event.h" />
+		<Unit filename="..\..\lib\tolua_is.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\lib\tolua_map.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\lib\tolua_push.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\lib\tolua_to.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

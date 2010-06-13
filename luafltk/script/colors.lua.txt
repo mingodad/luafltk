@@ -1,0 +1,16 @@
+
+In order to provide an accurate visual representation of the color
+chosen with fl_color_chooser, color 15 is being set to the rgb
+values you pick. The button changes to the new color, as does any
+other widget using color 15. The number 15 is an arbitrary one
+chosen simply because that color is not being used elsewhere.
+
+fl_color_cube is used to find the closest match in the 0-255
+range to the RGB color picked with fl_color_chooser. It has
+a somewhat complex formula, and I'll probably never use it
+in a real-world situation. In fact I wouldn't even use RGB
+colors as part of a FLTK interface, simply because the 256
+provided colors are plenty. RGB/hex is of course useful in
+finding colors that will be used for other purposes, such
+as examining full-color images or passing color values to
+other programs.

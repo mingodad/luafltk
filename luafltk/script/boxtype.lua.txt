@@ -1,0 +1,27 @@
+
+Although there is a kind of order in the table of buttons
+in the script, Lua has a habit of making up its own order
+of traversing non-numeric tables that, while it probably
+has some logic behind it, results in a seemingly random
+order in the display of its contents.
+
+The "UP" state of these box types apparently causes a
+button to also inherit the "DOWN" state of the same
+box type. You can see this when clicking on the example
+buttons; the up state will change to down when clicked,
+but the buttons already in a down state do not change.
+
+Note that changing the scheme of the demo application will
+change the appearance of buttons that are not associated
+with a particular theme (FL_THIN_UP_BOX, for example).
+
+Prior to murgaLua version 0.6, there was a bug in some of
+the box types. The constant name for some box types was
+not fully useable, and required the numerical value.
+These same box types also had constant names that began
+with an underscore, inconsistent with other FLTK constants.
+This bug was also apparent with label types.
+Fortunately, this particular script was written in a way
+that allowed me to simply add the corrected constant names
+to the table without problems, so both 0.6 and earlier
+versions can display the box types properly.

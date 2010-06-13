@@ -1,0 +1,71 @@
+# depslib dependency file v1.0
+1198859543 source:g:\c\lua-5.1.4\src\lua.c
+	<signal.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1218029412 g:\c\lua-5.1.4\src\lua.h
+	<stdarg.h>
+	<stddef.h>
+	"luaconf.h"
+
+1202750708 g:\c\lua-5.1.4\src\luaconf.h
+	<limits.h>
+	<stddef.h>
+	<unistd.h>
+	<io.h>
+	<stdio.h>
+	<stdio.h>
+	<readline/readline.h>
+	<readline/history.h>
+	<assert.h>
+	<math.h>
+	<unistd.h>
+
+1198764145 g:\c\lua-5.1.4\src\lauxlib.h
+	<stddef.h>
+	<stdio.h>
+	"lua.h"
+
+1198764145 g:\c\lua-5.1.4\src\lualib.h
+	"lua.h"
+
+1198859543 source:g:\c\luafltk\lua-5.1.4\src\lua.c
+	<signal.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1274512205 g:\c\luafltk\lua-5.1.4\src\lua.h
+	<stdarg.h>
+	<stddef.h>
+	"luaconf.h"
+
+1202750708 g:\c\luafltk\lua-5.1.4\src\luaconf.h
+	<limits.h>
+	<stddef.h>
+	<unistd.h>
+	<io.h>
+	<stdio.h>
+	<stdio.h>
+	<readline/readline.h>
+	<readline/history.h>
+	<assert.h>
+	<math.h>
+	<unistd.h>
+
+1198764145 g:\c\luafltk\lua-5.1.4\src\lauxlib.h
+	<stddef.h>
+	<stdio.h>
+	"lua.h"
+
+1198764145 g:\c\luafltk\lua-5.1.4\src\lualib.h
+	"lua.h"
+

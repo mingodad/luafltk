@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="luafltk" />
+		<Option pch_mode="2" />
+		<Option compiler="gnu_gcc_compiler_fltk_console" />
+		<Build>
+			<Target title="Debug">
+				<Option output="luafltk-dbg" prefix_auto="1" extension_auto="1" />
+				<Option type="1" />
+				<Option compiler="gnu_gcc_compiler_fltk_console" />
+				<Option parameters="widgets.lua" />
+				<Option host_application="luafltk-dbg.exe" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add library="libluafltk-dbg.a" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="luafltk" prefix_auto="1" extension_auto="1" />
+				<Option type="1" />
+				<Option compiler="gnu_gcc_compiler_fltk_console" />
+				<Option parameters="widgets.lua" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-mno-cygwin" />
+					<Add option="-mwindows" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="libluafltk.a" />
+				</Linker>
+			</Target>
+			<Target title="Release no checks">
+				<Option output="luafltk-nc" prefix_auto="1" extension_auto="1" />
+				<Option type="1" />
+				<Option compiler="gnu_gcc_compiler_fltk_console" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="libluafltk-nc.a" />
+				</Linker>
+			</Target>
+			<Target title="Release no console">
+				<Option output="luafltkw" prefix_auto="1" extension_auto="1" />
+				<Option type="1" />
+				<Option compiler="gnu_gcc_compiler_fltk_console" />
+				<Option parameters="widgets.lua" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-mno-cygwin" />
+					<Add option="-Wl,-subsystem,windows" />
+					<Add library="libluafltk.a" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-DWIN32" />
+			<Add directory="..\tolua++-1.0.93\include" />
+			<Add directory="..\lua-5.1.4\src" />
+		</Compiler>
+		<Linker>
+			<Add library="..\lua-5.1.4\src\liblua.a" />
+			<Add library="..\..\..\..\..\murga\local\lib\bit.a" />
+			<Add directory="..\luafltk" />
+			<Add directory="..\..\..\..\..\murga\murgaLua\src\luasqlite" />
+		</Linker>
+		<Unit filename="..\luafilesystem-1.4.1\src\lfs.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

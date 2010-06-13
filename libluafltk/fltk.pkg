@@ -1,0 +1,4228 @@
+module fltk {
+
+//TOLUA_PROPERTY_TYPE(overload_func); // default type for the 'global' scope
+
+<verbatim>
+#include "tolua_base.h"
+ 
+#include "fl_lua_misc.H" 
+#include <FL/fl_types.h>
+#include <FL/Enumerations.H>
+#include <FL/Fl.H>
+#include <FL/Fl_Adjuster.H>
+#include <FL/Fl_BMP_Image.H>
+#include <FL/Fl_Bitmap.H>
+#include <FL/Fl_Box.H>
+#include <FL/Fl_Browser.H>
+#include <FL/Fl_Browser_.H>
+#include <FL/Fl_Button.H>
+#include <FL/Fl_Chart.H>
+#include <FL/Fl_Check_Browser.H>
+#include <FL/Fl_Check_Button.H>
+#include <FL/Fl_Choice.H>
+#include <FL/Fl_Clock.H>
+#include <FL/Fl_Color_Chooser.H>
+#include <FL/Fl_Counter.H>
+#include <FL/Fl_Device.H>
+#include <FL/Fl_Dial.H>
+#include <FL/Fl_Double_Window.H>
+#include <FL/Fl_Export.H>
+#include <FL/Fl_File_Browser.H>
+#include <FL/Fl_File_Chooser.H>
+#include <FL/Fl_File_Icon.H>
+#include <FL/Fl_File_Input.H>
+#include <FL/Fl_Fill_Dial.H>
+#include <FL/Fl_Fill_Slider.H>
+#include <FL/Fl_Float_Input.H>
+#include <FL/Fl_GIF_Image.H>
+#include <FL/Fl_Gl_Window.H>
+#include <FL/Fl_Group.H>
+#include <FL/Fl_Help_Dialog.H>
+#include <FL/Fl_Help_View.H>
+#include <FL/Fl_Hold_Browser.H>
+#include <FL/Fl_Hor_Fill_Slider.H>
+#include <FL/Fl_Hor_Nice_Slider.H>
+#include <FL/Fl_Hor_Slider.H>
+#include <FL/Fl_Hor_Value_Slider.H>
+#include <FL/Fl_Image.H>
+#include <FL/Fl_Input.H>
+#include <FL/Fl_Input_.H>
+#include <FL/Fl_Input_Choice.H>
+#include <FL/Fl_Int_Input.H>
+#include <FL/Fl_JPEG_Image.H>
+#include <FL/Fl_Light_Button.H>
+#include <FL/Fl_Line_Dial.H>
+#include <FL/Fl_Menu.H>
+#include <FL/Fl_Menu_.H>
+#include <FL/Fl_Menu_Bar.H>
+#include <FL/Fl_Menu_Button.H>
+#include <FL/Fl_Menu_Item.H>
+#include <FL/Fl_Menu_Window.H>
+#include <FL/Fl_Multi_Browser.H>
+#include <FL/Fl_Multi_Label.H>
+#include <FL/Fl_Multiline_Input.H>
+#include <FL/Fl_Multiline_Output.H>
+#include <FL/Fl_Native_File_Chooser.H>
+#include <FL/Fl_Nice_Slider.H>
+#include <FL/Fl_Object.H>
+#include <FL/Fl_Output.H>
+#include <FL/Fl_Overlay_Window.H>
+#include <FL/Fl_PNG_Image.H>
+#include <FL/Fl_PNM_Image.H>
+#include <FL/Fl_Pack.H>
+#include <FL/Fl_Plugin.H>
+#include <FL/Fl_Positioner.H>
+#include <FL/Fl_Preferences.H>
+#include <FL/Fl_Printer.H>
+#include <FL/Fl_Progress.H>
+#include <FL/Fl_RGB_Image.H>
+#include <FL/Fl_Radio_Button.H>
+#include <FL/Fl_Radio_Light_Button.H>
+#include <FL/Fl_Radio_Round_Button.H>
+#include <FL/Fl_Repeat_Button.H>
+#include <FL/Fl_Return_Button.H>
+#include <FL/Fl_Roller.H>
+#include <FL/Fl_Round_Button.H>
+#include <FL/Fl_Round_Clock.H>
+#include <FL/Fl_Scroll.H>
+#include <FL/Fl_Scrollbar.H>
+#include <FL/Fl_Secret_Input.H>
+#include <FL/Fl_Select_Browser.H>
+#include <FL/Fl_Shared_Image.H>
+#include <FL/Fl_Simple_Counter.H>
+#include <FL/Fl_Single_Window.H>
+#include <FL/Fl_Slider.H>
+#include <FL/Fl_Spinner.H>
+#include <FL/Fl_Sys_Menu_Bar.H>
+#include <FL/Fl_Table.H>
+#include <FL/Fl_Table_Row.H>
+#include <FL/Fl_Tabs.H>
+#include <FL/Fl_Text_Buffer.H>
+#include <FL/Fl_Text_Display.H>
+#include <FL/Fl_Text_Editor.H>
+#include <FL/Fl_Tile.H>
+#include <FL/Fl_Tiled_Image.H>
+#include <FL/Fl_Toggle_Button.H>
+#include <FL/Fl_Toggle_Light_Button.H>
+#include <FL/Fl_Toggle_Round_Button.H>
+#include <FL/Fl_Tooltip.H>
+#include <FL/Fl_Tree.H>
+#include <FL/Fl_Tree_Item.H>
+#include <FL/Fl_Tree_Item_Array.H>
+#include <FL/Fl_Tree_Prefs.H>
+#include <FL/Fl_Valuator.H>
+#include <FL/Fl_Value_Input.H>
+#include <FL/Fl_Value_Output.H>
+#include <FL/Fl_Value_Slider.H>
+#include <FL/Fl_Widget.H>
+#include <FL/Fl_Window.H>
+#include <FL/Fl_Wizard.H>
+#include <FL/Fl_XBM_Image.H>
+#include <FL/Fl_XPM_Image.H>
+#include <FL/dirent.h>
+#include <FL/filename.H>
+#include <FL/fl_ask.H>
+#include <FL/fl_draw.H>
+#include <FL/fl_message.H>
+#include <FL/fl_show_colormap.H>
+#include <FL/fl_show_input.H>
+#include <FL/fl_utf8.h>
+#include <FL/forms.H>
+#include <FL/gl.h>
+#include <FL/gl2opengl.h>
+#include <FL/gl_draw.H>
+#include <FL/glu.h>
+#include <FL/glut.H>
+#include <FL/math.h>
+#include <FL/names.h>
+#include <FL/Fl_Abstract_Printer.H>
+#include <FL/Fl_PSfile_Device.H>
+
+typedef int lua_Function;
+
+</verbatim>
+
+enum Fl_Cursor {	// standard cursors
+  FL_CURSOR_DEFAULT	= 0,
+  FL_CURSOR_ARROW	= 35,
+  FL_CURSOR_CROSS	= 66,
+  FL_CURSOR_WAIT	= 76,
+  FL_CURSOR_INSERT	= 77,
+  FL_CURSOR_HAND	= 31,
+  FL_CURSOR_HELP	= 47,
+  FL_CURSOR_MOVE	= 27,
+  // fltk provides bitmaps for these:
+  FL_CURSOR_NS		= 78,
+  FL_CURSOR_WE		= 79,
+  FL_CURSOR_NWSE	= 80,
+  FL_CURSOR_NESW	= 81,
+  FL_CURSOR_NONE	= 255,
+  // for back compatability (non MSWindows ones):
+  FL_CURSOR_N		= 70,
+  FL_CURSOR_NE		= 69,
+  FL_CURSOR_E		= 49,
+  FL_CURSOR_SE		= 8,
+  FL_CURSOR_S		= 9,
+  FL_CURSOR_SW		= 7,
+  FL_CURSOR_W		= 36,
+  FL_CURSOR_NW		= 68
+  //FL_CURSOR_NS	= 22,
+  //FL_CURSOR_WE	= 55,
+};
+
+enum {
+  FL_SOLID	= 0,		///< line style: <tt>___________</tt>
+  FL_DASH	= 1,		///< line style: <tt>_ _ _ _ _ _</tt>
+  FL_DOT	= 2,		///< line style: <tt>. . . . . .</tt>
+  FL_DASHDOT	= 3,		///< line style: <tt>_ . _ . _ .</tt>
+  FL_DASHDOTDOT	= 4,		///< line style: <tt>_ . . _ . .</tt>
+
+  FL_CAP_FLAT	= 0x100,	///< cap style: end is flat
+  FL_CAP_ROUND	= 0x200,	///< cap style: end is round
+  FL_CAP_SQUARE	= 0x300,	///< cap style: end wraps end point
+
+  FL_JOIN_MITER	= 0x1000,	///< join style: line join extends to a point
+  FL_JOIN_ROUND	= 0x2000,	///< join style: line join is rounded
+  FL_JOIN_BEVEL	= 0x3000	///< join style: line join is tidied
+};
+
+typedef void *ID;
+
+//$typedef char *_cstring;
+
+typedef unsigned char uchar;
+typedef unsigned long ulong;
+typedef char *Fl_String;
+typedef const char *Fl_CString;
+typedef unsigned int Fl_Shortcut;
+typedef unsigned int Fl_Char;
+typedef unsigned Fl_Align;
+typedef int Fl_Font;
+typedef int Fl_Fontsize;
+typedef unsigned int Fl_Color;
+//typedef void (*Fl_Draw_Image_Cb)(void* data,int x,int y,int w,uchar* buf);
+//typedef int (*FL_HANDLEPTR)(Fl_Widget *, int , float, float, char);
+typedef void* GLContext;
+//typedef const char *(Fl_Help_Func)(Fl_Widget *, const char *);
+typedef Fl_Menu_Item Fl_Menu;
+typedef void *ID;
+//typedef struct {
+//      int scrollsize;
+//typedef Fl_Image *(*Fl_Shared_Handler)(const char *name, uchar *header,
+//                                       int headerlen);
+typedef Fl_Menu_Bar Fl_Sys_Menu_Bar;
+//typedef void (*Fl_Text_Modify_Cb)(int pos, int nInserted, int nDeleted,
+//                                  int nRestyled, const char* deletedText,
+//                                  void* cbArg);
+// typedef void (*Fl_Text_Predelete_Cb)(int pos, int nDeleted, void* cbArg);
+// typedef void (*Unfinished_Style_Cb)(int, void *);
+// typedef int (*Key_Func)(int key, Fl_Text_Editor* editor);
+// typedef void (Fl_Callback )(Fl_Widget*, void*);
+// typedef Fl_Callback* Fl_Callback_p;
+// typedef void (Fl_Callback0)(Fl_Widget*);
+// typedef void (Fl_Callback1)(Fl_Widget*, long);
+// typedef int (Fl_File_Sort_F)(struct dirent **, struct dirent **);
+typedef Fl_Widget FL_OBJECT;
+typedef Fl_Window FL_FORM;
+typedef int FL_Coord;
+// typedef void (*FL_IO_CALLBACK) (int, void*);
+// typedef void (*Forms_CB)(Fl_Widget*, long);
+// typedef void (*Forms_FormCB)(Fl_Widget*);
+typedef float Matrix[4][4];
+//typedef void (*GLUTproc)();
+//typedef struct page_format {
+//      int width;
+typedef unsigned char Flv_ShowScrollbar;
+typedef unsigned short Flv_Feature;
+
+#define	FALSE	1
+#define	FL_ALIGN_BESIDE	65
+#define	FL_ALL_FREE	66
+#define	FL_ALT	67
+#define	FL_ANALOG_CLOCK	68
+#define	FL_AUTO	69
+#define	FL_BAR_CHART	70
+#define	FL_BOLDITALIC_STYLE	71
+#define	FL_BOLD_STYLE	72
+#define	FL_BOTTOM_BCOL	73
+#define	FL_BOUND_WIDTH	74
+#define	FL_BUTTONS	75
+#define	FL_CANCEL	76
+#define	FL_CAPS_LOCK	77
+#define	FL_CHART_LABEL_MAX	78
+#define	FL_CHART_MAX	79
+#define	FL_CIRCLE_BOX	80
+#define	FL_COLOR_CUBE	82
+#define	FL_CONTINUOUS_FREE	83
+#define	FL_CTRL	84
+#define	FL_DARKCYAN	85
+#define	FL_DARKGOLD	86
+#define	FL_DARKTOMATO	87
+#define	FL_DEFAULT_CURSOR	88
+#define	FL_DEFAULT_FONT	89
+#define	FL_DEFAULT_SIZE	90
+#define	FL_DIAMOND_BOX	91
+#define	FL_DIAMOND_DOWN_BOX	92
+#define	FL_DIAMOND_UP_BOX	93
+#define	FL_DIGITAL_CLOCK	94
+#define	FL_DOUBLE_WINDOW	95
+#define	FL_DRAW	96
+#define	FL_DROPLIST_CHOICE	97
+#define	FL_EMBOSSED_LABEL	98
+#define	FL_EMBOSSED_STYLE	99
+#define	FL_ENGRAVED_LABEL	100
+#define	FL_ENGRAVED_STYLE	101
+#define	FL_F	102
+#define	FL_FILLED_CHART	103
+#define	FL_FILL_CHART	104
+#define	FL_FILL_DIAL	105
+#define	FL_FIXEDBOLDITALIC_STYLE	106
+#define	FL_FIXEDBOLD_STYLE	107
+#define	FL_FIXEDITALIC_STYLE	108
+#define	FL_FIXED_STYLE	109
+#define	FL_FLOAT_INPUT	110
+#define	FL_FRAME	111
+#define	FL_FRAME_BOX	112
+#define	FL_FREEMEM	113
+#define	FL_FREEZE	114
+#define	FL_FREE_COLOR	115
+#define	FL_GRAY	116
+#define	FL_GRAY_RAMP	117
+#define	FL_GTK_DOWN_BOX	118
+#define	FL_GTK_DOWN_FRAME	119
+#define	FL_GTK_ROUND_DOWN_BOX	120
+#define	FL_GTK_ROUND_UP_BOX	121
+#define	FL_GTK_THIN_DOWN_BOX	122
+#define	FL_GTK_THIN_DOWN_FRAME	123
+#define	FL_GTK_THIN_UP_BOX	124
+#define	FL_GTK_THIN_UP_FRAME	125
+#define	FL_GTK_UP_BOX	126
+#define	FL_GTK_UP_FRAME	127
+#define	FL_HORBAR_CHART	70
+#define	FL_IGNORE	128
+#define	FL_IMAGE_WITH_ALPHA	129
+#define	FL_INACTIVE	130
+#define	FL_INACTIVE_COL	131
+#define	FL_INDIANRED	132
+#define	FL_INOUT_BUTTON	133
+#define	FL_INPUT_FREE	134
+#define	FL_INPUT_READONLY	135
+#define	FL_INPUT_TYPE	136
+#define	FL_INPUT_WRAP	137
+#define	FL_INT_INPUT	138
+#define	FL_INVALID	139
+#define	FL_INVALID_STYLE	140
+#define	FL_INVISIBLE_CURSOR	141
+#define	FL_ITALIC_STYLE	142
+#define	FL_KEY_MASK	143
+#define	FL_KP	144
+#define	FL_LARGE_FONT	145
+#define	FL_LARGE_SIZE	146
+#define	FL_LCOL	147
+#define	FL_LEFTMOUSE	148
+#define	FL_LEFT_BCOL	149
+#define	FL_LEFT_MOUSE	150
+#define	FL_LINE_CHART	151
+#define	FL_LINE_DIAL	152
+#define	FL_MAJOR_VERSION	153
+#define	FL_MCOL	154
+#define	FL_MEDIUM_FONT	155
+#define	FL_MEDIUM_SIZE	156
+#define	FL_MENU_BUTTON	157
+#define	FL_META	158
+#define	FL_MIDDLEMOUSE	159
+#define	FL_MIDDLE_MOUSE	160
+#define	FL_MINOR_VERSION	161
+#define	FL_MOUSE	162
+#define	FL_MULTILINE_INPUT	163
+#define	FL_MULTILINE_INPUT_WRAP	164
+#define	FL_MULTILINE_OUTPUT	165
+#define	FL_MULTILINE_OUTPUT_WRAP	166
+#define	FL_MULTI_BROWSER	167
+#define	FL_NONE	168
+#define	FL_NORMAL_BITMAP	169
+#define	FL_NORMAL_BROWSER	170
+#define	FL_NORMAL_BUTTON	171
+#define	FL_NORMAL_BUTTON	172
+#define	FL_NORMAL_CHOICE	173
+#define	FL_NORMAL_COUNTER	174
+#define	FL_NORMAL_DIAL	175
+#define	FL_NORMAL_FONT	176
+#define	FL_NORMAL_FREE	177
+#define	FL_NORMAL_INPUT	178
+#define	FL_NORMAL_OUTPUT	179
+#define	FL_NORMAL_PIXMAP	180
+#define	FL_NORMAL_POSITIONER	181
+#define	FL_NORMAL_STYLE	182
+#define	FL_NORMAL_TEXT	183
+#define	FL_NORMAL_TIMER	184
+#define	FL_NO_FRAME	185
+#define	FL_NUM_BLUE	186
+#define	FL_NUM_FREE_COLOR	187
+#define	FL_NUM_GRAY	188
+#define	FL_NUM_GREEN	189
+#define	FL_NUM_LOCK	190
+#define	FL_NUM_RED	191
+#define	FL_OFF	192
+#define	FL_OFLAT_BOX	193
+#define	FL_OK	194
+#define	FL_ON	195
+#define	FL_ORCHID	196
+#define	FL_OSHADOW_BOX	197
+#define	FL_OVAL_BOX	198
+#define	FL_OVAL_FRAME	199
+#define	FL_PALEGREEN	200
+#define	FL_PATCH_VERSION	201
+#define	FL_PIE_CHART	202
+#define	FL_PLACE_CENTERFREE	203
+#define	FL_PLACE_FREE_CENTER	204
+#define	FL_PLASTIC_DOWN_BOX	205
+#define	FL_PLASTIC_DOWN_FRAME	206
+#define	FL_PLASTIC_ROUND_DOWN_BOX	207
+#define	FL_PLASTIC_ROUND_UP_BOX	208
+#define	FL_PLASTIC_THIN_DOWN_BOX	209
+#define	FL_PLASTIC_THIN_UP_BOX	210
+#define	FL_PLASTIC_UP_BOX	211
+#define	FL_PLASTIC_UP_FRAME	212
+#define	FL_PREEMPT	213
+#define	FL_PULLDOWN_MENU	214
+#define	FL_PUP_INACTIVE	215
+#define	FL_PUP_TOGGLE	216
+#define	FL_PUSH_BUTTON	217
+#define	FL_PUSH_MENU	218
+#define	FL_RADIO_BUTTON	219
+#define	FL_RESERVED_TYPE	220
+#define	FL_RETURN_ALWAYS	221
+#define	FL_RETURN_BUTTON	222
+#define	FL_RETURN_CHANGED	223
+#define	FL_RETURN_END	224
+#define	FL_RETURN_END_CHANGED	225
+#define	FL_RFLAT_BOX	226
+#define	FL_RIGHTMOUSE	227
+#define	FL_RIGHT_BCOL	228
+#define	FL_RIGHT_MOUSE	229
+#define	FL_ROUNDED_BOX	230
+#define	FL_ROUNDED_FRAME	231
+#define	FL_ROUND_CLOCK	232
+#define	FL_ROUND_DOWN_BOX	233
+#define	FL_ROUND_UP_BOX	234
+#define	FL_RSHADOW_BOX	235
+#define	FL_SCROLL_LOCK	236
+#define	FL_SECRET_INPUT	237
+#define	FL_SELECT_BROWSER	238
+#define	FL_SHADOW_BOX	239
+#define	FL_SHADOW_FRAME	240
+#define	FL_SHADOW_LABEL	241
+#define	FL_SHADOW_STYLE	242
+#define	FL_SHIFT	243
+#define	FL_SIMPLE_COUNTER	244
+#define	FL_SLATEBLUE	245
+#define	FL_SLEEPING_FREE	246
+#define	FL_SMALL_FONT	247
+#define	FL_SMALL_SIZE	248
+#define	FL_SORT_ASCENDING	249
+#define	FL_SORT_DESCENDING	250
+#define	FL_SPECIALPIE_CHART	251
+#define	FL_SPIKE_CHART	252
+#define	FL_SQUARE_CLOCK	253
+#define	FL_STEP	254
+#define	FL_SYMBOL_LABEL	255
+#define	FL_TEXT_EDITOR_ANY_STATE	256
+#define	FL_THAW	257
+#define	FL_TIMESBOLDITALIC_STYLE	258
+#define	FL_TIMESBOLD_STYLE	259
+#define	FL_TIMESITALIC_STYLE	260
+#define	FL_TIMES_STYLE	261
+#define	FL_TINY_FONT	262
+#define	FL_TINY_SIZE	263
+#define	FL_TOGGLE_BUTTON	264
+#define	FL_TOMATO	265
+#define	FL_TOP_BCOL	266
+#define	FL_TOUCH_BUTTON	267
+#define	FL_TOUCH_MENU	268
+#define	FL_VALID	269
+#define	FL_VALUE_TIMER	270
+#define	FL_VERSION	271
+#define	FL_VERTICAL	272
+#define	FL_VERT_BROWSER_SLIDER	273
+#define	FL_VERT_FILL_SLIDER	274
+#define	FL_VERT_NICE_SLIDER	275
+#define	FL_VERT_SLIDER	276
+#define	FL_WHEAT	277
+#define	FL_WHEN_NEEDED	278
+#define	FL_WINDOW	279
+#define	NO_PAGE_FORMATS	280
+#define	NULL	281
+#define	SLIDER_WIDTH	282
+#define	TRUE	283
+
+#define	FL_TREE_SORT_NONE	1
+#define	FL_TREE_SORT_ASCENDING	2
+#define	FL_TREE_SORT_DESCENDING	3
+// #define	A0	1
+// #define	A1	2
+// #define	A2	3
+// #define	A3	4
+// #define	A4	5
+// #define	A5	6
+// #define	A6	7
+// #define	A7	8
+// #define	A8	9
+// #define	A9	10
+// #define	B0	11
+// #define	B1	12
+// #define	B2	13
+// #define	B3	14
+// #define	B4	15
+// #define	B5	16
+// #define	B6	17
+// #define	B7	18
+// #define	B8	19
+// #define	B9	20
+// #define	B10	21
+// #define	C5E	22
+// #define	DLE	23
+// #define	EXECUTIVE	24
+// #define	FOLIO	25
+// #define	LEDGER	26
+// #define	LEGAL	27
+// #define	LETTER	28
+// #define	TABLOID	29
+// #define	ENVELOPE	30
+// #define	MEDIA	31
+#define	FL_RGB	1
+#define	FL_INDEX	2
+#define	FL_SINGLE	3
+#define	FL_DOUBLE	4
+#define	FL_ACCUM	5
+#define	FL_ALPHA	6
+#define	FL_DEPTH	7
+#define	FL_STENCIL	8
+#define	FL_RGB8	9
+#define	FL_MULTISAMPLE	10
+#define	FL_STEREO	11
+#define	FL_FAKE_SINGLE	12
+// #define	FL_CURSOR_DEFAULT	1
+// #define	FL_CURSOR_ARROW	2
+// #define	FL_CURSOR_CROSS	3
+// #define	FL_CURSOR_WAIT	4
+// #define	FL_CURSOR_INSERT	5
+// #define	FL_CURSOR_HAND	6
+// #define	FL_CURSOR_HELP	7
+// #define	FL_CURSOR_MOVE	8
+// #define	FL_CURSOR_NS	9
+// #define	FL_CURSOR_WE	10
+// #define	FL_CURSOR_NWSE	11
+// #define	FL_CURSOR_NESW	12
+// #define	FL_CURSOR_NONE	13
+// #define	FL_CURSOR_N	14
+// #define	FL_CURSOR_NE	15
+// #define	FL_CURSOR_E	16
+// #define	FL_CURSOR_SE	17
+// #define	FL_CURSOR_S	18
+// #define	FL_CURSOR_SW	19
+// #define	FL_CURSOR_W	20
+// #define	FL_CURSOR_NW	21
+
+#define	FL_TREE_SELECT_NONE	1
+#define	FL_TREE_SELECT_SINGLE	2
+#define	FL_TREE_SELECT_MULTI	3
+#define	FL_TREE_CONNECTOR_NONE	1
+#define	FL_TREE_CONNECTOR_DOTTED	2
+#define	FL_TREE_CONNECTOR_SOLID	3
+#define	GLUT_RETURN_ZERO	1
+#define	GLUT_WINDOW_X	2
+#define	GLUT_WINDOW_Y	3
+#define	GLUT_WINDOW_WIDTH	4
+#define	GLUT_WINDOW_HEIGHT	5
+#define	GLUT_WINDOW_PARENT	6
+#define	GLUT_SCREEN_WIDTH	7
+#define	GLUT_SCREEN_HEIGHT	8
+#define	GLUT_MENU_NUM_ITEMS	9
+#define	GLUT_DISPLAY_MODE_POSSIBLE	10
+#define	GLUT_INIT_WINDOW_X	11
+#define	GLUT_INIT_WINDOW_Y	12
+#define	GLUT_INIT_WINDOW_WIDTH	13
+#define	GLUT_INIT_WINDOW_HEIGHT	14
+#define	GLUT_INIT_DISPLAY_MODE	15
+#define	GLUT_WINDOW_BUFFER_SIZE	16
+#define	GLUT_VERSION	17
+#define	FL_DAMAGE_CHILD	1
+#define	FL_DAMAGE_EXPOSE	2
+#define	FL_DAMAGE_SCROLL	3
+#define	FL_DAMAGE_OVERLAY	4
+#define	FL_DAMAGE_USER1	5
+#define	FL_DAMAGE_USER2	6
+#define	FL_DAMAGE_ALL	7
+#define	FL_NO_EVENT	1
+#define	FL_PUSH	2
+#define	FL_RELEASE	3
+#define	FL_ENTER	4
+#define	FL_LEAVE	5
+#define	FL_DRAG	6
+#define	FL_FOCUS	7
+#define	FL_UNFOCUS	8
+#define	FL_KEYDOWN	9
+#define	FL_KEYBOARD	10
+#define	FL_KEYUP	11
+#define	FL_CLOSE	12
+#define	FL_MOVE	13
+#define	FL_SHORTCUT	14
+#define	FL_DEACTIVATE	15
+#define	FL_ACTIVATE	16
+#define	FL_HIDE	17
+#define	FL_SHOW	18
+#define	FL_PASTE	19
+#define	FL_SELECTIONCLEAR	20
+#define	FL_MOUSEWHEEL	21
+#define	FL_DND_ENTER	22
+#define	FL_DND_DRAG	23
+#define	FL_DND_LEAVE	24
+#define	FL_DND_RELEASE	25
+
+// FIXME: These codes collide with valid Unicode keys
+
+#define FL_Button	0xfee8	///< A mouse button; use Fl_Button + n for mouse button n.
+#define FL_BackSpace	0xff08	///< The backspace key.
+#define FL_Tab		0xff09	///< The tab key.
+#define FL_Enter	0xff0d	///< The enter key. 
+#define FL_Pause	0xff13	///< The pause key.
+#define FL_Scroll_Lock	0xff14	///< The scroll lock key.
+#define FL_Escape	0xff1b	///< The escape key.
+#define FL_Home		0xff50	///< The home key.
+#define FL_Left		0xff51	///< The left arrow key.
+#define FL_Up		0xff52	///< The up arrow key.
+#define FL_Right	0xff53	///< The right arrow key.
+#define FL_Down		0xff54	///< The down arrow key.
+#define FL_Page_Up	0xff55	///< The page-up key.
+#define FL_Page_Down	0xff56	///< The page-down key.
+#define FL_End		0xff57	///< The end key.
+#define FL_Print	0xff61	///< The print (or print-screen) key.
+#define FL_Insert	0xff63	///< The insert key. 
+#define FL_Menu		0xff67	///< The menu key.
+#define FL_Help		0xff68	///< The 'help' key on Mac keyboards
+#define FL_Num_Lock	0xff7f	///< The num lock key.
+#define FL_KP		0xff80	///< One of the keypad numbers; use FL_KP + n for number n.
+#define FL_KP_Enter	0xff8d	///< The enter key on the keypad, same as Fl_KP+'\\r'.
+#define FL_KP_Last	0xffbd	///< The last keypad key; use to range-check keypad.
+#define FL_F		0xffbd	///< One of the function keys; use FL_F + n for function key n.
+#define FL_F_Last	0xffe0	///< The last function key; use to range-check function keys.
+#define FL_Shift_L	0xffe1	///< The lefthand shift key.
+#define FL_Shift_R	0xffe2	///< The righthand shift key.
+#define FL_Control_L	0xffe3	///< The lefthand control key.
+#define FL_Control_R	0xffe4	///< The righthand control key.
+#define FL_Caps_Lock	0xffe5	///< The caps lock key.
+#define FL_Meta_L	0xffe7	///< The left meta/Windows key.
+#define FL_Meta_R	0xffe8	///< The right meta/Windows key.
+#define FL_Alt_L	0xffe9	///< The left alt key.
+#define FL_Alt_R	0xffea	///< The right alt key. 
+#define FL_Delete	0xffff	///< The delete key.
+
+  /** Align the label horizontally in the middle. */
+#define FL_ALIGN_CENTER		= (Fl_Align)0;
+  /** Align the label at the top of the widget. Inside labels appear below the top,
+   *  outside labels are drawn on top of the widget. */
+#define FL_ALIGN_TOP		= (Fl_Align)1;
+  /** Align the label at the bottom of the widget. */
+#define FL_ALIGN_BOTTOM		= (Fl_Align)2;
+  /** Align the label at the left of the widget. Inside labels appear left-justified
+   *  starting at the left side of the widget, outside labels are right-justified and
+   *  drawn to the left of the widget. */
+#define FL_ALIGN_LEFT		= (Fl_Align)4;
+  /** Align the label to the right of the widget. */
+#define FL_ALIGN_RIGHT		= (Fl_Align)8;
+  /** Draw the label inside of the widget. */
+#define FL_ALIGN_INSIDE		= (Fl_Align)16;
+  /** If the label contains an image, draw the text on top of the image. */
+#define FL_ALIGN_TEXT_OVER_IMAGE	= (Fl_Align)0x0020;
+  /** If the label contains an image, draw the text below the image. */
+#define FL_ALIGN_IMAGE_OVER_TEXT	= (Fl_Align)0x0000;
+  /** All parts of the label that are lager than the widget will not be drawn . */
+#define FL_ALIGN_CLIP		= (Fl_Align)64;
+  /** Wrap text that does not fit the width of the widget. */
+#define FL_ALIGN_WRAP		= (Fl_Align)128;
+  /** If the label contains an image, draw the text to the right of the image. */
+#define FL_ALIGN_IMAGE_NEXT_TO_TEXT = (Fl_Align)0x0100;
+  /** If the label contains an image, draw the text to the left of the image. */
+#define FL_ALIGN_TEXT_NEXT_TO_IMAGE = (Fl_Align)0x0120;
+/** If the label contains an image, draw the image or deimage in the backgroup. */
+#define FL_ALIGN_IMAGE_BACKDROP  = (Fl_Align)0x0200;
+#define FL_ALIGN_TOP_LEFT	= FL_ALIGN_TOP | FL_ALIGN_LEFT;
+#define FL_ALIGN_TOP_RIGHT	= FL_ALIGN_TOP | FL_ALIGN_RIGHT;
+#define FL_ALIGN_BOTTOM_LEFT	= FL_ALIGN_BOTTOM | FL_ALIGN_LEFT;
+#define FL_ALIGN_BOTTOM_RIGHT	= FL_ALIGN_BOTTOM | FL_ALIGN_RIGHT;
+#define FL_ALIGN_LEFT_TOP	= 0x0007; // magic value
+#define FL_ALIGN_RIGHT_TOP	= 0x000b; // magic value
+#define FL_ALIGN_LEFT_BOTTOM	= 0x000d; // magic value
+#define FL_ALIGN_RIGHT_BOTTOM	= 0x000e; // magic value
+#define FL_ALIGN_NOWRAP		= (Fl_Align)0; // for back compatability
+#define FL_ALIGN_POSITION_MASK   = 0x000f; // left, right, top, bottom
+#define FL_ALIGN_IMAGE_MASK      = 0x0320; // l/r, t/b, backdrop
+
+
+// Standard colors. These are used as default colors in widgets and altered as necessary
+#define FL_FOREGROUND_COLOR  = 0;	///< the default foreground color (0) used for labels and text
+#define FL_BACKGROUND2_COLOR = 7;	///< the default background color for text, list, and valuator widgets
+#define FL_INACTIVE_COLOR    = 8;	///< the inactive foreground color
+#define FL_SELECTION_COLOR   = 15;	///< the default selection/highlight color
+
+  // boxtypes generally limit themselves to these colors so
+  // the whole ramp is not allocated:
+
+#define FL_GRAY0   = 32;	// 'A'
+#define FL_DARK3   = 39;	// 'H'
+#define FL_DARK2   = 45; // 'N'
+#define FL_DARK1   = 47;	// 'P'
+#define FL_BACKGROUND_COLOR  = 49;	// 'R' default background color
+#define FL_LIGHT1  = 50;	// 'S'
+#define FL_LIGHT2  = 52;	// 'U'
+#define FL_LIGHT3  = 54;	// 'W'
+
+  // FLTK provides a 5x8x5 color cube that is used with colormap visuals
+
+#define FL_BLACK   = 56;
+#define FL_RED     = 88;
+#define FL_GREEN   = 63;
+#define FL_YELLOW  = 95;
+#define FL_BLUE    = 216;
+#define FL_MAGENTA = 248;
+#define FL_CYAN    = 223;
+#define FL_DARK_RED = 72;
+
+#define FL_DARK_GREEN    = 60;
+#define FL_DARK_YELLOW   = 76;
+#define FL_DARK_BLUE     = 136;
+#define FL_DARK_MAGENTA  = 152;
+#define FL_DARK_CYAN     = 140;
+
+#define FL_WHITE         = 255;
+
+// standard fonts
+
+#define FL_HELVETICA              = 0;	///< Helvetica (or Arial) normal (0)
+#define FL_HELVETICA_BOLD         = 1;	///< Helvetica (or Arial) bold
+#define FL_HELVETICA_ITALIC       = 2;	///< Helvetica (or Arial) oblique
+#define FL_HELVETICA_BOLD_ITALIC  = 3;	///< Helvetica (or Arial) bold-oblique
+#define FL_COURIER                = 4;	///< Courier normal
+#define FL_COURIER_BOLD           = 5;	///< Courier bold 
+#define FL_COURIER_ITALIC         = 6;	///< Courier italic
+#define FL_COURIER_BOLD_ITALIC    = 7;	///< Courier bold-italic
+#define FL_TIMES                  = 8;	///< Times roman
+#define FL_TIMES_BOLD             = 9;	///< Times roman bold
+#define FL_TIMES_ITALIC           = 10;	///< Times roman italic
+#define FL_TIMES_BOLD_ITALIC      = 11;	///< Times roman bold-italic
+#define FL_SYMBOL                 = 12;	///< Standard symbol font
+#define FL_SCREEN                 = 13;	///< Default monospaced screen font
+#define FL_SCREEN_BOLD            = 14;	///< Default monospaced bold screen font
+#define FL_ZAPF_DINGBATS          = 15;	///< Zapf-dingbats font
+
+#define FL_FREE_FONT              = 16;	///< first one to allocate
+#define FL_BOLD                   = 1;	///< add this to helvetica, courier, or times
+#define FL_ITALIC                 = 2;	///< add this to helvetica, courier, or times
+#define FL_BOLD_ITALIC            = 3;	///< add this to helvetica, courier, or times
+
+enum Fl_Boxtype { // boxtypes (if you change these you must fix fl_boxtype.C):
+
+  FL_NO_BOX = 0,		///< nothing is drawn at all, this box is invisible
+  FL_FLAT_BOX,			///< a flat box
+  FL_UP_BOX,			///< see figure 1
+  FL_DOWN_BOX,			///< see figure 1
+  FL_UP_FRAME,			///< see figure 1
+  FL_DOWN_FRAME,		///< see figure 1
+  FL_THIN_UP_BOX,		///< see figure 1
+  FL_THIN_DOWN_BOX,		///< see figure 1
+  FL_THIN_UP_FRAME,		///< see figure 1
+  FL_THIN_DOWN_FRAME,		///< see figure 1
+  FL_ENGRAVED_BOX,		///< see figure 1
+  FL_EMBOSSED_BOX,		///< see figure 1
+  FL_ENGRAVED_FRAME,		///< see figure 1
+  FL_EMBOSSED_FRAME,		///< see figure 1
+  FL_BORDER_BOX,		///< see figure 1
+  _FL_SHADOW_BOX,		///< see figure 1
+  FL_BORDER_FRAME,		///< see figure 1
+  _FL_SHADOW_FRAME,		///< see figure 1
+  _FL_ROUNDED_BOX,		///< see figure 1
+  _FL_RSHADOW_BOX,		///< see figure 1
+  _FL_ROUNDED_FRAME,		///< see figure 1
+  _FL_RFLAT_BOX,		///< see figure 1
+  _FL_ROUND_UP_BOX,		///< see figure 1
+  _FL_ROUND_DOWN_BOX,		///< see figure 1
+  _FL_DIAMOND_UP_BOX,		///< see figure 1
+  _FL_DIAMOND_DOWN_BOX,		///< see figure 1
+  _FL_OVAL_BOX,			///< see figure 1
+  _FL_OSHADOW_BOX,		///< see figure 1
+  _FL_OVAL_FRAME,		///< see figure 1
+  _FL_OFLAT_BOX,		///< see figure 1
+  _FL_PLASTIC_UP_BOX,		///< plastic version of FL_UP_BOX
+  _FL_PLASTIC_DOWN_BOX,		///< plastic version of FL_DOWN_BOX
+  _FL_PLASTIC_UP_FRAME,		///< plastic version of FL_UP_FRAME
+  _FL_PLASTIC_DOWN_FRAME,	///< plastic version of FL_DOWN_FRAME
+  _FL_PLASTIC_THIN_UP_BOX,	///< plastic version of FL_THIN_UP_BOX
+  _FL_PLASTIC_THIN_DOWN_BOX,	///< plastic version of FL_THIN_DOWN_BOX
+  _FL_PLASTIC_ROUND_UP_BOX,	///< plastic version of FL_ROUND_UP_BOX
+  _FL_PLASTIC_ROUND_DOWN_BOX,	///< plastic version of FL_ROUND_DOWN_BOX
+  _FL_GTK_UP_BOX,		///< gtk+ version of FL_UP_BOX
+  _FL_GTK_DOWN_BOX,		///< gtk+ version of FL_DOWN_BOX
+  _FL_GTK_UP_FRAME,		///< gtk+ version of FL_UP_FRAME
+  _FL_GTK_DOWN_FRAME,		///< gtk+ version of FL_DOWN_RAME
+  _FL_GTK_THIN_UP_BOX,		///< gtk+ version of FL_THIN_UP_BOX
+  _FL_GTK_THIN_DOWN_BOX,	///< gtk+ version of FL_THIN_DOWN_BOX
+  _FL_GTK_THIN_UP_FRAME,	///< gtk+ version of FL_UP_FRAME
+  _FL_GTK_THIN_DOWN_FRAME,	///< gtk+ version of FL_THIN_DOWN_FRAME
+  _FL_GTK_ROUND_UP_BOX,		///< gtk+ version of FL_ROUND_UP_BOX
+  _FL_GTK_ROUND_DOWN_BOX,	///< gtk+ version of FL_ROUND_DOWN_BOX
+  FL_FREE_BOXTYPE		///< the first free box type for creation of new box types
+};
+
+enum Fl_Labeltype {	// labeltypes:
+  FL_NORMAL_LABEL	= 0,	///< draws the text (0)
+  FL_NO_LABEL,			///< does nothing
+  _FL_SHADOW_LABEL,		///< draws a drop shadow under the text
+  _FL_ENGRAVED_LABEL,		///< draws edges as though the text is engraved
+  _FL_EMBOSSED_LABEL,		///< draws edges as thought the text is raised
+  _FL_MULTI_LABEL,		///< ?
+  _FL_ICON_LABEL,		///< draws the icon associated with the text
+  _FL_IMAGE_LABEL,		///< ?
+
+  FL_FREE_LABELTYPE		///< first free labeltype to use for creating own labeltypes
+};
+
+enum Fl_When { // Fl_Widget::when():
+  FL_WHEN_NEVER		= 0,	///< Never call the callback
+  FL_WHEN_CHANGED	= 1,	///< Do the callback only when the widget value changes
+  FL_WHEN_NOT_CHANGED	= 2,	///< Do the callback whenever the user interacts with the widget
+  FL_WHEN_RELEASE	= 4,	///< Do the callback when the button or key is released and the value changes
+  FL_WHEN_RELEASE_ALWAYS= 6,	///< Do the callback when the button or key is released, even if the value doesn't change
+  FL_WHEN_ENTER_KEY	= 8,	///< Do the callback when the user presses the ENTER key and the value changes
+  FL_WHEN_ENTER_KEY_ALWAYS=10,	///< Do the callback when the user presses the ENTER key, even if the value doesn't change
+  FL_WHEN_ENTER_KEY_CHANGED=11	///< ?
+};
+/////////////////////////////////////////////////////
+//
+// 	becuase inheritance needs to have base classes declared first
+// 	the classes will appear out of alphabetical order
+//
+////////////////////////////////////////////////////
+
+class	Fl_Widget		{
+	protected:
+	Fl_Widget(int x, int y, int w, int h, const char *label=0L);
+	
+	public:
+	virtual ~Fl_Widget();
+	
+enum {
+        INACTIVE        = 1<<0,   ///< the widget can't receive focus, and is disabled but potentially visible
+        INVISIBLE       = 1<<1,   ///< the widget is not drawn but can receive events
+        OUTPUT          = 1<<2,   ///< for output only
+        NOBORDER        = 1<<3,   ///< don't draw a decoration (Fl_Window)
+        FORCE_POSITION  = 1<<4,   ///< don't let the window manager position the window (Fl_Window)
+        NON_MODAL       = 1<<5,   ///< thisis a hovering toolbar window (Fl_Window)
+        SHORTCUT_LABEL  = 1<<6,   ///< the label contains a shortcut we need to draw
+        CHANGED         = 1<<7,   ///< the widget value changed
+        OVERRIDE        = 1<<8,   ///< position window on top (Fl_Window)
+        VISIBLE_FOCUS   = 1<<9,   ///< accepts keyboard focus navigation if the widget can have the focus
+        COPIED_LABEL    = 1<<10,  ///< the widget label is internally copied, its destruction is handled by the widget
+        CLIP_CHILDREN   = 1<<11,  ///< all drawing within this widget will be clipped (Fl_Group)
+        MENU_WINDOW     = 1<<12,  ///< a temporary popup window, dismissed by clicking outside (Fl_Window)
+        TOOLTIP_WINDOW  = 1<<13,  ///< a temporary popup, transparent to events, and dismissed easily (Fl_Window)
+        MODAL           = 1<<14,  ///< a window blocking input to all other winows (Fl_Window)
+        NO_OVERLAY      = 1<<15,  ///< window not using a hardware overlay plane (Fl_Menu_Window)
+        GROUP_RELATIVE  = 1<<16,  ///< position this idget relative to the parent group, not to the window
+
+		GROUP_TYPE      = 1 << 20,
+		WINDOW_TYPE     = 1 << 21,
+        // (space for more flags)
+        USERFLAG3       = 1<<29,  ///< reserved for 3rd party extensions
+        USERFLAG2       = 1<<30,  ///< reserved for 3rd party extensions
+        USERFLAG1       = 1<<31   ///< reserved for 3rd party extensions
+  };
+  
+	void		activate	()	;
+	int		active	()	;
+	int		active_r	()	;
+	//Fl_Align		align	()	;
+	//void		align	(Fl_Align alignment)	;
+	tolua_get_set Fl_Align align();
+	
+	//long		argument	()	;
+	//void		argument	(long v)	;
+	tolua_get_set long argument();
+	
+	Fl_Gl_Window	*	as_gl_window	()	;
+virtual	Fl_Group	*	as_group	()	;
+virtual	Fl_Window	*	as_window	()	;
+	//Fl_Boxtype		box	()	;
+	//void		box	(Fl_Boxtype new_box)	;
+	tolua_get_set Fl_Boxtype box();
+	
+	//Fl_Callback_p		callback	()	;
+	//void		callback	(Fl_Callback* cb, void* p)	;
+	//void		callback	(Fl_Callback* cb)	;
+	tolua_outside void set_fltk_widget_callback@callback(lua_State* L, lua_Function luaFunc, lua_Object data = 0);
+	//void		callback	(Fl_Callback0* cb)	;
+	//void		callback	(Fl_Callback1*cb, long p=0)	;
+	//tolua_outside void set_fltk_widget_callback2wl@callback2wl(lua_State* L, lua_Function luaFunc, long num);
+	//tolua_outside void set_fltk_widget_callback2ww@callback2ww(lua_State* L, lua_Function luaFunc, Fl_Widget *w);
+	int		changed	()	;
+	void		clear_changed	()	;
+	void		clear_damage	(uchar c = 0)	;
+	void		clear_output	()	;
+	void		clear_visible	()	;
+	void		clear_visible_focus	()	;
+	//Fl_Color		color	()	;
+	//void		color	 (Fl_Color bg)	;
+	tolua_get_set Fl_Color color();
+	
+	void		color	@ set_color_bg_sel(Fl_Color bg, Fl_Color sel)	;
+	int		contains	(const Fl_Widget *w)	;
+	void		copy_label	(const char *new_label)	;
+	//uchar		damage	()	;
+	//void		damage	(uchar c)	;
+	tolua_get_set uchar damage();
+	void		damage	@ damage_rect(uchar c, int x, int y, int w, int h)	;
+	int		damage_resize	(int,int,int,int)	;
+	void		deactivate	()	;
+static	void		default_callback	(Fl_Widget *cb, void *d)	;
+	//Fl_Image	*	deimage	()	;
+	//void		deimage	(Fl_Image* img)	;
+	tolua_get_set Fl_Image* deimage();
+	
+virtual	void		do_callback	(Fl_Widget* o,void* arg=0)	;
+	void		do_callback	()	;
+	void		do_callback	(Fl_Widget* o,long arg)	;
+virtual	void		draw	()	;
+	void		draw_label	(int, int, int, int, Fl_Align)	;
+	//void		get_full_size	(int &full_x, int &full_y, int &full_w, int &full_h)	;
+	int		h	()	;
+virtual	int		handle	(int event)	;
+virtual	void		hide	()	;
+	//Fl_Image	*	image	()	;
+	//void		image	(Fl_Image* img)	;
+	tolua_get_set Fl_Image* image();
+	
+	int		inside	(const Fl_Widget* w)	;
+	bool		is_group	()	;
+	bool		is_window	()	;
+	//char	*	label	()	;
+	//void		label	(const char* text)	;
+	tolua_get_set char* label();
+	void		label	@ set_labeltype_and_label(Fl_Labeltype a, const char* b)	;
+	int		label_shortcut	(const char *t)	;
+	//Fl_Color		labelcolor	()	;
+	//void		labelcolor	(Fl_Color c)	;
+	tolua_get_set Fl_Color labelcolor();
+	//Fl_Font		labelfont	()	;
+	//void		labelfont	(Fl_Font f)	;
+	tolua_get_set Fl_Font labelfont();
+	//Fl_Fontsize		labelsize	()	;
+	//void		labelsize	(Fl_Fontsize pix)	;
+	tolua_get_set Fl_Fontsize labelsize();
+	//Fl_Labeltype		labeltype	()	;
+	//void		labeltype	(Fl_Labeltype a)	;
+	tolua_get_set Fl_Labeltype labeltype();
+	void		measure_label	(int& ww, int& hh)	;
+	int		output	()	;
+	//Fl_Group	*	parent	()	;
+	//void		parent	(Fl_Group* p)	;
+	tolua_get_set Fl_Group* parent();
+	Fl_Group	*	parent_root	()	;
+	void		position	(int X,int Y)	;
+	void		redraw	()	;
+	void		redraw_label	()	;
+virtual	void		resize	(int x, int y, int w, int h)	;
+	//Fl_Color		selection_color	()	;
+	//void		selection_color	(Fl_Color a)	;
+	tolua_get_set Fl_Color selection_color();
+	
+	void		set_changed	()	;
+	void		set_output	()	;
+	void		set_visible	()	;
+	void		set_visible_focus	()	;
+virtual	void		show	()	;
+	void		size	(int W,int H)	;
+	int		take_focus	()	;
+	int		takesevents	()	;
+//static	int		test_shortcut	(const char*)	;
+//	int		test_shortcut	()	;
+//virtual	Fl_Font		textfont	()	;
+//virtual	void		textfont	(Fl_Font s)	;
+	tolua_get_set Fl_Font textfont();
+//virtual	Fl_Fontsize		textsize	()	;
+//virtual	void		textsize	(Fl_Fontsize s)	;
+	tolua_get_set Fl_Fontsize textsize();
+	//char	*	tooltip	()	;
+	//void		tooltip	(const char *t)	;
+	tolua_get_set char* tooltip();
+	//uchar		type	()	;
+	//void		type	(uchar t)	;
+	tolua_get_set uchar type();
+	//void	*	user_data	()	;
+	//void		user_data	(void* v)	;
+	tolua_get_set void* user_data();
+	int		visible	()	;
+	//void		visible_focus	(int v)	;
+	//int		visible_focus	()	;
+	tolua_get_set int visible_focus();
+	int		visible_r	()	;
+	int		w	()	;
+	//Fl_When		when	()	;
+	//void		when	(uchar i)	;
+	tolua_get_set Fl_When when();
+	Fl_Window	*	window	()	;
+	int		x	()	;
+	int		y	()	;
+};
+
+class	Fl_Box	 :public Fl_Widget	{
+	public:
+			Fl_Box	(int X, int Y, int W, int H, const char *l=0)	;
+			Fl_Box	(Fl_Boxtype b, int X, int Y, int W, int H, const char *l)	;
+virtual	int		handle	(int)	;
+};
+
+class	Fl_Group	 :public Fl_Widget	{
+	public:
+			Fl_Group	(int,int,int,int, const char * = 0)	;
+	void		add	(Fl_Widget* o)	;
+	void		add_resizable	(Fl_Widget& o)	;
+	//const	*	array	()	;
+virtual	Fl_Group	*	as_group	()	;
+	void		begin	()	;
+	Fl_Widget	*	child	(int n)	;
+	int		children	()	;
+	void		clear	()	;
+	//void		clip_children	(int c)	;
+	//int		clip_children	()	;
+	tolua_get_set int clip_children();
+//static	Fl_Group	*	current	()	;
+//static	void		current	(Fl_Group *g)	;
+	static tolua_get_set Fl_Group* current();
+	void		end	@ endd()	;
+	int		find	(const Fl_Widget*)	;
+	void		focus	(Fl_Widget* W)	;
+	virtual int		handle	(int)	;
+	tolua_outside void set_fltk_fl_widget_user_handler@user_handler(lua_State* L, lua_Function luaFunc);
+	void		init_sizes	()	;
+	void		insert	(Fl_Widget&, int i)	;
+	void		insert	(Fl_Widget& o, Fl_Widget* before)	;
+	void		remove	(Fl_Widget* o)	;
+	//void		resizable	(Fl_Widget* o)	;
+	//Fl_Widget	*	resizable	()	;
+	tolua_get_set Fl_Widget* resizable();
+	void		resize	(int,int,int,int)	;
+	void		resizefont	(float font_scale)	;
+};
+
+class	Fl_Browser_	 :public Fl_Group	{
+	public:
+	int		deselect	(int docallbacks=0)	;
+	void		display	(void *item)	;
+	int		handle	(int event)	;
+	//uchar		has_scrollbar	()	;
+	//void		has_scrollbar	(uchar mode)	;
+	tolua_get_set uchar has_scrollbar();
+	//int		hposition	()	;
+	//void		hposition	(int)	;
+	tolua_get_set int hposition();
+	//int		position	()	;
+	//void		position	(int pos)	;
+	tolua_get_set int position();
+	void		resize	(int X,int Y,int W,int H)	;
+	void		scrollbar_left	()	;
+	void		scrollbar_right	()	;
+	//int		scrollbar_size	()	;
+	//void		scrollbar_size	(int size)	;
+	tolua_get_set int scrollbar_size();
+	//int		scrollbar_width	()	;
+	//void		scrollbar_width	(int width)	;
+	tolua_get_set int scrollbar_width();
+	int		select	(void *item,int val=1,int docallbacks=0)	;
+	int		select_only	(void *item,int docallbacks=0)	;
+	void		sort	(int flags=0)	;
+	//Fl_Color		textcolor	()	;
+	//void		textcolor	(Fl_Color col)	;
+	tolua_get_set Fl_Color textcolor();
+	//Fl_Font		textfont	()	;
+	//void		textfont	(Fl_Font font)	;
+	tolua_get_set Fl_Font textfont();
+	//Fl_Fontsize		textsize	()	;
+	//void		textsize	(Fl_Fontsize size)	;
+	tolua_get_set Fl_Fontsize textsize();
+};
+
+class	Fl_Browser	 :public Fl_Browser_	{
+	public:
+	 enum Fl_Line_Position { TOP, BOTTOM, MIDDLE };
+			Fl_Browser	(int X, int Y, int W, int H, const char *L = 0)	;
+	void		add	(const char* newtext, void* d = 0)	;
+	void		bottomline	(int line)	;
+	void		clear	()	;
+	//char		column_char	()	;
+	//void		column_char	(char c)	;
+	tolua_get_set char column_char();
+	//int	*	column_widths	()	;
+	//void		column_widths	(const int* arr)	;
+	tolua_outside lua_Object fltk_Fl_Browser_get_column_widths@get_column_widths(lua_State* L);
+	tolua_outside void fltk_Fl_Browser_set_column_widths@set_column_widths(lua_State* L, lua_Object tbl);
+	//tolua_get_set const int* column_widths;
+	void	*	data	(int line)	;
+	void		data	(int line, void* d)	;
+	void		display	(int line, int val=1)	;
+	int		displayed	(int line)	;
+	//char		format_char	()	;
+	//void		format_char	(char c)	;
+	tolua_get_set char format_char();
+	void		hide@line_hide	(int line)	;
+	//void		hide	()	;
+	void		icon	(int line, Fl_Image* icon)	;
+	Fl_Image	*	icon	(int line)	;
+	void		insert	(int line, const char* newtext, void* d = 0)	;
+	void		lineposition	(int line, Fl_Line_Position pos)	;
+	int		load	(const char* filename)	;
+	void		make_visible	(int line)	;
+	void		middleline	(int line)	;
+	void		move	(int to, int from)	;
+	void		remove	(int line)	;
+	void		remove_icon	(int line)	;
+	void		replace	(int a, const char* b)	;
+	int		select	(int line, int val=1)	;
+	int		selected	(int line)	;
+	void		show@line_show	(int line)	;
+	//void		show	()	;
+	int		size	()	;
+	void		size	(int W, int H)	;
+	void		swap	(int a, int b)	;
+	char	*	text	(int line)	;
+	void		text	(int line, const char* newtext)	;
+	//int		topline	()	;
+	//void		topline	(int line)	;
+	tolua_get_set int topline();
+	//int		value	()	;
+	//void		value	(int line)	;
+	tolua_get_set int value();
+	int		visible@line_visible	(int line)	;
+	virtual	int		handle	(int event)	;
+};
+
+class	Fl_Button	 :public Fl_Widget	{
+	protected:
+	virtual void draw();	
+	
+	public:
+	Fl_Button	(int X, int Y, int W, int H, const char *L=0)	;
+	int		clear	()	;
+	//Fl_Boxtype		down_box	()	;
+	//void		down_box	(Fl_Boxtype b)	;
+	tolua_get_set Fl_Boxtype down_box();
+	//Fl_Color		down_color	()	;
+	//void		down_color	(unsigned c)	;
+	tolua_get_set Fl_Color down_color();
+virtual	int		handle	(int)	;
+	int		set	()	;
+	void		setonly	()	;
+	int		shortcut	()	;
+	void		shortcut	(int s)	;
+	void		shortcut	(const char *s)	;
+	//tolua_get_set int shortcut();
+	//void		shortcut	 @ set_shortcut_str(const char *s)	;
+	//int		value	(int v)	;
+	//char		value	()	;
+	tolua_get_set int value();
+};
+
+class	Fl_Chart	 :public Fl_Widget	{
+	public:
+			Fl_Chart	(int X, int Y, int W, int H, const char *L = 0)	;
+	void		add	(double val, const char *str = 0, unsigned col = 0)	;
+	//uchar		autosize	()	;
+	//void		autosize	(uchar n)	;
+	tolua_get_set uchar autosize();
+	void		bounds	@ get_bounds(double *a=0,double *b=0)	;
+	void		bounds	@ set_bounds(double a,double b)	;
+	void		clear	()	;
+	void		insert	(int ind, double val, const char *str = 0, unsigned col = 0)	;
+	//int		maxsize	()	;
+	//void		maxsize	(int m)	;
+	tolua_get_set int maxsize();
+	void		replace	(int ind, double val, const char *str = 0, unsigned col = 0)	;
+	int		size	()	;
+	void		size	(int W, int H)	;
+	//Fl_Color		textcolor	()	;
+	//void		textcolor	(Fl_Color n)	;
+	tolua_get_set Fl_Color textcolor();
+	//Fl_Font		textfont	()	;
+	//void		textfont	(Fl_Font s)	;
+	tolua_get_set Fl_Font textfont();
+	//Fl_Fontsize		textsize	()	;
+	//void		textsize	(Fl_Fontsize s)	;
+	tolua_get_set Fl_Fontsize textsize();
+};
+
+class	Fl_Check_Browser	 :public Fl_Browser_	{
+	public:
+			Fl_Check_Browser	(int x, int y, int w, int h, const char *l = 0)	;
+	int		add	(char *s)	;
+	int		add	(char *s, int b)	;
+	void		check_all	()	;
+	void		check_none	()	;
+	int		checked	(int item)	;
+	void		checked	(int item, int b)	;
+	void		clear	()	;
+	int		nchecked	()	;
+	int		nitems	()	;
+	int		remove	(int item)	;
+	void		set_checked	(int item)	;
+	char	*	text	(int item)	;
+	int		value	()	;
+};
+
+class	Fl_Clock_Output	 :public Fl_Widget	{
+	public:
+			Fl_Clock_Output	(int X, int Y, int W, int H, const char *L = 0)	;
+	int		hour	()	;
+	int		minute	()	;
+	int		second	()	;
+	//void		value	(ulong v)	;
+	//ulong		value	()	;
+	tolua_get_set ulong value();
+	void		value	@ set_value_hms(int H, int m, int s)	;
+};
+
+class	Fl_Clock	 :public Fl_Clock_Output	{
+	public:
+			Fl_Clock	(int X, int Y, int W, int H, const char *L = 0)	;
+			Fl_Clock	(uchar t, int X, int Y, int W, int H, const char *L)	;
+	int		handle	(int)	;
+};
+
+class	Fl_Color_Chooser	 :public Fl_Group	{
+	public:
+			Fl_Color_Chooser	(int X, int Y, int W, int H, const char *L = 0)	;
+	double		b	()	;
+	double		g	()	;
+	int		hsv	(double H, double S, double V)	;
+static	void		hsv2rgb	(double H, double S, double V, double& R, double& G, double& B)	;
+	double		hue	()	;
+	int		mode	()	;
+	double		r	()	;
+	int		rgb	(double R, double G, double B)	;
+static	void		rgb2hsv	(double R, double G, double B, double& H, double& S, double& V)	;
+	double		saturation	()	;
+	double		value	()	;
+};
+
+int fl_color_chooser(const char* name, double& r, double& g, double& b);
+
+class	Fl_Device		{
+	public:
+static	Fl_Device	*	current	()	;
+static	Fl_Display	*	display_device	()	;
+virtual	Fl_Device	*	set_current	(void)	;
+	int		type	()	;
+};
+
+class	Fl_Abstract_Printer	 :public Fl_Device	{
+	public:
+virtual	void		end_job	(void)	;
+virtual	int		end_page	(void)	;
+virtual	void		margins	(int *left=0, int *top=0, int *right=0, int *bottom=0)	;
+virtual	void		origin	(int x, int y)	;
+void print_widget(Fl_Widget* widget, int delta_x = 0, int delta_y = 0);
+void print_window_part(Fl_Window *win, int x, int y, int w, int h, int delta_x = 0, int delta_y = 0);
+virtual	int		printable_rect	(int *w=0, int *h=0)	;
+virtual	void		rotate	(float angle)	;
+virtual	void		scale	(float scale_x, float scale_y)	;
+	Fl_Device	*	set_current	(void)	;
+virtual	int		start_job	(int pagecount, int *frompage = NULL, int *topage = NULL)	;
+virtual	int		start_page	(void)	;
+virtual	void		translate	(int x, int y)	;
+virtual	void		untranslate	(void)	;
+};
+
+// class	Fl_Display	 :public Fl_Device	{
+	// public:
+// };
+
+// class	Fl_End		{
+	// public:
+			// Fl_End	()	;
+// };
+
+void Fl_End();
+
+class	Fl_File_Browser	 :public Fl_Browser	{
+	public:
+	
+	enum { FILES, DIRECTORIES };
+	Fl_File_Browser	(int, int, int, int, const char * = 0)	;
+	//int		filetype	()	;
+	//void		filetype	(int t)	;
+	tolua_get_set int filetype();
+	//char	*	filter	()	;
+	//void		filter	(const char *pattern)	;
+	tolua_get_set char * filter();
+	//uchar		iconsize	()	;
+	//void		iconsize	(uchar s)	;
+	tolua_get_set uchar iconsize();
+	//int		load	(const char *directory, Fl_File_Sort_F *sort = fl_numericsort)	;
+	int		load	(const char *directory)	;
+	//Fl_Fontsize		textsize	()	;
+	//void		textsize	(Fl_Fontsize s)	;
+	tolua_get_set Fl_Fontsize textsize();
+};
+
+class	Fl_File_Chooser		{
+	public:
+			Fl_File_Chooser	(const char *d, const char *p, int t, const char *title)	;
+	Fl_Widget	*	add_extra	(Fl_Widget* gr)	;
+	Fl_File_Browser	*	browser	(void)	;
+	//void		callback	(void (*cb)(Fl_File_Chooser *, void *), void *d = 0)	;
+	//void		color	(Fl_Color c)	;
+	//Fl_Color		color	()	;
+	tolua_get_set Fl_Color color();
+	int		count	()	;
+	//void		directory	(const char *d)	;
+	//char	*	directory	()	;
+	tolua_get_set char* directory();
+	//char	*	filter	()	;
+	//void		filter	(const char *p)	;
+	tolua_get_set char* filter();
+	//int		filter_value	()	;
+	//void		filter_value	(int f)	;
+	tolua_get_set int filter_value();
+	void		hide	()	;
+	//void		iconsize	(uchar s)	;
+	//uchar		iconsize	()	;
+	tolua_get_set uchar iconsize();
+	//char	*	label	()	;
+	//void		label	(const char *l)	;
+	tolua_get_set char* label();
+	//char	*	ok_label	()	;
+	//void		ok_label	(const char *l)	;
+	tolua_get_set char* ok_label();
+	//void		preview	(int e)	;
+	//int		preview	()	;
+	tolua_get_set int preview();
+	void		rescan	()	;
+	void		rescan_keep_filename	()	;
+	void		show	()	;
+	int		shown	()	;
+	//void		textcolor	(Fl_Color c)	;
+	//Fl_Color		textcolor	()	;
+	tolua_get_set Fl_Color textcolor();
+	//void		textfont	(Fl_Font f)	;
+	//Fl_Font		textfont	()	;
+	tolua_get_set Fl_Font textfont();
+	//void		textsize	(Fl_Fontsize s)	;
+	//Fl_Fontsize		textsize	()	;
+	tolua_get_set Fl_Fontsize textsize();
+	//void		type	(int t)	;
+	//int		type	()	;
+	tolua_get_set int type();
+	//void	*	user_data	()	;
+	//void		user_data	(void *d)	;
+	tolua_get_set void* user_data();
+	char	*	value	(int f = 1)	;
+	void		value	(const char *filename)	;
+	int		visible	()	;
+};
+
+char *fl_dir_chooser(const char *message,const char *fname,int relative=0);
+char *fl_file_chooser(const char *message,const char *pat,const char *fname,int relative=0);
+//void fl_file_chooser_callback(void (*cb)(const char*));
+void fl_file_chooser_ok_label(const char*l);
+
+int	fl_open_uri(const char *uri, char *msg = 0,  int msglen = 0);
+
+class	Fl_File_Icon		{
+	public:
+  enum				// File types
+  {
+    ANY,			// Any kind of file
+    PLAIN,			// Only plain files
+    FIFO,			// Only named pipes
+    DEVICE,			// Only character and block devices
+    LINK,			// Only symbolic links
+    DIRECTORY			// Only directories
+  };
+
+  enum				// Data opcodes
+  {
+    END,			// End of primitive/icon
+    COLOR,			// Followed by color value (2 shorts)
+    LINE,			// Start of line
+    CLOSEDLINE,			// Start of closed line
+    POLYGON,			// Start of polygon
+    OUTLINEPOLYGON,		// Followed by outline color (2 shorts)
+    VERTEX			// Followed by scaled X,Y
+  };	
+	//Fl_File_Icon	(const char *p, int t, int nd = 0, short *d = 0)	;
+	Fl_File_Icon	(const char *p, int t)	;
+	short	*	add	(short d)	;
+	short	*	add_color	(Fl_Color c)	;
+	//short	*	add_vertex	(int x, int y)	;
+	short	*	add_vertex	(float x, float y)	;
+	void		clear	()	;
+	void		draw	(int x, int y, int w, int h, Fl_Color ic, int active = 1)	;
+static	Fl_File_Icon	*	find	(const char *filename, int filetype = ANY)	;
+static	Fl_File_Icon	*	first	()	;
+	void		label	(Fl_Widget *w)	;
+static	void		labeltype	(const Fl_Label *o, int x, int y, int w, int h, Fl_Align a)	;
+	void		load	(const char *f)	;
+	int		load_fti	(const char *fti)	;
+	int		load_image	(const char *i)	;
+static	void		load_system_icons	(void)	;
+	Fl_File_Icon	*	next	()	;
+	char	*	pattern	()	;
+	int		size	()	;
+	int		type	()	;
+	short	*	value	()	;
+};
+
+// class	Fl_GDI_Display	 :public Fl_Display	{
+	// public:
+			// Fl_GDI_Display	()	;
+// };
+
+class	Fl_Help_Dialog		{
+	public:
+			Fl_Help_Dialog	()	;
+	int		h	()	;
+	void		hide	()	;
+	void		load	(const char *f)	;
+	void		position	(int xx, int yy)	;
+	void		resize	(int xx, int yy, int ww, int hh)	;
+	void		show	()	;
+	void		show	(int argc, char **argv)	;
+	//void		textsize	(Fl_Fontsize s)	;
+	//Fl_Fontsize		textsize	()	;
+	tolua_get_set Fl_Fontsize textsize();
+	void		topline	(const char *n)	;
+	void		topline	(int n)	;
+	//char	*	value	()	;
+	//void		value	(const char *f)	;
+	tolua_get_set char* value();
+	int		visible	()	;
+	int		w	()	;
+	int		x	()	;
+	int		y	()	;
+};
+
+class	Fl_Help_View	 :public Fl_Group	{
+	public:
+			Fl_Help_View	(int xx, int yy, int ww, int hh, const char *l = 0)	;
+			~Fl_Help_View();
+	void		clear_selection	()	;
+	char	*	directory	()	;
+	char	*	filename	()	;
+	int		find	(const char *s, int p = 0)	;
+	//void		leftline	(int)	;
+	//int		leftline	()	;
+	tolua_get_set int leftline();
+	//void		link	(Fl_Help_Func *fn)	;
+	tolua_outside void set_fltk_help_view_link@link(lua_State* L, lua_Function luaFunc);
+	int		load	(const char *f)	;
+	void		resize	(int,int,int,int)	;
+	//int		scrollbar_size	()	;
+	//void		scrollbar_size	(int size)	;
+	tolua_get_set int scrollbar_size();
+	void		select_all	()	;
+	int		size	()	;
+	void		size	(int W, int H)	;
+	//void		textcolor	(Fl_Color c)	;
+	//Fl_Color		textcolor	()	;
+	tolua_get_set Fl_Color textcolor();
+	//void		textfont	(Fl_Font f)	;
+	//Fl_Font		textfont	()	;
+	tolua_get_set Fl_Font textfont();
+	//void		textsize	(Fl_Fontsize s)	;
+	//Fl_Fontsize		textsize	()	;
+	tolua_get_set Fl_Fontsize textsize();
+	char	*	title	()	;
+	void		topline	@ topline_str(const char *n)	;
+	//void		topline	(int)	;
+	//int		topline	()	;
+	tolua_get_set int topline();
+	//char	*	value	()	;
+	//void		value	(const char *val)	;
+	tolua_get_set char* value();
+	//int		font_increment() const { return (font_increment_); }
+	//void		font_increment(int i) {font_increment_ = i;};
+    tolua_get_set int font_increment();
+
+	//int		td_top_gap() const { return (td_top_gap_); }
+	//void		td_top_gap(int i) {td_top_gap_ = i;};
+    tolua_get_set int td_top_gap();
+
+	//int		td_bottom_gap() const { return (td_bottom_gap_); }
+	//void		td_bottom_gap(int i) {td_bottom_gap_ = i;};
+    tolua_get_set int td_bottom_gap();
+    tolua_get_set int tr_gap();
+    tolua_get_set int line31();
+	
+};
+
+class	Fl_Hold_Browser	 :public Fl_Browser	{
+	public:
+			Fl_Hold_Browser	(int X,int Y,int W,int H,const char *l=0)	;
+	virtual	int		handle	(int event)	;
+};
+
+class	Fl_Image		{
+	public:
+			Fl_Image	(int W, int H, int D)	;
+virtual	void		color_average	(Fl_Color c, float i)	;
+virtual	Fl_Image	*	copy	(int W, int H)	;
+	Fl_Image	*	copy	()	;
+	int		count	()	;
+	int		d	()	;
+	//const	*	data	()	;
+virtual	void		desaturate	()	;
+virtual	void		draw	(int X, int Y, int W, int H, int cx=0, int cy=0)	;
+	void		draw	(int X, int Y)	;
+	int		h	()	;
+	void		inactive	()	;
+virtual	void		label	(Fl_Widget* w)	;
+virtual	void		label	(Fl_Menu_Item* m)	;
+	int		ld	()	;
+virtual	void		uncache	()	;
+	int		w	()	;
+};
+
+//class	Fl_Pixmap	 :public Fl_Image	{
+class	Fl_Pixmap	 :public Fl_Image	{
+	public:
+			// Fl_Pixmap	(char * const * D)	;
+			// Fl_Pixmap	(uchar * const * D)	;
+			// Fl_Pixmap	(const char * const * D)	;
+			// Fl_Pixmap	(const uchar * const * D)	;
+	static tolua_outside Fl_Pixmap* new_fltk_Fl_Pixmap@NewFromStrTable(lua_State* L, lua_Object tbl);
+virtual	void		color_average	(Fl_Color c, float i)	;
+virtual	Fl_Image	*	copy	(int W, int H)	;
+	Fl_Image	*	copy	()	;
+virtual	void		desaturate	()	;
+virtual	void		draw	(int X, int Y, int W, int H, int cx=0, int cy=0)	;
+	void		draw	(int X, int Y)	;
+virtual	void		label	(Fl_Widget* w)	;
+virtual	void		label	(Fl_Menu_Item* m)	;
+virtual	void		uncache	()	;
+};
+
+class	Fl_GIF_Image	 :public Fl_Pixmap	{
+	public:
+			Fl_GIF_Image	(const char* filename)	;
+};
+
+class	Fl_Input_	 :public Fl_Widget	{
+	public:
+	//		Fl_Input_	(int, int, int, int, const char* = 0)	;
+	int		copy	(int clipboard)	;
+	int		copy_cuts	()	;
+	//Fl_Color		cursor_color	()	;
+	//void		cursor_color	(Fl_Color n)	;
+	tolua_get_set Fl_Color cursor_color();
+	int		cut	()	;
+	int		cut	(int n)	;
+	int		cut	(int a, int b)	;
+	Fl_Char		index	(int i)	;
+	//int		input_type	()	;
+	//void		input_type	(int t)	;
+	tolua_get_set int input_type();
+	int		insert	(const char* t, int l=0)	;
+	//int		mark	()	;
+	//int		mark	(int m)	;
+	tolua_get_set int mark();
+	//int		maximum_size	()	;
+	//void		maximum_size	(int m)	;
+	tolua_get_set int maximum_size();
+	int		position	()	;
+	int		position	(int p, int m)	;
+	int		position	(int p)	;
+	//int		readonly	()	;
+	//void		readonly	(int b)	;
+	tolua_get_set int readonly();
+	int		replace	(int, int, const char*, int=0)	;
+	void		resize	(int, int, int, int)	;
+	//int		shortcut	()	;
+	//void		shortcut	(int s)	;
+	tolua_get_set int shortcut();
+	int		size	()	;
+	void		size	(int W, int H)	;
+	//void		textcolor	(Fl_Color c)	;
+	//Fl_Color		textcolor	()	;
+	tolua_get_set Fl_Color textcolor();
+	//void		textfont	(Fl_Font f)	;
+	//Fl_Font		textfont	()	;
+	tolua_get_set Fl_Font textfont();
+	//void		textsize	(Fl_Fontsize s)	;
+	//Fl_Fontsize		textsize	()	;
+	tolua_get_set Fl_Fontsize textsize();
+	int		undo	()	;
+	//char	*	value	()	;
+	//int		value	(const char*)	;
+	tolua_get_set char* value();
+	int		value	@ value_str_int(const char*, int)	;
+	//int		wrap	()	;
+	//void		wrap	(int b)	;
+	tolua_get_set int wrap();
+};
+
+class	Fl_Input	 :public Fl_Input_	{
+	public:
+			Fl_Input	(int,int,int,int,const char * = 0)	;
+	virtual int		handle	(int)	;
+};
+
+class	Fl_File_Input	 :public Fl_Input	{
+	public:
+			Fl_File_Input	(int X, int Y, int W, int H, const char *L=0)	;
+	Fl_Boxtype		down_box	()	;
+	void		down_box	(Fl_Boxtype b)	;
+	Fl_Color		errorcolor	()	;
+	void		errorcolor	(Fl_Color c)	;
+virtual	int		handle	(int event)	;
+	char	*	value	()	;
+	int		value	(const char *str)	;
+	int		value	(const char *str, int len)	;
+};
+
+class	Fl_Float_Input	 :public Fl_Input	{
+	public:
+			Fl_Float_Input	(int X,int Y,int W,int H,const char *l = 0)	;
+	virtual int		handle	(int)	;
+};
+
+class	Fl_Input_Choice	 :public Fl_Group	{
+	public:
+			Fl_Input_Choice	(int x,int y,int w,int h,const char*l=0)	;
+	void		add	(const char *s)	;
+	int		changed	()	;
+	void		clear	()	;
+	void		clear_changed	()	;
+	//Fl_Boxtype		down_box	()	;
+	//void		down_box	(Fl_Boxtype b)	;
+	tolua_get_set Fl_Boxtype down_box();
+	Fl_Input	*	input	()	;
+	Fl_Menu_Item	*	menu	()	;
+	void		menu	(const Fl_Menu_Item *m)	;
+	Fl_Menu_Button	*	menubutton	()	;
+	void		resize	(int X, int Y, int W, int H)	;
+	void		set_changed	()	;
+	//void		textcolor	(Fl_Color c)	;
+	//Fl_Color		textcolor	()	;
+	tolua_get_set Fl_Color textcolor();
+	//void		textfont	(Fl_Font f)	;
+	//Fl_Font		textfont	()	;
+	tolua_get_set Fl_Font textfont();
+	//void		textsize	(Fl_Fontsize s)	;
+	//Fl_Fontsize		textsize	()	;
+	tolua_get_set Fl_Fontsize textsize();
+	//char	*	value	()	;
+	//void		value	(const char *val)	;
+	//void		value	(int val)	;
+	tolua_get_set char* value();
+};
+
+class	Fl_Int_Input	 :public Fl_Input	{
+	public:
+			Fl_Int_Input	(int X,int Y,int W,int H,const char *l = 0)	;
+	virtual int		handle	(int)	;
+};
+
+class	Fl_Label		{
+	public:
+	void		draw	(int,int,int,int, Fl_Align)	;
+	void		measure	(int &w, int &h)	;
+};
+
+class	Fl_Light_Button	 :public Fl_Button	{
+	public:
+			Fl_Light_Button	(int x,int y,int w,int h,const char *l = 0)	;
+virtual	int		handle	(int)	;
+};
+
+class	Fl_Check_Button	 :public Fl_Light_Button	{
+	public:
+			Fl_Check_Button	(int X, int Y, int W, int H, const char *L = 0)	;
+};
+
+enum { // values for flags:
+  FL_MENU_INACTIVE = 1,		///< Deactivate menu item (gray out)
+  FL_MENU_TOGGLE= 2,		///< Item is a checkbox toggle (shows checkbox for on/off state)
+  FL_MENU_VALUE = 4,		///< The on/off state for checkbox/radio buttons (if set, state is 'on')
+  FL_MENU_RADIO = 8,		///< Item is a radio button (one checkbox of many can be on)
+  FL_MENU_INVISIBLE = 0x10,	///< Item will not show up (shortcut will work)
+  FL_SUBMENU_POINTER = 0x20,	///< Indicates user_data() is a pointer to another menu array
+  FL_SUBMENU = 0x40,		///< This item is a submenu to other items
+  FL_MENU_DIVIDER = 0x80,	///< Creates divider line below this item. Also ends a group of radio buttons.
+  FL_MENU_HORIZONTAL = 0x100	///< ??? -- reserved
+};
+
+class	Fl_Menu_Item		{
+	public:
+	void		activate	()	;
+	int		active	()	;
+	int		activevisible	()	;
+	//int		add	(const char*, int shortcut, Fl_Callback*, void* =0, int = 0)	;
+	//int		add	(const char*a, const char* b, Fl_Callback* c, void* d = 0, int e = 0)	;
+	Fl_Menu_Item *menu_at(int index);
+tolua_outside int fltk_fl_menu_item_add@add(lua_State* L, const char *label, 
+		lua_Object shortcut, lua_Function luaFunc, lua_Object data, int flags);
+	//long		argument	()	;
+	//void		argument	(long v)	;
+	tolua_get_set long argument();
+	// Fl_Callback_p		callback	()	;
+	// void		callback	(Fl_Callback* c, void* p)	;
+	// void		callback	(Fl_Callback* c)	;
+	// void		callback	(Fl_Callback0*c)	;
+	// void		callback	(Fl_Callback1*c, long p=0)	;
+	tolua_outside void set_fltk_menu_item_callback@callback(lua_State* L, lua_Function luaFunc, lua_Object data=0);
+	void		check	()	;
+	int		checkbox	()	;
+	int		checked	()	;
+	void		clear	()	;
+	void		deactivate	()	;
+	void		do_callback	(Fl_Widget* o)	;
+	//void		do_callback	(Fl_Widget* o,void* arg)	;
+	void		do_callback	(Fl_Widget* o,long arg)	;
+	void		draw	(int x, int y, int w, int h, const Fl_Menu_*, int t=0)	;
+	Fl_Menu_Item	*	find_shortcut	(int *ip=0)	;
+	Fl_Menu_Item	*	first	()	;
+	void		hide	()	;
+	void		image	(Fl_Image* a)	;
+	//int		insert	(int,const char*,int,Fl_Callback*,void* =0, int =0)	;
+tolua_outside int fltk_fl_menu_item_insert@insert(lua_State* L, int index, const char *label, 
+		lua_Object shortcut, lua_Function luaFunc, lua_Object data, int flags);
+	char	*	label	()	;
+	void		label	(const char* a)	;
+	void		label	(Fl_Labeltype a,const char* b)	;
+	Fl_Labeltype		labeltype	()	;
+	void		labeltype	(Fl_Labeltype a)	;
+	int		measure	(int* h, const Fl_Menu_*)	;
+	Fl_Menu_Item	*	next	(int i=1)	;
+	Fl_Menu_Item	*	popup	( int X, int Y, const char *title = 0, const Fl_Menu_Item* picked=0, const Fl_Menu_* = 0)	;
+	Fl_Menu_Item	*	pulldown	( int X, int Y, int W, int H, const Fl_Menu_Item* picked = 0, const Fl_Menu_* = 0, const Fl_Menu_Item* title = 0, int menubar=0)	;
+	int		radio	()	;
+	void		set	()	;
+	void		setonly	()	;
+	//int		shortcut	()	;
+	//void		shortcut	(int s)	;
+	tolua_get_set int shortcut();
+	void		show	()	;
+	int		size	()	;
+	int		submenu	()	;
+	Fl_Menu_Item	*	test_shortcut	()	;
+	void		uncheck	()	;
+	//void	*	user_data	()	;
+	//void		user_data	(void* v)	;
+	tolua_get_set void* user_data();
+	int		value	()	;
+	int		visible	()	;
+};
+
+class	Fl_Menu_	 :public Fl_Widget	{
+	public:
+			//Fl_Menu_	(int,int,int,int,const char * =0)	;
+	//int		add	(const char*, int shortcut, Fl_Callback*, void* = 0, int = 0)	;
+	//int		add	(const char* a, const char* b, Fl_Callback* c, void* d = 0, int e = 0)	;
+tolua_outside int fltk_fl_menu_add@add(lua_State* L, const char *label, 
+		lua_Object shortcut, lua_Function luaFunc, lua_Object data=0, int flags=0);
+	int		add	(const char *)	;
+	void		clear	()	;
+	int		clear_submenu	(int index)	;
+	void		copy	(const Fl_Menu_Item *m, void* user_data = 0)	;
+	//Fl_Boxtype		down_box	()	;
+	//void		down_box	(Fl_Boxtype b)	;
+	tolua_get_set Fl_Boxtype down_box();
+	//Fl_Color		down_color	()	;
+	//void		down_color	(unsigned c)	;
+	tolua_get_set Fl_Color down_color();
+	int		find_index	(const char *name)	;
+	int		find_index	(const Fl_Menu_Item *item)	;
+	int		find_index	(Fl_Callback *cb)	;
+	Fl_Menu_Item	*	find_item	(const char *name)	;
+	Fl_Menu_Item	*	find_item	(Fl_Callback*)	;
+	void		global	()	;
+	//int		insert	(int index, const char*, int shortcut, Fl_Callback*, void* = 0, int = 0)	;
+	//int		insert	(int index, const char* a, const char* b, Fl_Callback* c, void* d = 0, int e = 0)	;
+tolua_outside int fltk_fl_menu_insert@insert(lua_State* L, int index, const char *label, 
+		lua_Object shortcut, lua_Function luaFunc, lua_Object data, int flags);
+	
+	int		item_pathname	(char *name, int namelen, const Fl_Menu_Item *finditem=0)	;
+	const Fl_Menu_Item	*	menu	()	;
+	Fl_Menu_Item * menu_at(int idx);
+	void		menu	(const Fl_Menu_Item *m)	;
+	void		mode	(int i,int fl)	;
+	int		mode	(int i)	;
+	Fl_Menu_Item	*	mvalue	()	;
+	Fl_Menu_Item	*	picked	(const Fl_Menu_Item*)	;
+	void		remove	(int)	;
+	void		replace	(int,const char *)	;
+	void		shortcut	(int i, int s)	;
+	int		size	()	;
+	void		size	(int W, int H)	;
+	Fl_Menu_Item	*	test_shortcut	()	;
+	char	*	text	()	;
+	char	*	text	(int i)	;
+	//void		textcolor	(Fl_Color c)	;
+	//Fl_Color		textcolor	()	;
+	tolua_get_set Fl_Color textcolor();
+	//void		textfont	(Fl_Font f)	;
+	//Fl_Font		textfont	()	;
+	tolua_get_set Fl_Font textfont();
+	//void		textsize	(Fl_Fontsize s)	;
+	//Fl_Fontsize		textsize	()	;
+	tolua_get_set Fl_Fontsize textsize();
+	int		value	()	;
+	int		value	(const Fl_Menu_Item*)	;
+	int		value	(int i)	;
+};
+
+class	Fl_Choice	 :public Fl_Menu_	{
+	public:
+			Fl_Choice	(int X, int Y, int W, int H, const char *L = 0)	;
+	virtual int		handle	(int)	;
+	int		value	()	;
+	int		value	(int v)	;
+	int		value	(const Fl_Menu_Item* v)	;
+};
+
+class	Fl_Menu_Bar	 :public Fl_Menu_	{
+	public:
+			Fl_Menu_Bar	(int X, int Y, int W, int H,const char *l=0)	;
+	virtual int		handle	(int)	;
+};
+
+class	Fl_Menu_Button	 :public Fl_Menu_	{
+	public:
+			Fl_Menu_Button	(int,int,int,int,const char * =0)	;
+	virtual int		handle	(int)	;
+	Fl_Menu_Item	*	popup	()	;
+};
+
+class	Fl_Multi_Browser	 :public Fl_Browser	{
+	public:
+			Fl_Multi_Browser	(int X,int Y,int W,int H,const char *L=0)	;
+	virtual int		handle	(int)	;
+};
+
+class	Fl_Multi_Label		{
+	public:
+	void		label	(Fl_Widget*)	;
+	void		label	(Fl_Menu_Item*)	;
+};
+
+class	Fl_Multiline_Input	 :public Fl_Input	{
+	public:
+			Fl_Multiline_Input	(int X,int Y,int W,int H,const char *l = 0)	;
+	virtual int		handle	(int)	;
+};
+
+class	Fl_Output	 :public Fl_Input	{
+	public:
+			Fl_Output	(int X,int Y,int W,int H, const char *l = 0)	;
+};
+
+class	Fl_Multiline_Output	 :public Fl_Output	{
+	public:
+			Fl_Multiline_Output	(int X,int Y,int W,int H,const char *l = 0)	;
+};
+
+class	Fl_PSfile_Device	 :public Fl_Abstract_Printer	{
+	public:
+enum Page_Format {
+      A0 = 0,
+      A1,
+      A2,
+      A3,
+      A4,
+      A5,
+      A6,
+      A7,
+      A8,
+      A9,
+      B0,
+      B1,
+      B2,
+      B3,
+      B4,
+      B5,
+      B6,
+      B7,
+      B8,
+      B9,
+      B10,
+      C5E,
+      DLE,
+      EXECUTIVE,
+      FOLIO,
+      LEDGER,
+      LEGAL,
+      LETTER,
+      TABLOID,
+      ENVELOPE,
+      MEDIA = 0x1000
+    };
+    
+    /**
+     \brief Possible page layouts.
+     */
+    enum Page_Layout {PORTRAIT = 0, LANDSCAPE = 0x100, REVERSED = 0x200, ORIENTATION = 0x300};	
+	
+	Fl_PSfile_Device	(void)	;
+	//void		close_command	( int (*cmd)(FILE *))	;
+	void		end_job	(void)	;
+	int		end_page	(void)	;
+	FILE	*	file	()	;
+	void		interpolate	(int i)	;
+	int		interpolate	()	;
+	void		margins	(int *left=0, int *top=0, int *right=0, int *bottom=0)	;
+	void		origin	(int x, int y)	;
+	void		page	(double pw, double ph, int media = 0)	;
+	void		page	(int format)	;
+	void		page_policy	(int p)	;
+	int		page_policy	()	;
+	//void		place	(double x, double y, double tx, double ty, double scale = 1)	;
+	int		printable_rect	(int *w=0, int *h=0)	;
+	void		rotate	(float angle)	;
+	void		scale	(float scale_x, float scale_y)	;
+	//int		start_job	(int pagecount, enum Page_Format format = A4, enum Page_Layout layout = PORTRAIT)	;
+	//int		start_job	(FILE *ps_output, int pagecount, enum Page_Format format = A4, enum Page_Layout layout = PORTRAIT)	;
+	int		start_page	(void)	;
+	void		translate	(int x, int y)	;
+	void		untranslate	(void)	;
+};
+
+class	Fl_Pack	 :public Fl_Group	{
+	public:
+			Fl_Pack	(int x,int y,int w ,int h,const char *l = 0)	;
+	uchar		horizontal	()	;
+	int		spacing	()	;
+	void		spacing	(int i)	;
+};
+
+// class	Fl_Plugin		{
+	// public:
+			// Fl_Plugin	(const char *klass, const char *name)	;
+// };
+
+// class	Fl_Plugin_Manager	 :public Fl_Preferences	{
+	// public:
+			// Fl_Plugin_Manager	(const char *klass)	;
+	// ID		addPlugin	(const char *name, Fl_Plugin *plugin)	;
+// static	int		load	(const char *filename)	;
+// static	int		loadAll	(const char *filepath, const char *pattern=0)	;
+	// Fl_Plugin	*	plugin	(int index)	;
+	// Fl_Plugin	*	plugin	(const char *name)	;
+	// int		plugins	()	;
+// static	void		removePlugin	(Fl_Preferences::ID id)	;
+// };
+
+// class	Fl_Device_Plugin	 :public Fl_Plugin	{
+	// public:
+			// Fl_Device_Plugin	(const char *name)	;
+// virtual	char	*	klass	()	;
+// virtual	char	*	name	()	;
+// virtual	int		print	(Fl_Widget* w, int x, int y, int height)	;
+// };
+
+class	Fl_Positioner	 :public Fl_Widget	{
+	public:
+			Fl_Positioner	(int x,int y,int w,int h, const char *l=0)	;
+	virtual int		handle	(int)	;
+	int		value	(double,double)	;
+	void		xbounds	(double, double)	;
+	//double		xmaximum	()	;
+	//void		xmaximum	(double a)	;
+	tolua_get_set double xmaximum();
+	//double		xminimum	()	;
+	//void		xminimum	(double a)	;
+	tolua_get_set double xminimum();
+	void		xstep	(double a)	;
+	double		xvalue	()	;
+	int		xvalue	(double)	;
+	void		ybounds	(double, double)	;
+	//double		ymaximum	()	;
+	//void		ymaximum	(double a)	;
+	tolua_get_set double ymaximum();
+	//double		yminimum	()	;
+	//void		yminimum	(double a)	;
+	tolua_get_set double yminimum();
+	void		ystep	(double a)	;
+	//double		yvalue	()	;
+	//int		yvalue	(double)	;
+	tolua_get_set double yvalue();
+};
+
+class	Fl_Preferences		{
+	public:
+  enum Root { 
+    SYSTEM=0,   ///< Preferences are used system-wide
+    USER        ///< Preferences apply only to the current user
+  };	
+			Fl_Preferences	( Root root, const char *vendor, const char *application )	;
+			Fl_Preferences	( const char *path, const char *vendor, const char *application )	;
+			Fl_Preferences	( Fl_Preferences *parent, const char *group )	;
+			Fl_Preferences	( Fl_Preferences *parent, int groupIndex )	;
+			Fl_Preferences	(const Fl_Preferences&)	;
+			//Fl_Preferences	( ID id )	;
+	char		clear	()	;
+	char		copyTo	(class Fl_Tree*)	;
+	char		deleteAllEntries	()	;
+	char		deleteAllGroups	()	;
+	char		deleteEntry	( const char *entry )	;
+	char		deleteGroup	( const char *group )	;
+	int		entries	()	;
+	char	*	entry	( int index )	;
+	char		entryExists	( const char *key )	;
+	void		flush	()	;
+//	char		get	( const char *entry, int &value, int defaultValue )	;
+//	char		get	( const char *entry, float &value, float defaultValue )	;
+	char		get	( const char *entry, double &value, double defaultValue )	;
+	char		get	( const char *entry, char *value, const char *defaultValue, int maxSize )	;
+	char		get	( const char *entry, void *&value, const void *defaultValue, int defaultSize )	;
+	char		get	( const char *entry, void *value, const void *defaultValue, int defaultSize, int maxSize )	;
+	char		getUserdataPath	( char *path, int pathlen )	;
+	char	*	group	( int num_group )	;
+	char		groupExists	( const char *key )	;
+	int		groups	()	;
+	//ID		id	()	;
+	char	*	name	()	;
+static	char	*	newUUID	()	;
+	char	*	path	()	;
+//static	char		remove	(ID id_)	;
+//	char		set	( const char *entry, int value )	;
+//	char		set	( const char *entry, float value )	;
+//	char		set	( const char *entry, float value, int precision )	;
+	char		set	( const char *entry, double value )	;
+	char		set	( const char *entry, double value, int precision )	;
+	char		set	( const char *entry, const char *value )	;
+	char		set	( const char *entry, const void *value, int size )	;
+	int		size	( const char *entry )	;
+};
+
+class	Fl_Printer	 :public Fl_Abstract_Printer	{
+	public:
+			Fl_Printer	(void)	;
+	void		end_job	(void)	;
+	int		end_page	(void)	;
+	void		margins	(int *left=0, int *top=0, int *right=0, int *bottom=0)	;
+	void		origin	(int x, int y)	;
+	//void		origin	@ get_origin(int *x=0, int *y=0)	;
+	//void		print_widget	(Fl_Widget* widget, int delta_x = 0, int delta_y = 0)	;
+	//void		print_window_part	(Fl_Window *win, int x, int y, int w, int h, int delta_x = 0, int delta_y = 0)	;
+	int		printable_rect	(int *w=0, int *h=0)	;
+	void		rotate	(float angle)	;
+	void		scale	(float scale_x, float scale_y)	;
+	int		start_job	(int pagecount, int *frompage = NULL, int *topage = NULL)	;
+	int		start_page	(void)	;
+	void		translate	(int x, int y)	;
+	void		untranslate	(void)	;
+	tolua_get_set int ask_for_printer();
+};
+
+class	Fl_Progress	 :public Fl_Widget	{
+	public:
+			Fl_Progress	(int x, int y, int w, int h, const char *l = 0)	;
+	//void		maximum	(float v)	;
+	//float		maximum	()	;
+	tolua_get_set float maximum();
+	//void		minimum	(float v)	;
+	//float		minimum	()	;
+	tolua_get_set float minimum();
+	//void		value	(float v)	;
+	//float		value	()	;
+	tolua_get_set float value();
+};
+
+// class	Fl_Quartz_Display	 :public Fl_Display	{
+	// public:
+			// Fl_Quartz_Display	()	;
+// };
+
+class	Fl_RGB_Image	 :public Fl_Image	{
+	public:
+			Fl_RGB_Image	(const uchar *bits, int W, int H, int D=3, int LD=0)	;
+virtual	void		color_average	(Fl_Color c, float i)	;
+virtual	Fl_Image	*	copy	(int W, int H)	;
+	Fl_Image	*	copy	()	;
+virtual	void		desaturate	()	;
+virtual	void		draw	(int X, int Y, int W, int H, int cx=0, int cy=0)	;
+	void		draw	(int X, int Y)	;
+virtual	void		label	(Fl_Widget*w)	;
+virtual	void		label	(Fl_Menu_Item*m)	;
+virtual	void		uncache	()	;
+};
+
+class	Fl_BMP_Image	 :public Fl_RGB_Image	{
+	public:
+			Fl_BMP_Image	(const char* filename)	;
+};
+
+class	Fl_Bitmap	 :public Fl_Image	{
+	public:
+			Fl_Bitmap	(const uchar *bits, int W, int H)	;
+			Fl_Bitmap	(const char *bits, int W, int H)	;
+virtual	Fl_Image	*	copy	(int W, int H)	;
+	Fl_Image	*	copy	()	;
+virtual	void		draw	(int X, int Y, int W, int H, int cx=0, int cy=0)	;
+	void		draw	(int X, int Y)	;
+virtual	void		label	(Fl_Widget*w)	;
+virtual	void		label	(Fl_Menu_Item*m)	;
+virtual	void		uncache	()	;
+};
+
+class	Fl_JPEG_Image	 :public Fl_RGB_Image	{
+	public:
+			Fl_JPEG_Image	(const char *filename)	;
+			Fl_JPEG_Image	(const char *name, const unsigned char *data)	;
+};
+
+class	Fl_Radio_Button	 :public Fl_Button	{
+	public:
+			Fl_Radio_Button	(int x,int y,int w,int h,const char *l=0)	;
+};
+
+class	Fl_Radio_Light_Button	 :public Fl_Light_Button	{
+	public:
+			Fl_Radio_Light_Button	(int X,int Y,int W,int H,const char *l=0)	;
+};
+
+class	Fl_Repeat_Button	 :public Fl_Button	{
+	public:
+			Fl_Repeat_Button	(int X,int Y,int W,int H,const char *l=0)	;
+	void		deactivate	()	;
+	int		handle	(int)	;
+};
+
+class	Fl_Return_Button	 :public Fl_Button	{
+	public:
+			Fl_Return_Button	(int X, int Y, int W, int H,const char *l=0)	;
+	int		handle	(int)	;
+};
+
+class	Fl_Round_Button	 :public Fl_Light_Button	{
+	public:
+			Fl_Round_Button	(int x,int y,int w,int h,const char *l = 0)	;
+};
+
+class	Fl_Radio_Round_Button	 :public Fl_Round_Button	{
+	public:
+			Fl_Radio_Round_Button	(int x,int y,int w,int h,const char *l=0)	;
+};
+
+class	Fl_Round_Clock	 :public Fl_Clock	{
+	public:
+			Fl_Round_Clock	(int x,int y,int w,int h, const char *l = 0)	;
+};
+
+class	Fl_Scroll	 :public Fl_Group	{
+	public:
+			Fl_Scroll	(int X,int Y,int W,int H,const char*l=0)	;
+	void		clear	()	;
+	virtual int		handle	(int)	;
+	void		resize	(int,int,int,int)	;
+	void		scroll_to	(int, int)	;
+	//int		scrollbar_size	()	;
+	//void		scrollbar_size	(int size)	;
+	tolua_get_set int scrollbar_size();
+	int		xposition	()	;
+	int		yposition	()	;
+};
+
+class	Fl_Secret_Input	 :public Fl_Input	{
+	public:
+			Fl_Secret_Input	(int X,int Y,int W,int H,const char *l = 0)	;
+};
+
+class	Fl_Select_Browser	 :public Fl_Browser	{
+	public:
+			Fl_Select_Browser	(int X,int Y,int W,int H,const char *l=0)	;
+	virtual int		handle	(int)	;
+};
+
+class	Fl_Shared_Image	 :public Fl_Image	{
+	public:
+static	void		add_handler	(Fl_Shared_Handler f)	;
+virtual	void		color_average	(Fl_Color c, float i)	;
+virtual	Fl_Image	*	copy	(int W, int H)	;
+	Fl_Image	*	copy	()	;
+virtual	void		desaturate	()	;
+virtual	void		draw	(int X, int Y, int W, int H, int cx, int cy)	;
+	void		draw	(int X, int Y)	;
+static	Fl_Shared_Image	*	find	(const char *n, int W = 0, int H = 0)	;
+static	Fl_Shared_Image	*	get	(const char *n, int W = 0, int H = 0)	;
+//static	Fl_Shared_Image	**	images	()	;
+	char	*	name	()	;
+static	int		num_images	()	;
+	int		refcount	()	;
+	void		release	()	;
+	void		reload	()	;
+static	void		remove_handler	(Fl_Shared_Handler f)	;
+virtual	void		uncache	()	;
+};
+
+void fl_register_images();
+
+class	Fl_Simple_Counter	 :public Fl_Counter	{
+	public:
+			Fl_Simple_Counter	(int x,int y,int w,int h, const char *l = 0)	;
+};
+
+class	Fl_Spinner	 :public Fl_Group	{
+	public:
+			Fl_Spinner	(int X, int Y, int W, int H, const char *L = 0)	;
+	//char	*	format	()	;
+	//void		format	(const char *f)	;
+	tolua_get_set char* format();
+	virtual int		handle	(int event)	;
+	//void		maximum	(double v)	;
+	//double		maximum	()	;
+	tolua_get_set double maximum();
+	//void		minimum	(double v)	;
+	//double		minimum	()	;
+	tolua_get_set double minimum();
+	void		range	(double a, double b)	;
+	void		resize	(int X, int Y, int W, int H)	;
+	//double		step	()	;
+	//void		step	(double s)	;
+	tolua_get_set double step();
+	//Fl_Color		textcolor	()	;
+	//void		textcolor	(Fl_Color c)	;
+	tolua_get_set Fl_Color textcolor();
+	//Fl_Font		textfont	()	;
+	//void		textfont	(Fl_Font f)	;
+	tolua_get_set Fl_Font textfont();
+	//Fl_Fontsize		textsize	()	;
+	//void		textsize	(Fl_Fontsize s)	;
+	tolua_get_set Fl_Fontsize textsize();
+	//uchar		type	()	;
+	//void		type	(uchar v)	;
+	tolua_get_set uchar type();
+	//void		value	(double v)	;
+	//double		value	()	;
+	tolua_get_set double value();
+};
+
+class	Fl_Sys_Menu_Bar	 :public Fl_Menu_Bar	{
+	public:
+			Fl_Sys_Menu_Bar	(int x,int y,int w,int h,const char *l=0)	;
+	int		add	(const char* label, int shortcut, Fl_Callback*, void *user_data=0, int flags=0)	;
+	void		clear	()	;
+	int		clear_submenu	(int index)	;
+//static	void	*	doMenuOrItemOperation	( menuOrItemOperation operation, ...)	;
+	int		insert	(int index, const char* label, int shortcut, Fl_Callback *cb, void *user_data=0, int flags=0)	;
+	void		menu	(const Fl_Menu_Item *m)	;
+	void		remove	(int n)	;
+	void		replace	(int rank, const char *name)	;
+};
+
+class	Fl_Table	 :public Fl_Group	{
+	protected:
+	virtual void draw_cell(TableContext context, int R=0, int C=0,
+                         int X=0, int Y=0, int W=0, int H=0);
+	
+	public:
+  enum TableContext {
+    CONTEXT_NONE       = 0,
+    CONTEXT_STARTPAGE  = 0x01,	// before a page is redrawn
+    CONTEXT_ENDPAGE    = 0x02,	// after a page is redrawn
+    CONTEXT_ROW_HEADER = 0x04,	// in the row header
+    CONTEXT_COL_HEADER = 0x08,	// in the col header
+    CONTEXT_CELL       = 0x10,	// in one of the cells
+    CONTEXT_TABLE      = 0x20,	// in the table
+    CONTEXT_RC_RESIZE  = 0x40 	// column or row being resized
+  };	
+			Fl_Table	(int X, int Y, int W, int H, const char *l=0)	;
+	void		add	(Fl_Widget* w)	;
+	//const	*	array	()	;
+	void		begin	()	;
+	//void		callback	(Fl_Widget*, void*)	;
+	int		callback_col	()	;
+	TableContext		callback_context	()	;
+	int		callback_row	()	;
+	Fl_Widget	*	child	(int n)	;
+	int		children	()	;
+virtual	void		clear	()	;
+	//int		col_header	()	;
+	//void		col_header	(int flag)	;
+	tolua_get_set int col_header();
+	//void		col_header_color	(Fl_Color val)	;
+	//Fl_Color		col_header_color	()	;
+	tolua_get_set Fl_Color col_header_color();
+	//void		col_header_height	(int height)	;
+	//int		col_header_height	()	;
+	tolua_get_set int col_header_height();
+	//void		col_position	(int col)	;
+	//int		col_position	()	;
+	tolua_get_set int col_position();
+	//int		col_resize	()	;
+	//void		col_resize	(int flag)	;
+	tolua_get_set int col_resize();
+	//int		col_resize_min	()	;
+	//void		col_resize_min	(int val)	;
+	tolua_get_set int col_resize_min();
+	void		col_width	(int col, int width)	;
+	int		col_width	(int col)	;
+	void		col_width_all	(int width)	;
+virtual	void		cols	(int val)	;
+	int		cols	()	;
+	void		do_callback	(TableContext context, int row, int col)	;
+	void		draw	(void)	;
+	void		end	@ endd()	;
+	int		find	(const Fl_Widget *w)	;
+	void		get_selection	(int& s_top, int& s_left, int& s_bottom, int& s_right)	;
+	void		init_sizes	()	;
+	void		insert	(Fl_Widget& w, int n)	;
+	void		insert	(Fl_Widget& w, Fl_Widget* w2)	;
+	int		is_interactive_resize	()	;
+	int		is_selected	(int r, int c)	;
+	int		move_cursor	(int R, int C)	;
+	void		remove	(Fl_Widget& w)	;
+	void		resize	(int X, int Y, int W, int H)	;
+	//int		row_header	()	;
+	//void		row_header	(int flag)	;
+	tolua_get_set int row_header();
+	//void		row_header_color	(Fl_Color val)	;
+	//Fl_Color		row_header_color	()	;
+	tolua_get_set Fl_Color row_header_color();
+	//void		row_header_width	(int width)	;
+	//int		row_header_width	()	;
+	tolua_get_set int row_header_width();
+	void		row_height	(int row, int height)	;
+	int		row_height	(int row)	;
+	void		row_height_all	(int height)	;
+	//void		row_position	(int row)	;
+	//int		row_position	()	;
+	tolua_get_set int row_position();
+	//int		row_resize	()	;
+	//void		row_resize	(int flag)	;
+	tolua_get_set int row_resize();
+	//int		row_resize_min	()	;
+	//void		row_resize_min	(int val)	;
+	tolua_get_set int row_resize_min();
+virtual	void		rows	(int val)	;
+	int		rows	()	;
+	void		set_selection	(int s_top, int s_left, int s_bottom, int s_right)	;
+	//void		table_box	(Fl_Boxtype val)	;
+	//Fl_Boxtype		table_box	( void )	;
+	tolua_get_set Fl_Boxtype table_box();
+	//void		top_row	(int row)	;
+	//int		top_row	()	;
+	tolua_get_set int top_row();
+	void		visible_cells	(int& r1, int& r2, int& c1, int& c2)	;
+	//void		when	(Fl_When flags)	;
+};
+
+class	Fl_Table_Row	 :public Fl_Table	{
+	private:
+	virtual void dummyToTriggerVirtualGeneration();
+	public:
+  enum TableRowSelectMode {
+    SELECT_NONE,		// no selection allowed
+    SELECT_SINGLE,		// single row selection
+    SELECT_MULTI		// multiple row selection (default)
+  };	
+			Fl_Table_Row	(int X, int Y, int W, int H, const char *l=0)	;
+	void		clear	()	;
+	int		row_selected	(int row)	;
+	//void		rows	(int val)	;
+	//int		rows	()	;
+	tolua_get_set int rows();
+	void		select_all_rows	(int flag=1)	;
+	int		select_row	(int row, int flag=1)	;
+	void		type	(TableRowSelectMode val)	;
+	TableRowSelectMode		type	()	;
+};
+
+class	Fl_Tabs	 :public Fl_Group	{
+	public:
+			Fl_Tabs	(int,int,int,int,const char * = 0)	;
+	virtual int		handle	(int)	;
+	Fl_Widget	*	push	()	;
+	int		push	(Fl_Widget *)	;
+	Fl_Widget	*	value	()	;
+	int		value	(Fl_Widget *)	;
+	Fl_Widget	*	which	(int event_x, int event_y)	;
+};
+
+class	Fl_Text_Buffer		{
+	public:
+			Fl_Text_Buffer	(int requestedSize = 0, int preferredGapSize = 1024)	;
+	void		add_modify_callback	(Fl_Text_Modify_Cb bufModifiedCB, void* cbArg)	;
+	void		add_predelete_callback	(Fl_Text_Predelete_Cb bufPredelCB, void* cbArg)	;
+	char	*	address	(int pos)	;
+	void		append	(const char* t)	;
+	int		appendfile	(const char *file, int buflen = 128*1024)	;
+	void		call_modify_callbacks	()	;
+	void		call_predelete_callbacks	()	;
+	void		canUndo	(char flag=1)	;
+	int		character	(int pos)	;
+static	int		character_width	(const char *src, int indent, int tabDist)	;
+static	int		character_width	(const char c, int indent, int tabDist)	;
+	void		clear_rectangular	(int start, int end, int rectStart, int rectEnd)	;
+	void		copy	(Fl_Text_Buffer* fromBuf, int fromStart, int fromEnd, int toPos)	;
+	int		count_displayed_characters	(int lineStartPos, int targetPos)	;
+	int		count_lines	(int startPos, int endPos)	;
+static	int		expand_character	(const char *src, int indent, char* outStr, int tabDist)	;
+	int		expand_character	(int pos, int indent, char *outStr)	;
+	int		findchar_backward	(int startPos, char searchChar, int* foundPos)	;
+	int		findchar_forward	(int startPos, char searchChar, int* foundPos)	;
+	int		findchars_backward	(int startPos, const char* searchChars, int* foundPos)	;
+	int		findchars_forward	(int startPos, const char* searchChars, int* foundPos)	;
+	void		highlight	(int start, int end)	;
+	int		highlight	()	;
+	int		highlight_position	(int* start, int* end)	;
+	int		highlight_position	(int* start, int* end, int* isRect, int* rectStart, int* rectEnd)	;
+	void		highlight_rectangular	(int start, int end, int rectStart, int rectEnd)	;
+	Fl_Text_Selection	*	highlight_selection	()	;
+	char	*	highlight_text	()	;
+	void		insert	(int pos, const char* text)	;
+	void		insert_column	(int column, int startPos, const char* text, int* charsInserted, int* charsDeleted)	;
+	int		insertfile	(const char *file, int pos, int buflen = 128*1024)	;
+	int		length	()	;
+	int		line_end	(int pos)	;
+	int		line_start	(int pos)	;
+	char	*	line_text	(int pos)	;
+	int		loadfile	(const char *file, int buflen = 128*1024)	;
+	int		outputfile	(const char *file, int start, int end, int buflen = 128*1024)	;
+	void		overlay_rectangular	(int startPos, int rectStart, int rectEnd, const char* text, int* charsInserted, int* charsDeleted)	;
+	Fl_Text_Selection	*	primary_selection	()	;
+	void		remove	(int start, int end)	;
+	void		remove_modify_callback	(Fl_Text_Modify_Cb bufModifiedCB, void* cbArg)	;
+	void		remove_predelete_callback	(Fl_Text_Predelete_Cb predelCB, void* cbArg)	;
+	void		remove_rectangular	(int start, int end, int rectStart, int rectEnd)	;
+	void		remove_secondary_selection	()	;
+	void		remove_selection	()	;
+	void		replace	(int start, int end, const char *text)	;
+	void		replace_rectangular	(int start, int end, int rectStart, int rectEnd, const char* text)	;
+	void		replace_secondary_selection	(const char* text)	;
+	void		replace_selection	(const char* text)	;
+	int		rewind_lines	(int startPos, int nLines)	;
+	int		savefile	(const char *file, int buflen = 128*1024)	;
+	int		search_backward	(int startPos, const char* searchString, int* foundPos, int matchCase = 0)	;
+	int		search_forward	(int startPos, const char* searchString, int* foundPos, int matchCase = 0)	;
+	void		secondary_select	(int start, int end)	;
+	void		secondary_select_rectangular	(int start, int end, int rectStart, int rectEnd)	;
+	int		secondary_selected	()	;
+	Fl_Text_Selection	*	secondary_selection	()	;
+	int		secondary_selection_position	(int* start, int* end)	;
+	int		secondary_selection_position	(int* start, int* end, int* isRect, int* rectStart, int* rectEnd)	;
+	char	*	secondary_selection_text	()	;
+	void		secondary_unselect	()	;
+	void		select	(int start, int end)	;
+	void		select_rectangular	(int start, int end, int rectStart, int rectEnd)	;
+	int		selected	()	;
+	int		selection_position	(int* start, int* end)	;
+	int		selection_position	(int* start, int* end, int* isRect, int* rectStart, int* rectEnd)	;
+	char	*	selection_text	()	;
+	int		skip_displayed_characters	(int lineStartPos, int nChars)	;
+	int		skip_lines	(int startPos, int nLines)	;
+	//int		tab_distance	()	;
+	//void		tab_distance	(int tabDist)	;
+	tolua_get_set int tab_distance();
+	//char	*	text	()	;
+	//void		text	(const char* text)	;
+	tolua_get_set char* text();
+	char	*	text_in_rectangle	(int start, int end, int rectStart, int rectEnd)	;
+	char	*	text_range	(int start, int end)	;
+	int		undo	(int *cp=0)	;
+	void		unhighlight	()	;
+	void		unselect	()	;
+	int		word_end	(int pos)	;
+	int		word_start	(int pos)	;
+};
+
+class	Fl_Text_Display: public Fl_Group		{
+	public:
+    enum {
+      NORMAL_CURSOR, CARET_CURSOR, DIM_CURSOR,
+      BLOCK_CURSOR, HEAVY_CURSOR
+    };
+
+    enum {
+      CURSOR_POS, CHARACTER_POS
+    };
+
+    /** drag types- they match Fl::event_clicks() so that single clicking to
+        start a collection selects by character, double clicking selects by
+        word and triple clicking selects by line.
+    */
+    enum {
+      DRAG_CHAR = 0, DRAG_WORD = 1, DRAG_LINE = 2
+    };
+
+    /** style attributes - currently not implemented! */
+    enum {
+      ATTR_NONE = 0,
+      ATTR_UNDERLINE = 1,
+      ATTR_HIDDEN = 2
+    };
+    /** This structure associates the color,font,size of a string to draw
+        with an attribute mask matching attr */
+    struct Style_Table_Entry {
+      Fl_Color	color;
+      Fl_Font	font;
+      int	size;
+      unsigned	attr;
+    };
+	
+	Fl_Text_Display(int X, int Y, int W, int H, const char *l = 0);
+	//void		buffer	(Fl_Text_Buffer* buf)	;
+	//Fl_Text_Buffer	*	buffer	()	;
+	tolua_get_set Fl_Text_Buffer* buffer();
+	int		count_lines	(int start, int end, bool start_pos_is_line_start)	;
+	//Fl_Color		cursor_color	()	;
+	//void		cursor_color	(Fl_Color n)	;
+	tolua_get_set Fl_Color cursor_color();
+	void		cursor_style	(int style)	;
+//friend	void		fl_text_drag_me	(int pos, Fl_Text_Display* d)	;
+virtual	int		handle	(int e)	;
+	void		hide_cursor	()	;
+	//void		highlight_data	(Fl_Text_Buffer *styleBuffer, const Style_Table_Entry *styleTable, int nStyles, char unfinishedStyle, Unfinished_Style_Cb unfinishedHighlightCB, void *cbArg)	;
+	int		in_selection	(int x, int y)	;
+	void		insert	(const char* text)	;
+	void		insert_position	(int newPos)	;
+	int		insert_position	()	;
+	int		line_end	(int pos, bool start_pos_is_line_start)	;
+	int		line_start	(int pos)	;
+	int		move_down	()	;
+	int		move_left	()	;
+	int		move_right	()	;
+	int		move_up	()	;
+	void		next_word	(void)	;
+	void		overstrike	(const char* text)	;
+	int		position_style	(int lineStartPos, int lineLen, int lineIndex, int dispIndex)	;
+	void		previous_word	(void)	;
+	void		redisplay_range	(int start, int end)	;
+virtual	void		resize	(int X, int Y, int W, int H)	;
+	int		rewind_lines	(int startPos, int nLines)	;
+	void		scroll	(int topLineNum, int horizOffset)	;
+	//Fl_Align		scrollbar_align	()	;
+	//void		scrollbar_align	(Fl_Align a)	;
+	tolua_get_set Fl_Align scrollbar_align();
+	//int		scrollbar_width	()	;
+	//void		scrollbar_width	(int W)	;
+	tolua_get_set int scrollbar_width();
+	//int		shortcut	()	;
+	//void		shortcut	(int s)	;
+	tolua_get_set int shortcut();
+	void		show_cursor	(int b = 1)	;
+	void		show_insert_position	()	;
+	int		skip_lines	(int startPos, int nLines, bool startPosIsLineStart)	;
+	//Fl_Color		textcolor	()	;
+	//void		textcolor	(Fl_Color n)	;
+	tolua_get_set Fl_Color textcolor();
+	//Fl_Font		textfont	()	;
+	//void		textfont	(Fl_Font s)	;
+	tolua_get_set Fl_Font textfont();
+	//Fl_Fontsize		textsize	()	;
+	//void		textsize	(Fl_Fontsize s)	;
+	tolua_get_set Fl_Fontsize textsize();
+	//typedef		void	(*Unfinished_Style_Cb)	;
+	int		word_end	(int pos)	;
+	int		word_start	(int pos)	;
+	void		wrap_mode	(int wrap, int wrap_margin)	;
+	int		wrapped_column	(int row, int column)	;
+	int		wrapped_row	(int row)	;
+};
+
+class	Fl_Text_Editor	 :public Fl_Text_Display	{
+	public:
+    /** Simple linked list associating a key/state to a function */
+    // struct Key_Binding {
+      // int          key;		///< the key pressed
+      // int          state;	///< the state of key modifiers
+      // Key_Func     function;	///< associated function
+      // Key_Binding* next;	///< next key binding in the list
+    // };	
+			Fl_Text_Editor	(int X, int Y, int W, int H, const char* l = 0)	;
+	//void		add_default_key_bindings	(Key_Binding** list)	;
+	//void		add_key_binding	(int key, int state, Key_Func f, Key_Binding** list)	;
+	//void		add_key_binding	(int key, int state, Key_Func f)	;
+	//Key_Func		bound_key_function	(int key, int state, Key_Binding* list)	;
+	//Key_Func		bound_key_function	(int key, int state)	;
+	//void		default_key_function	(Key_Func f)	;
+virtual	int		handle	(int e)	;
+	void		insert_mode	(int b)	;
+	int		insert_mode	()	;
+	//typedef		int	(*Key_Func)	;
+static	int		kf_backspace	(int c, Fl_Text_Editor* e)	;
+static	int		kf_c_s_move	(int c, Fl_Text_Editor* e)	;
+static	int		kf_copy	(int c, Fl_Text_Editor* e)	;
+static	int		kf_ctrl_move	(int c, Fl_Text_Editor* e)	;
+static	int		kf_cut	(int c, Fl_Text_Editor* e)	;
+static	int		kf_default	(int c, Fl_Text_Editor* e)	;
+static	int		kf_delete	(int c, Fl_Text_Editor* e)	;
+static	int		kf_down	(int c, Fl_Text_Editor* e)	;
+static	int		kf_end	(int c, Fl_Text_Editor* e)	;
+static	int		kf_enter	(int c, Fl_Text_Editor* e)	;
+static	int		kf_home	(int, Fl_Text_Editor* e)	;
+static	int		kf_ignore	(int c, Fl_Text_Editor* e)	;
+static	int		kf_insert	(int c, Fl_Text_Editor* e)	;
+static	int		kf_left	(int c, Fl_Text_Editor* e)	;
+static	int		kf_m_s_move	(int c, Fl_Text_Editor* e)	;
+static	int		kf_meta_move	(int c, Fl_Text_Editor* e)	;
+static	int		kf_move	(int c, Fl_Text_Editor* e)	;
+static	int		kf_page_down	(int c, Fl_Text_Editor* e)	;
+static	int		kf_page_up	(int c, Fl_Text_Editor* e)	;
+static	int		kf_paste	(int c, Fl_Text_Editor* e)	;
+static	int		kf_right	(int c, Fl_Text_Editor* e)	;
+static	int		kf_select_all	(int c, Fl_Text_Editor* e)	;
+static	int		kf_shift_move	(int c, Fl_Text_Editor* e)	;
+static	int		kf_undo	(int c, Fl_Text_Editor* e)	;
+static	int		kf_up	(int c, Fl_Text_Editor* e)	;
+	//void		remove_all_key_bindings	(Key_Binding** list)	;
+	void		remove_all_key_bindings	()	;
+	//void		remove_key_binding	(int key, int state, Key_Binding** list)	;
+	void		remove_key_binding	(int key, int state)	;
+};
+
+class	Fl_Text_Selection		{
+	public:
+	int		end	@ endd()	;
+	int		includes	(int pos, int lineStartPos, int dispIndex)	;
+	int		position	(int* start, int* end)	;
+	int		position	(int* start, int* end, int* isRect, int* rectStart, int* rectEnd)	;
+	int		rect_end	()	;
+	int		rect_start	()	;
+	char		rectangular	()	;
+	//char		selected	()	;
+	//void		selected	(char b)	;
+	tolua_get_set char selected();
+	void		set	(int start, int end)	;
+	void		set_rectangular	(int start, int end, int rectStart, int rectEnd)	;
+	int		start	()	;
+	void		update	(int pos, int nDeleted, int nInserted)	;
+};
+
+class	Fl_Tile	 :public Fl_Group	{
+	public:
+			Fl_Tile	(int X,int Y,int W,int H,const char*l=0)	;
+	virtual int		handle	(int)	;
+	void		position	(int, int, int, int)	;
+	void		resize	(int, int, int, int)	;
+};
+
+class	Fl_Tiled_Image	 :public Fl_Image	{
+	public:
+			Fl_Tiled_Image	(Fl_Image *i, int W = 0, int H = 0)	;
+virtual	void		color_average	(Fl_Color c, float i)	;
+virtual	Fl_Image	*	copy	(int W, int H)	;
+	Fl_Image	*	copy	()	;
+virtual	void		desaturate	()	;
+virtual	void		draw	(int X, int Y, int W, int H, int cx, int cy)	;
+	void		draw	(int X, int Y)	;
+	Fl_Image	*	image	()	;
+};
+
+class	Fl_Toggle_Button	 :public Fl_Button	{
+	public:
+			Fl_Toggle_Button	(int X,int Y,int W,int H,const char *l=0)	;
+};
+
+class	Fl_Tooltip		{
+	public:
+//static	Fl_Color		color	()	;
+//static	void		color	(Fl_Color c)	;
+static tolua_get_set  Fl_Color color();
+//static	Fl_Widget	*	current	()	;
+//static	void		current	(Fl_Widget*)	;
+static tolua_get_set  Fl_Widget* current();
+//static	float		delay	()	;
+//static	void		delay	(float f)	;
+static tolua_get_set  float delay();
+static	void		disable	()	;
+static	void		enable	(int b = 1)	;
+static	int		enabled	()	;
+static	void		enter_area	(Fl_Widget* w, int X, int Y, int W, int H, const char* tip)	;
+//static	Fl_Font		font	()	;
+//static	void		font	(Fl_Font i)	;
+static tolua_get_set  Fl_Font font();
+//static	float		hoverdelay	()	;
+//static	void		hoverdelay	(float f)	;
+static tolua_get_set  float hoverdelay();
+//static	Fl_Fontsize		size	()	;
+//static	void		size	(Fl_Fontsize s)	;
+static tolua_get_set  Fl_Fontsize size();
+//static	Fl_Color		textcolor	()	;
+//static	void		textcolor	(Fl_Color c)	;
+static tolua_get_set  Fl_Color textcolor();
+};
+
+class	Fl_Tree	 :public Fl_Group	{
+	public:
+			Fl_Tree	(int X, int Y, int W, int H, const char *L=0)	;
+	Fl_Tree_Item	*	add	(const char *path)	;
+	Fl_Tree_Item	*	add	@ add2(Fl_Tree_Item *item, const char *name)	;
+	void		clear	()	;
+	void		clear_children	(Fl_Tree_Item *item)	;
+	void		close	(Fl_Tree_Item *item)	;
+	int		close	(const char *path)	;
+	//Fl_Image	*	closeicon	()	;
+	//void		closeicon	(Fl_Image *val)	;
+	tolua_get_set  Fl_Image* closeicon();
+	//Fl_Tree_Connector		connectorstyle	()	;
+	//void		connectorstyle	(Fl_Tree_Connector val)	;
+	tolua_get_set  Fl_Tree_Connector connectorstyle();
+	//int		connectorwidth	()	;
+	//void		connectorwidth	(int val)	;
+	tolua_get_set  int connectorwidth();
+	void		deselect	(Fl_Tree_Item *item, int docallback=0)	;
+	int		deselect	(const char *path, int docallback=0)	;
+	int		deselect_all	(Fl_Tree_Item *item=0, int docallback=0)	;
+	void		draw	()	;
+	Fl_Tree_Item	*	find_clicked	()	;
+	Fl_Tree_Item	*	find_item	(const char *path)	;
+	Fl_Tree_Item	*	first	()	;
+	virtual int		handle	(int e)	;
+	Fl_Tree_Item	*	insert	(Fl_Tree_Item *item, const char *name, int pos)	;
+	Fl_Tree_Item	*	insert_above	(Fl_Tree_Item *above, const char *name)	;
+	int		is_close	(Fl_Tree_Item *item)	;
+	int		is_close	(const char *path)	;
+	int		is_open	(Fl_Tree_Item *item)	;
+	int		is_open	(const char *path)	;
+	int		is_selected	(Fl_Tree_Item *item)	;
+	int		is_selected	(const char *path)	;
+	Fl_Tree_Item	*	item_clicked	()	;
+	//int		labelfont	()	;
+	//void		labelfont	(int val)	;
+	tolua_get_set  int labelfont();
+	//int		labelsize	()	;
+	//void		labelsize	(int val)	;
+	tolua_get_set  int labelsize();
+	Fl_Tree_Item	*	last	()	;
+	//int		marginleft	()	;
+	//void		marginleft	(int val)	;
+	tolua_get_set  int marginleft();
+	//int		margintop	()	;
+	//void		margintop	(int val)	;
+	tolua_get_set  int margintop();
+	void		open	(Fl_Tree_Item *item)	;
+	int		open	(const char *path)	;
+	//int		openchild_marginbottom	()	;
+	//void		openchild_marginbottom	(int val)	;
+	tolua_get_set  int openchild_marginbottom();
+	//Fl_Image	*	openicon	()	;
+	//void		openicon	(Fl_Image *val)	;
+	tolua_get_set  Fl_Image* openicon();
+	Fl_Tree_Item	*	parent	(Fl_Tree_Item *item)	;
+	int		remove	(Fl_Tree_Item *item)	;
+	Fl_Tree_Item	*	root	()	;
+	void		root_label	(const char *new_label)	;
+	void		select	(Fl_Tree_Item *item, int docallback=0)	;
+	int		select	(const char *path, int docallback=0)	;
+	int		select_all	(Fl_Tree_Item *item=0, int docallback=0)	;
+	int		select_only	(Fl_Tree_Item *selitem, int docallback=0)	;
+	void		select_toggle	(Fl_Tree_Item *item, int docallback=0)	;
+	//Fl_Boxtype		selectbox	()	;
+	//void		selectbox	(Fl_Boxtype val)	;
+	tolua_get_set  Fl_Boxtype selectbox();
+	//Fl_Tree_Select		selectmode	()	;
+	//void		selectmode	(Fl_Tree_Select val)	;
+	tolua_get_set  Fl_Tree_Select selectmode();
+	void		show_self	()	;
+	//int		showcollapse	()	;
+	//void		showcollapse	(int val)	;
+	tolua_get_set  int showcollapse();
+	//int		showroot	()	;
+	//void		showroot	(int val)	;
+	tolua_get_set  int showroot();
+	//Fl_Tree_Sort		sortorder	()	;
+	//void		sortorder	(Fl_Tree_Sort val)	;
+	tolua_get_set  Fl_Tree_Sort sortorder();
+	//Fl_Image	*	usericon	()	;
+	//void		usericon	(Fl_Image *val)	;
+	tolua_get_set  Fl_Image* usericon();
+};
+
+class	Fl_Tree_Item		{
+	public:
+			Fl_Tree_Item	(const Fl_Tree_Prefs &prefs)	;
+			Fl_Tree_Item	(const Fl_Tree_Item *o)	;
+	void		activate	(int val=1)	;
+	Fl_Tree_Item	*	add	(const Fl_Tree_Prefs &prefs, const char *new_label)	;
+	Fl_Tree_Item	*	add	(const Fl_Tree_Prefs &prefs, char **arr)	;
+	Fl_Tree_Item	*	child	(int index)	;
+	int		children	()	;
+	void		clear_children	()	;
+	void		close	()	;
+	void		deactivate	()	;
+	int		depth	()	;
+	void		deselect	()	;
+	int		deselect_all	()	;
+	void		draw	(int X, int &Y, int W, Fl_Widget *tree, const Fl_Tree_Prefs &prefs, int lastchild=1)	;
+	int		event_on_collapse_icon	(const Fl_Tree_Prefs &prefs)	;
+	int		event_on_label	(const Fl_Tree_Prefs &prefs)	;
+	int		find_child	(const char *name)	;
+	int		find_child	(Fl_Tree_Item *item)	;
+	Fl_Tree_Item	*	find_clicked	(const Fl_Tree_Prefs &prefs)	;
+	Fl_Tree_Item	*	find_item	(char **arr)	;
+	int		has_children	()	;
+	Fl_Tree_Item	*	insert	(const Fl_Tree_Prefs &prefs, const char *new_label, int pos=0)	;
+	Fl_Tree_Item	*	insert_above	(const Fl_Tree_Prefs &prefs, const char *new_label)	;
+	char		is_activated	()	;
+	char		is_active	()	;
+	int		is_close	()	;
+	int		is_open	()	;
+	int		is_root	()	;
+	char		is_selected	()	;
+	//char	*	label	()	;
+	//void		label	(const char *val)	;
+	tolua_get_set char* label();
+	//void		labelbgcolor	(Fl_Color val)	;
+	//Fl_Color		labelbgcolor	()	;
+	tolua_get_set Fl_Color labelbgcolor();
+	//void		labelcolor	(Fl_Color val)	;
+	//Fl_Color		labelcolor	()	;
+	tolua_get_set Fl_Color labelcolor();
+	//void		labelfgcolor	(Fl_Color val)	;
+	//Fl_Color		labelfgcolor	()	;
+	tolua_get_set Fl_Color labelfgcolor();
+	//void		labelfont	(int val)	;
+	//int		labelfont	()	;
+	tolua_get_set int labelfont();
+	//void		labelsize	(int val)	;
+	//int		labelsize	()	;
+	tolua_get_set int labelsize();
+	Fl_Tree_Item	*	next	()	;
+	void		open	()	;
+	void		open_toggle	()	;
+	//Fl_Tree_Item	*	parent	()	;
+	//void		parent	(Fl_Tree_Item *val)	;
+	tolua_get_set Fl_Tree_Item* parent();
+	Fl_Tree_Item	*	prev	()	;
+	int		remove_child	(Fl_Tree_Item *item)	;
+	int		remove_child	(const char *new_label)	;
+	void		select	(int val=1)	;
+	int		select_all	()	;
+	void		select_toggle	()	;
+	void		show_self	(const char *indent = "")	;
+	void		swap_children	(int ax, int bx)	;
+	int		swap_children	(Fl_Tree_Item *a, Fl_Tree_Item *b)	;
+	//void		user_data	( void* data )	;
+	//void	*	user_data	()	;
+	tolua_get_set void* user_data();
+	//void		usericon	(Fl_Image *val)	;
+	//Fl_Image	*	usericon	()	;
+	tolua_get_set Fl_Image* usericon();
+	///void		widget	(Fl_Widget *val)	;
+	//Fl_Widget	*	widget	()	;
+	tolua_get_set Fl_Widget* widget();
+};
+
+class	Fl_Tree_Item_Array		{
+	public:
+			Fl_Tree_Item_Array	(int new_chunksize = 10)	;
+			Fl_Tree_Item_Array	(const Fl_Tree_Item_Array *o)	;
+	void		add	(Fl_Tree_Item *val)	;
+	void		clear	()	;
+	void		insert	(int pos, Fl_Tree_Item *new_item)	;
+	void		remove	(int index)	;
+	int		remove	(Fl_Tree_Item *item)	;
+	void		swap	(int ax, int bx)	;
+	int		total	()	;
+};
+
+/// \enum Fl_Tree_Sort
+/// Sort order options for items added to the tree
+///
+enum Fl_Tree_Sort {
+  FL_TREE_SORT_NONE=0,	///< No sorting; items are added in the order defined (default).
+  FL_TREE_SORT_ASCENDING=1,	///< Add items in ascending sort order.
+  FL_TREE_SORT_DESCENDING=2	///< Add items in descending sort order.
+};
+
+/// \enum Fl_Tree_Connector
+/// Defines the style of connection lines between items.
+///
+enum Fl_Tree_Connector {
+  FL_TREE_CONNECTOR_NONE=0,	///< Use no lines connecting items
+  FL_TREE_CONNECTOR_DOTTED=1,	///< Use dotted lines connecting items (default)
+  FL_TREE_CONNECTOR_SOLID=2	///< Use solid lines connecting items
+};
+
+/// \enum Fl_Tree_Select
+/// Tree selection style.
+///
+enum Fl_Tree_Select {
+  FL_TREE_SELECT_NONE=0,	///< Nothing selected when items are clicked
+  FL_TREE_SELECT_SINGLE,	///< Single item selected when item is clicked (default)
+  FL_TREE_SELECT_MULTI	///< Multiple items can be selected by clicking with
+  ///< SHIFT or CTRL or mouse drags.
+};
+
+class	Fl_Tree_Prefs		{
+	public:
+			Fl_Tree_Prefs	()	;
+	//Fl_Color		bgcolor	()	;
+	//void		bgcolor	(Fl_Color val)	;
+	tolua_get_set Fl_Color bgcolor();
+	Fl_Image	*	closeicon	()	;
+	void		closeicon	(Fl_Image *val)	;
+	//Fl_Color		connectorcolor	()	;
+	//void		connectorcolor	(Fl_Color val)	;
+	tolua_get_set Fl_Color connectorcolor();
+	//Fl_Tree_Connector		connectorstyle	()	;
+	//void		connectorstyle	(Fl_Tree_Connector val)	;
+	tolua_get_set Fl_Tree_Connector connectorstyle();
+	//void		connectorstyle	(int val)	;
+	//int		connectorwidth	()	;
+	//void		connectorwidth	(int val)	;
+	tolua_get_set int connectorwidth();
+	//Fl_Color		fgcolor	()	;
+	//void		fgcolor	(Fl_Color val)	;
+	tolua_get_set Fl_Color fgcolor();
+	//Fl_Color		inactivecolor	()	;
+	//void		inactivecolor	(Fl_Color val)	;
+	tolua_get_set Fl_Color inactivecolor();
+	//int		labelfont	()	;
+	//void		labelfont	(int val)	;
+	tolua_get_set int labelfont();
+	//int		labelmarginleft	()	;
+	//void		labelmarginleft	(int val)	;
+	tolua_get_set int labelmarginleft();
+	//int		labelsize	()	;
+	//void		labelsize	(int val)	;
+	tolua_get_set int labelsize();
+	//int		linespacing	()	;
+	//void		linespacing	(int val)	;
+	tolua_get_set int linespacing();
+	//int		marginleft	()	;
+	//void		marginleft	(int val)	;
+	tolua_get_set int marginleft();
+	//int		margintop	()	;
+	///void		margintop	(int val)	;
+	tolua_get_set int margintop();
+	//int		openchild_marginbottom	()	;
+	//void		openchild_marginbottom	(int val)	;
+	tolua_get_set int openchild_marginbottom();
+	//Fl_Image	*	openicon	()	;
+	//void		openicon	(Fl_Image *val)	;
+	tolua_get_set Fl_Image* openicon();
+	//Fl_Boxtype		selectbox	()	;
+	//void		selectbox	(Fl_Boxtype val)	;
+	tolua_get_set Fl_Boxtype selectbox();
+	//Fl_Color		selectcolor	()	;
+	//void		selectcolor	(Fl_Color val)	;
+	tolua_get_set Fl_Color selectcolor();
+	//Fl_Tree_Select		selectmode	()	;
+	//void		selectmode	(Fl_Tree_Select val)	;
+	tolua_get_set Fl_Tree_Select selectmode();
+	//char		showcollapse	()	;
+	//void		showcollapse	(int val)	;
+	tolua_get_set int showcollapse();
+	//int		showroot	()	;
+	//void		showroot	(int val)	;
+	tolua_get_set int showroot();
+	//Fl_Tree_Sort		sortorder	()	;
+	//void		sortorder	(Fl_Tree_Sort val)	;
+	tolua_get_set Fl_Tree_Sort sortorder();
+	//Fl_Image	*	usericon	()	;
+	//void		usericon	(Fl_Image *val)	;
+	tolua_get_set Fl_Image* usericon();
+	//int		usericonmarginleft	()	;
+	//void		usericonmarginleft	(int val)	;
+	tolua_get_set int usericonmarginleft();
+};
+
+$#define step_int(i) step(i)
+$#define step_double_int(d, i) step(d, i)
+
+class	Fl_Valuator	 :public Fl_Widget	{
+	public:
+	void		bounds	(double a, double b)	;
+	double		clamp	(double)	;
+virtual	int		format	(char*)	;
+	double		increment	(double, int)	;
+	//double		maximum	()	;
+	//void		maximum	(double a)	;
+	tolua_get_set double maximum();
+	//double		minimum	()	;
+	//void		minimum	(double a)	;
+	tolua_get_set double minimum();
+	void		precision	(int)	;
+	void		range	(double a, double b)	;
+	double		round	(double)	;
+	void		step_int	(int a)	;
+	//void		step_double_int	(double a, int b)	;
+	//void		step	(double s)	;
+	//double		step	()	;
+	tolua_get_set double step();
+	//double		value	()	;
+	//int		value	(double)	;
+	tolua_get_set double value();
+};
+
+class	Fl_Adjuster	 :public Fl_Valuator	{
+	public:
+			Fl_Adjuster	(int X,int Y,int W,int H,const char *l=0)	;
+	void		soft	(int s)	;
+	int		soft	()	;
+};
+
+class	Fl_Counter	 :public Fl_Valuator	{
+	public:
+			Fl_Counter	(int X, int Y, int W, int H, const char* L = 0)	;
+	virtual int		handle	(int)	;
+	void		lstep	(double a)	;
+	void		step	(double a,double b)	;
+	void		step	(double a)	;
+	double		step	()	;
+	//Fl_Color		textcolor	()	;
+	//void		textcolor	(Fl_Color s)	;
+	tolua_get_set Fl_Color textcolor();
+	//Fl_Font		textfont	()	;
+	//void		textfont	(Fl_Font s)	;
+	tolua_get_set Fl_Font textfont();
+	//Fl_Fontsize		textsize	()	;
+	//void		textsize	(Fl_Fontsize s)	;
+	tolua_get_set Fl_Fontsize textsize();
+};
+
+class	Fl_Dial	 :public Fl_Valuator	{
+	public:
+			Fl_Dial	(int x,int y,int w,int h, const char *l = 0)	;
+	//short		angle1	()	;
+	//void		angle1	(short a)	;
+	tolua_get_set short angle1();
+	//short		angle2	()	;
+	//void		angle2	(short a)	;
+	tolua_get_set short angle2();
+	void		angles	(short a, short b)	;
+	virtual int		handle	(int)	;
+};
+
+class	Fl_Value_Input	 :public Fl_Valuator	{
+	public:
+			Fl_Value_Input	(int x,int y,int w,int h,const char *l=0)	;
+	Fl_Color		cursor_color	()	;
+	void		cursor_color	(Fl_Color n)	;
+	virtual int		handle	(int)	;
+	void		resize	(int,int,int,int)	;
+	//int		shortcut	()	;
+	//void		shortcut	(int s)	;
+	tolua_get_set int shortcut();
+	//void		soft	(char s)	;
+	//char		soft	()	;
+	tolua_get_set char soft();
+	//Fl_Color		textcolor	()	;
+	//void		textcolor	(Fl_Color n)	;
+	tolua_get_set Fl_Color textcolor();
+	//Fl_Font		textfont	()	;
+	//void		textfont	(Fl_Font s)	;
+	tolua_get_set Fl_Font textfont();
+	//Fl_Fontsize		textsize	()	;
+	//void		textsize	(Fl_Fontsize s)	;
+	tolua_get_set Fl_Fontsize textsize();
+};
+
+class	Fl_Value_Output	 :public Fl_Valuator	{
+	public:
+			Fl_Value_Output	(int x,int y,int w,int h,const char *l=0)	;
+	int		handle	(int)	;
+	//void		soft	(uchar s)	;
+	//uchar		soft	()	;
+	tolua_get_set uchar soft();
+	//Fl_Color		textcolor	()	;
+	//void		textcolor	(Fl_Color s)	;
+	tolua_get_set Fl_Color textcolor();
+	//Fl_Font		textfont	()	;
+	//void		textfont	(Fl_Font s)	;
+	tolua_get_set Fl_Font textfont();
+	//Fl_Fontsize		textsize	()	;
+	//void		textsize	(Fl_Fontsize s)	;
+	tolua_get_set Fl_Fontsize textsize();
+};
+
+class	Fl_Window	 :public Fl_Group	{
+	public:
+			Fl_Window	(int w, int h, const char* title= 0)	;
+			Fl_Window	(int x, int y, int w, int h, const char* title = 0)	;
+virtual	Fl_Window	*	as_window	()	;
+	//void		border	(int b)	;
+	//int		border	()	;
+	tolua_get_set int border();
+	void		clear_border	()	;
+	void		copy_label	(const char* a)	;
+static	Fl_Window	*	current	()	;
+	void		cursor	(Fl_Cursor, Fl_Color=FL_BLACK, Fl_Color=FL_WHITE)	;
+static	void		default_callback	(Fl_Window*, void* v)	;
+	void		default_cursor	(Fl_Cursor, Fl_Color=FL_BLACK, Fl_Color=FL_WHITE)	;
+	void		free_position	()	;
+	void		fullscreen	()	;
+	void		fullscreen_off	(int,int,int,int)	;
+virtual	int		handle	(int)	;
+virtual	void		hide	()	;
+	void		hotspot	(int x, int y, int offscreen = 0)	;
+	void		hotspot	(const Fl_Widget*, int offscreen = 0)	;
+	//void	*	icon	()	;
+	//void		icon	(const void * ic)	;
+	tolua_get_set void* icon();
+tolua_outside void	fltk_Fl_Window_load_icon@load_icon(char *id);
+	void		iconize	()	;
+	//char	*	iconlabel	()	;
+	//void		iconlabel	(const char*)	;
+	tolua_get_set char* iconlabel();
+	//char	*	label	()	;
+	//void		label	(const char*)	;
+	tolua_get_set char* label();
+	//void		label	(const char* label, const char* iconlabel)	;
+	void		make_current	()	;
+	int		menu_window	()	;
+	int		modal	()	;
+	int		non_modal	()	;
+	int		override	()	;
+virtual	void		resize	(int,int,int,int)	;
+	void		set_menu_window	()	;
+	void		set_modal	()	;
+	void		set_non_modal	()	;
+	void		set_override	()	;
+	void		set_tooltip_window	()	;
+virtual	void		show	()	;
+	//void		show	(int, char**)	;
+tolua_outside void fltk_Fl_Window_show@show_main(lua_State* L);
+	int		shown	()	;
+	void		size_range	(int a, int b, int c=0, int d=0, int e=0, int f=0, int g=0)	;
+	int		tooltip_window	()	;
+	int		x_root	()	;
+	//char	*	xclass	()	;
+	//void		xclass	(const char* c)	;
+	tolua_get_set char* xclass();
+	int		y_root	()	;
+};
+
+class	Fl_Wizard	 :public Fl_Group	{
+	public:
+			Fl_Wizard	(int, int, int, int, const char * = 0)	;
+	void		next	()	;
+	void		prev	()	;
+	//Fl_Widget	*	value	()	;
+	//void		value	(Fl_Widget *)	;
+	tolua_get_set Fl_Widget* value();
+};
+
+class	Fl_XBM_Image	 :public Fl_Bitmap	{
+	public:
+			Fl_XBM_Image	(const char* filename)	;
+};
+
+class	Fl_XPM_Image	 :public Fl_Pixmap	{
+	public:
+			Fl_XPM_Image	(const char* filename)	;
+};
+
+// class	Fl_Xlib_Display	 :public Fl_Display	{
+	// public:
+			// Fl_Xlib_Display	()	;
+// };
+
+class	Flcc_HueBox	 :public Fl_Widget	{
+	public:
+			Flcc_HueBox	(int X, int Y, int W, int H)	;
+	int		handle	(int)	;
+};
+
+class	Flcc_ValueBox	 :public Fl_Widget	{
+	public:
+			Flcc_ValueBox	(int X, int Y, int W, int H)	;
+	int		handle	(int)	;
+};
+
+class	Flcc_Value_Input	 :public Fl_Value_Input	{
+	public:
+			Flcc_Value_Input	(int X, int Y, int W, int H)	;
+	int		format	(char*)	;
+};
+
+class	Fl		{
+	public:
+
+  static int e_number;
+  static int e_x;
+  static int e_y;
+  static int e_x_root;
+  static int e_y_root;
+  static int e_dx;
+  static int e_dy;
+  static int e_state;
+  static int e_clicks;
+  static int e_is_click;
+  static int e_keysym;
+  static char* e_text;
+  static int e_length;
+  static Fl_Widget* belowmouse_;
+  static Fl_Widget* pushed_;
+  static Fl_Widget* focus_;
+  static int damage_;
+  static Fl_Widget* selection_owner_;
+  static Fl_Window* modal_;
+  static Fl_Window* grab_;
+  static int compose_state;
+  static int visible_focus_;
+  static int dnd_text_ops_;
+	
+static	int		add_awake_handler_	(Fl_Awake_Handler, void*)	;
+static	void		add_check	(Fl_Timeout_Handler, void* = 0)	;
+static	void		add_fd	(int fd, int when, Fl_FD_Handler cb, void* = 0)	;
+static	void		add_fd	(int fd, Fl_FD_Handler cb, void* = 0)	;
+
+//static	void		add_handler	(Fl_Event_Handler h)	;
+static tolua_outside int set_fltk_fl_add_handler@add_handler(lua_State* L, lua_Function luaFunc);
+//static	void		remove_handler	(Fl_Event_Handler h)	;
+static tolua_outside void fltk_fl_remove_handler@remove_handler(lua_State* L, int ref);
+
+//static	void		add_idle	(Fl_Idle_Handler cb, void* data = 0)	;
+static tolua_outside int set_fltk_fl_add_idle@add_idle(lua_State* L, lua_Function luaFunc, lua_Object obj=0);
+//static	void		remove_idle	(Fl_Idle_Handler cb, void* data = 0)	;
+static tolua_outside void fltk_fl_remove_idle@remove_idle(lua_State* L, int ref);
+
+//static	void		add_timeout	(double t, Fl_Timeout_Handler,void* = 0)	;
+static tolua_outside int set_fltk_fl_add_timeout@add_timeout(lua_State* L, double t, lua_Function luaFunc, lua_Object obj=0);
+//static	void		remove_timeout	(Fl_Timeout_Handler, void* = 0)	;
+static tolua_outside void fltk_fl_remove_timeout@remove_timeout(lua_State* L, int ref);
+//static	void		repeat_timeout	(double t, Fl_Timeout_Handler, void* = 0)	;
+static tolua_outside void set_fltk_fl_repeat_timeout@repeat_timeout(lua_State* L, double t, int ref);
+
+static	int		arg	(int, char**, int&)	;
+//static	int		args	(int, char**, int&, Fl_Args_Handler ah = 0)	;
+//static	void		args	(int, char**)	;
+static	void		awake	(void* message = 0)	;
+static	int		awake	(Fl_Awake_Handler cb, void* message = 0)	;
+static	void		background	(uchar, uchar, uchar)	;
+static	void		background2	(uchar, uchar, uchar)	;
+//static	Fl_Widget	*	belowmouse	()	;
+//static	void		belowmouse	(Fl_Widget*)	;
+static tolua_get_set Fl_Widget* belowmouse();
+static	int		box_dh	(Fl_Boxtype)	;
+static	int		box_dw	(Fl_Boxtype)	;
+static	int		box_dx	(Fl_Boxtype)	;
+static	int		box_dy	(Fl_Boxtype)	;
+static	int		check	()	;
+static	void		clear_widget_pointer	(Fl_Widget const *w)	;
+static	int		compose	(int &del)	;
+static	void		compose_reset	()	;
+static	void		copy	(const char* stuff, int len, int clipboard = 0)	;
+//static	void		damage	(int d)	;
+//static	int		damage	()	;
+static tolua_get_set int damage();
+static	void		default_atclose	(Fl_Window*,void*)	;
+static	void		delete_widget	(Fl_Widget *w)	;
+static	void		display	(const char*)	;
+static	int		dnd	()	;
+//static	void		dnd_text_ops	(int v)	;
+//static	int		dnd_text_ops	()	;
+static tolua_get_set int dnd_text_ops();
+static	void		do_widget_deletion	()	;
+static	int		draw_box_active	()	;
+static	int		event	()	;
+static	int		event_alt	()	;
+static	int		event_button	()	;
+static	int		event_button1	()	;
+static	int		event_button2	()	;
+static	int		event_button3	()	;
+static	int		event_buttons	()	;
+//static	int		event_clicks	()	;
+//static	void		event_clicks	(int i)	;
+static tolua_get_set int event_clicks();
+static	int		event_command	()	;
+static	int		event_ctrl	()	;
+static	int		event_dx	()	;
+static	int		event_dy	()	;
+static	int		event_inside	(int,int,int,int)	;
+static	int		event_inside	(const Fl_Widget*)	;
+//static	int		event_is_click	()	;
+//static	void		event_is_click	(int i)	;
+static tolua_get_set int event_is_click();
+//static	int		event_key	()	;
+//static	int		event_key	(int key)	;
+static tolua_get_set int event_key();
+static	int		event_length	()	;
+static	int		event_original_key	()	;
+static	int		event_shift	()	;
+//static	int		event_state	()	;
+//static	int		event_state	(int i)	;
+static tolua_get_set int event_state();
+static	char	*	event_text	()	;
+static	int		event_x	()	;
+static	int		event_x_root	()	;
+static	int		event_y	()	;
+static	int		event_y_root	()	;
+//static	Fl_Window	*	first_window	()	;
+//static	void		first_window	(Fl_Window*)	;
+static tolua_get_set Fl_Window* first_window();
+static	void		flush	()	;
+//static	Fl_Widget	*	focus	()	;
+//static	void		focus	(Fl_Widget*)	;
+static tolua_get_set Fl_Widget* focus();
+
+//static void add_focus_changing_handler(Fl_Focus_Changing_Handler h);
+static tolua_outside int fltk_fl_add_focus_changing_handler@add_focus_changing_handler(lua_State* L, lua_Function luaFunc);
+static int has_focus_changing_handler();
+//static void remove_focus_changing_handler();
+static tolua_outside void fltk_fl_remove_focus_changing_handler@remove_focus_changing_handler(lua_State* L);
+
+static	void		foreground	(uchar, uchar, uchar)	;
+static	void		free_color	(Fl_Color, int overlay = 0)	;
+static	int		get_awake_handler_	(Fl_Awake_Handler&, void*&)	;
+static	Fl_Box_Draw_F	*	get_boxtype	(Fl_Boxtype)	;
+static	Fl_Color		get_color	(Fl_Color)	;
+static	void		get_color@get_color_rgb	(Fl_Color, uchar&, uchar&, uchar&)	;
+
+static	char	*	get_font	(Fl_Font)	;
+static	char	*	get_font_name	(Fl_Font, int* attributes = 0)	;
+//static	int		get_font_sizes	(Fl_Font, int*& sizep)	;
+static	int		get_key	(int key)	;
+static	void		get_mouse	(int &,int &)	;
+static	void		get_system_colors	()	;
+//static	int		gl_visual	(int, int *alist=0)	;
+//static	Fl_Window	*	grab	()	;
+//static	void		grab	(Fl_Window*)	;
+static tolua_get_set Fl_Window* grab();
+static	int		h	()	;
+static	int		handle	(int, Fl_Window*)	;
+static	int		has_check	(Fl_Timeout_Handler, void* = 0)	;
+static	int		has_idle	(Fl_Idle_Handler cb, void* data = 0)	;
+static	int		has_timeout	(Fl_Timeout_Handler, void* = 0)	;
+static	void		lock	()	;
+static	Fl_Window	*	modal	()	;
+static	Fl_Window	*	next_window	(const Fl_Window*)	;
+static	void		own_colormap	()	;
+static	void		paste	(Fl_Widget &receiver, int clipboard )	;
+static	void		paste	(Fl_Widget &receiver)	;
+//static	Fl_Widget	*	pushed	()	;
+//static	void		pushed	(Fl_Widget*)	;
+static tolua_get_set Fl_Widget* pushed();
+static	Fl_Widget	*	readqueue	()	;
+static	int		ready	()	;
+static	void		redraw	()	;
+static	void		release	()	;
+static	void		release_widget_pointer	(Fl_Widget *&w)	;
+static	int		reload_scheme	()	;
+static	void		remove_check	(Fl_Timeout_Handler, void* = 0)	;
+static	void		remove_fd	(int, int when)	;
+static	void		remove_fd	(int)	;
+static	int		run	()	;
+//static	int		scheme	(const char*)	;
+//static	char	*	scheme	()	;
+static tolua_get_set char* scheme();
+static	int		screen_count	()	;
+static	void		screen_xywh	(int &X, int &Y, int &W, int &H)	;
+static	void		screen_xywh	(int &X, int &Y, int &W, int &H, int mx, int my)	;
+static	void		screen_xywh	(int &X, int &Y, int &W, int &H, int n)	;
+//static	int		scrollbar_size	()	;
+//static	void		scrollbar_size	(int W)	;
+static tolua_get_set int scrollbar_size();
+static	void		selection	(Fl_Widget &owner, const char*, int len)	;
+//static	Fl_Widget	*	selection_owner	()	;
+//static	void		selection_owner	(Fl_Widget*)	;
+static tolua_get_set Fl_Widget* selection_owner();
+static	void		set_abort	(Fl_Abort_Handler f)	;
+static	void		set_atclose	(Fl_Atclose_Handler f)	;
+static	void		set_boxtype	(Fl_Boxtype, Fl_Box_Draw_F*,uchar,uchar,uchar,uchar)	;
+static	void		set_boxtype	(Fl_Boxtype, Fl_Boxtype from)	;
+static	void		set_color	(Fl_Color, uchar, uchar, uchar)	;
+static	void		set_color	(Fl_Color, unsigned)	;
+static	void		set_font	(Fl_Font, const char*)	;
+static	void		set_font	(Fl_Font, Fl_Font)	;
+static	Fl_Font		set_fonts	(const char* = 0)	;
+static	void		set_idle	(Fl_Old_Idle_Handler cb)	;
+//static	void		set_labeltype	(Fl_Labeltype,Fl_Label_Draw_F*,Fl_Label_Measure_F*)	;
+//static	void		set_labeltype	(Fl_Labeltype, Fl_Labeltype from)	;
+static	int		test_shortcut	(Fl_Shortcut)	;
+static	void	*	thread_message	()	;
+static	void		unlock	()	;
+static	double		version	()	;
+//static	void		visible_focus	(int v)	;
+//static	int		visible_focus	()	;
+static tolua_get_set int visible_focus();
+static	int		visual	(int)	;
+static	int		w	()	;
+//static	int		wait	()	;
+//static	double		wait	(double time)	;
+static tolua_get_set double wait();
+static	void		watch_widget_pointer	(Fl_Widget *&w)	;
+static	int		x	()	;
+static	int		y	()	;
+};
+
+class	Fl_Widget_Tracker		{
+	public:
+			Fl_Widget_Tracker	(Fl_Widget *wi)	;
+	int		deleted	()	;
+	int		exists	()	;
+	Fl_Widget	*	widget	()	;
+};
+
+class	Fl_Double_Window	 :public Fl_Window	{
+	public:
+			Fl_Double_Window	(int W, int H, const char *l = 0)	;
+			Fl_Double_Window	(int X, int Y, int W, int H, const char *l = 0)	;
+	void		flush	()	;
+	void		hide	()	;
+	void		resize	(int,int,int,int)	;
+	void		show	()	;
+	//void		show	(int a, char **b)	;
+	virtual int handle(int event);
+};
+
+class	Fl_Line_Dial	 :public Fl_Dial	{
+	public:
+			Fl_Line_Dial	(int x,int y,int w,int h, const char *l = 0)	;
+};
+
+/*
+#ifdef FLTK_USE_GLWINDOW
+class	Fl_Gl_Window	 :public Fl_Window	{
+	public:
+			Fl_Gl_Window	(int W, int H, const char *l=0)	;
+			Fl_Gl_Window	(int X, int Y, int W, int H, const char *l=0)	;
+virtual	Fl_Gl_Window	*	as_gl_window	()	;
+static	int		can_do	(int m)	;
+static	int		can_do	(const int *m)	;
+	int		can_do	()	;
+	int		can_do_overlay	()	;
+	void	*	context	()	;
+	void		context	(void*, int destroy_flag = 0)	;
+	char		context_valid	()	;
+	void		context_valid	(char v)	;
+	void		flush	()	;
+	void		hide	()	;
+	void		hide_overlay	()	;
+	void		invalidate	()	;
+	void		make_current	()	;
+	void		make_overlay_current	()	;
+	Fl_Mode		mode	()	;
+	int		mode	(int a)	;
+	int		mode	(const int *a)	;
+	void		ortho	()	;
+	void		redraw_overlay	()	;
+	void		resize	(int,int,int,int)	;
+	void		show	()	;
+	void		show	(int a, char **b)	;
+	void		swap_buffers	()	;
+	char		valid	()	;
+	void		valid	(char v)	;
+};
+#endif
+
+#ifdef FLTK_USE_GLUT
+class	Fl_Glut_Window	 :public Fl_Gl_Window	{
+	public:
+			Fl_Glut_Window	(int w, int h, const char *)	;
+			Fl_Glut_Window	(int x, int y, int w, int h, const char *)	;
+	void		make_current	()	;
+};
+#endif
+*/
+
+class	Fl_Single_Window	 :public Fl_Window	{
+	public:
+			Fl_Single_Window	(int W, int H, const char *l=0)	;
+			Fl_Single_Window	(int X, int Y, int W, int H, const char *l=0)	;
+	void		flush	()	;
+	//int		make_current	()	;
+	void		show	()	;
+	//void		show	(int a, char **b)	;
+};
+
+// shared type() values for classes that work in both directions:
+#define FL_VERTICAL		0 ///< The valuator can work vertically
+#define FL_HORIZONTAL		1 ///< The valuator can work horizontally
+
+// values for type(), lowest bit indicate horizontal:
+#define FL_VERT_SLIDER		0
+#define FL_HOR_SLIDER		1
+#define FL_VERT_FILL_SLIDER	2
+#define FL_HOR_FILL_SLIDER	3
+#define FL_VERT_NICE_SLIDER	4
+#define FL_HOR_NICE_SLIDER	5
+
+class	Fl_Slider	 :public Fl_Valuator	{
+	public:
+			Fl_Slider	(int X,int Y,int W,int H, const char *L = 0)	;
+			Fl_Slider	(uchar t,int X,int Y,int W,int H, const char *L)	;
+	void		bounds	(double a, double b)	;
+	virtual int		handle	(int)	;
+	int		scrollvalue	(int pos,int size,int first,int total)	;
+	Fl_Boxtype		slider	()	;
+	void		slider	(Fl_Boxtype c)	;
+	//float		slider_size	()	;
+	//void		slider_size	(double v)	;
+	tolua_get_set double slider_size();
+};
+
+class	Fl_Value_Slider	 :public Fl_Slider	{
+	public:
+			Fl_Value_Slider	(int x,int y,int w,int h, const char *l = 0)	;
+	virtual int		handle	(int)	;
+	//Fl_Color		textcolor	()	;
+	//void		textcolor	(Fl_Color s)	;
+	tolua_get_set Fl_Color textcolor();
+	//Fl_Font		textfont	()	;
+	//void		textfont	(Fl_Font s)	;
+	tolua_get_set Fl_Font textfont();
+	//Fl_Fontsize		textsize	()	;
+	//void		textsize	(Fl_Fontsize s)	;
+	tolua_get_set Fl_Fontsize textsize();
+};
+
+class	Fl_Fill_Slider	 :public Fl_Slider	{
+	public:
+			Fl_Fill_Slider	(int x,int y,int w,int h,const char *l=0)	;
+};
+
+class	Fl_Hor_Fill_Slider	 :public Fl_Slider	{
+	public:
+			Fl_Hor_Fill_Slider	(int x,int y,int w,int h,const char *l=0)	;
+};
+
+class	Fl_Hor_Slider	 :public Fl_Slider	{
+	public:
+			Fl_Hor_Slider	(int x,int y,int w,int h,const char *l=0)	;
+};
+
+class	Fl_Hor_Nice_Slider	 :public Fl_Slider	{
+	public:
+			Fl_Hor_Nice_Slider	(int x,int y,int w,int h,const char *l=0)	;
+};
+
+class	Fl_Hor_Value_Slider	 :public Fl_Value_Slider	{
+	public:
+			Fl_Hor_Value_Slider	(int X,int Y,int W,int H,const char *l=0)	;
+};
+
+class	Fl_Fill_Dial	 :public Fl_Dial	{
+	public:
+			Fl_Fill_Dial	(int x,int y,int w,int h, const char *l = 0)	;
+};
+
+class	Fl_Menu_Window	 :public Fl_Single_Window	{
+	public:
+			Fl_Menu_Window	(int W, int H, const char *l = 0)	;
+			Fl_Menu_Window	(int X, int Y, int W, int H, const char *l = 0)	;
+	void		clear_overlay	()	;
+	void		erase	()	;
+	void		flush	()	;
+	void		hide	()	;
+	int		overlay	()	;
+	void		set_overlay	()	;
+	void		show	()	;
+};
+
+class	Fl_Nice_Slider	 :public Fl_Slider	{
+	public:
+			Fl_Nice_Slider	(int x,int y,int w,int h,const char *l=0)	;
+};
+
+class	Fl_Overlay_Window	 :public Fl_Double_Window	{
+	public:
+			//Fl_Overlay_Window	(int W, int H, const char *l=0)	;
+			//Fl_Overlay_Window	(int X, int Y, int W, int H, const char *l=0)	;
+	int		can_do_overlay	()	;
+	void		flush	()	;
+	void		hide	()	;
+	void		redraw_overlay	()	;
+	void		resize	(int,int,int,int)	;
+	void		show	()	;
+	//void		show	(int a, char **b)	;
+};
+
+class	Fl_PNG_Image	 :public Fl_RGB_Image	{
+	public:
+			Fl_PNG_Image	(const char* filename)	;
+};
+
+class	Fl_PNM_Image	 :public Fl_RGB_Image	{
+	public:
+			Fl_PNM_Image	(const char* filename)	;
+};
+
+class	Fl_Roller	 :public Fl_Valuator	{
+	public:
+			Fl_Roller	(int X,int Y,int W,int H,const char* L=0)	;
+	int		handle	(int)	;
+};
+
+class	Fl_Scrollbar	 :public Fl_Slider	{
+	public:
+			Fl_Scrollbar	(int X,int Y,int W,int H, const char *L = 0)	;
+	virtual int		handle	(int)	;
+	int		linesize	()	;
+	void		linesize	(int i)	;
+	int		value	()	;
+	int		value	(int p)	;
+	int		value	(int pos, int size, int first, int total)	;
+};
+
+//functions
+
+ Fl_Boxtype fl_box(Fl_Boxtype b);
+ Fl_Boxtype fl_down(Fl_Boxtype b);
+ Fl_Boxtype fl_frame(Fl_Boxtype b);
+ Fl_Color fl_color_average(Fl_Color c1, Fl_Color c2, float weight);
+ Fl_Color fl_color_cube(int r, int g, int b);
+ Fl_Color fl_contrast(Fl_Color fg, Fl_Color bg);
+ Fl_Color fl_darker(Fl_Color c);
+ Fl_Color fl_gray_ramp(int i);
+ Fl_Color fl_inactive(Fl_Color c);
+ Fl_Color fl_lighter(Fl_Color c);
+ Fl_Color fl_rgb_color(uchar g);
+ Fl_Color fl_rgb_color(uchar r, uchar g, uchar b);
+
+//fl_ask.h
+
+//void fl_message_lua @ fl_message(const char *msg);
+//void fl_alert_lua @ fl_alert(const char *msg);
+//int fl_ask_lua @ fl_ask(const char *msg);
+
+void exit(int result);
+
+ Fl_Widget *fl_message_icon();
+char *fl_input(const char *label, const char *deflt = 0);
+char *fl_password(const char *label, const char *deflt = 0);
+int fl_ask(const char *);
+int fl_choice(const char *q, const char *b0, const char *b1, const char *b2);
+void fl_alert(const char *);
+void fl_beep(int type = FL_BEEP_DEFAULT);
+void fl_message(const char *);
+void fl_message_font(Fl_Font f, Fl_Fontsize s);
+const char *fl_input(const char *label, const char *deflt = 0);
+const char *fl_password(const char *label, const char *deflt = 0);
+
+void fl_message_font(Fl_Font f, Fl_Fontsize s);
+
+const char* fl_no;
+const char* fl_yes;
+const char* fl_ok;
+const char* fl_cancel;
+const char* fl_close;
+
+//fl_draw.h
+ Fl_Color fl_color();
+ Fl_Font fl_font();
+ Fl_Fontsize fl_size();
+ Fl_Region fl_clip_region();
+ char *fl_latin1_to_local(const char *t, int n=-1);
+ char *fl_local_to_latin1(const char *t, int n=-1);
+ char *fl_local_to_mac_roman(const char *t, int n=-1);
+ char *fl_mac_roman_to_local(const char *t, int n=-1);
+ char fl_can_do_alpha_blending();
+ char* fl_expand_text(const char* from, char* buf, int maxbuf,
+                                     double maxw, int& n, double &width,
+                                     int wrap, int draw_symbols = 0);
+ char* fl_shortcut_label(unsigned int shortcut);
+ char* fl_shortcut_label(unsigned int shortcut, const char **eom);
+ double fl_transform_dx(double x, double y);
+ double fl_transform_dy(double x, double y);
+ double fl_transform_x(double x, double y);
+ double fl_transform_y(double x, double y);
+ double fl_width(const char* txt);
+ double fl_width(const char* txt, int n);
+ double fl_width(unsigned int);
+ int   fl_descent();
+ int   fl_height();
+ //int fl_add_symbol(const char* name, void (*drawit)(Fl_Color), int scalable);
+ int fl_clip_box(int x , int y, int w, int h, int& X, int& Y, int& W, int& H);
+ int fl_draw_pixmap( char** data, int x,int y,Fl_Color=FL_GRAY);
+ int fl_draw_pixmap(const char** cdata, int x,int y,Fl_Color=FL_GRAY);
+ int fl_draw_symbol(const char* label,int x,int y,int w,int h, Fl_Color);
+ int fl_height(int font, int size);
+ int fl_measure_pixmap( char** data, int &w, int &h);
+ int fl_measure_pixmap(const char** cdata, int &w, int &h);
+ int fl_not_clipped(int x, int y, int w, int h);
+ int fl_old_shortcut(const char* s);
+ uchar *fl_read_image(uchar *p,int X,int Y,int W,int H,int alpha=0);
+ void	fl_color(Fl_Color c);
+ void	fl_color(uchar r, uchar g, uchar b);
+ void fl_arc(double x, double y, double r, double start, double end);
+ void fl_arc(int x, int y, int w, int h, double a1, double a2);
+ void fl_begin_complex_polygon();
+ void fl_begin_line();
+ void fl_begin_loop();
+ void fl_begin_points();
+ void fl_begin_polygon();
+ //void fl_chord(int x, int y, int w, int h, double a1, double a2);
+ void fl_circle(double x, double y, double r);
+ void fl_clip_region(Fl_Region r);
+ void fl_color(int c);
+ void fl_cursor(Fl_Cursor, Fl_Color fg=FL_BLACK, Fl_Color bg=FL_WHITE);
+ void fl_curve(double X0, double Y0, double X1, double Y1, double X2, double Y2, double X3, double Y3);
+ void fl_draw(const char* str, int n, int x, int y);
+ void fl_draw(const char* str, int x, int y);
+ void fl_draw(const char* str, int x, int y, int w, int h,
+                       Fl_Align align,
+                       Fl_Image* img=0, int draw_symbols = 1);
+ // void fl_draw(const char* str, int x, int y, int w, int h,
+                       // Fl_Align align,
+                       // void (*callthis)(const char *,int,int,int),
+                       // Fl_Image* img=0, int draw_symbols = 1);
+ void fl_draw(int angle, const char* str, int x, int y);
+ void fl_draw(int angle,const char* str, int n, int x, int y);
+ void fl_draw_box(Fl_Boxtype, int x, int y, int w, int h, Fl_Color);
+ void fl_draw_image(Fl_Draw_Image_Cb cb, void* data, int X,int Y,int W,int H, int D=3);
+ void fl_draw_image(const uchar* buf, int X,int Y,int W,int H, int D=3, int L=0);
+ //void fl_draw_image_mono(Fl_Draw_Image_Cb cb, void* data, int X,int Y,int W,int H, int D=1);
+ void fl_draw_image_mono(const uchar* buf, int X,int Y,int W,int H, int D=1, int L=0);
+ void fl_end_complex_polygon();
+ void fl_end_line();
+ void fl_end_loop();
+ void fl_end_points();
+ void fl_end_polygon();
+ void fl_font(Fl_Font face, Fl_Fontsize size);
+ void fl_frame(const char* s, int x, int y, int w, int h);
+ void fl_frame2(const char* s, int x, int y, int w, int h);
+ void fl_gap();
+ void fl_line(int x, int y, int x1, int y1);
+ void fl_line(int x, int y, int x1, int y1, int x2, int y2);
+ void fl_line_style(int style, int width=0, char* dashes=0);
+ void fl_loop(int x, int y, int x1, int y1, int x2, int y2);
+ void fl_loop(int x, int y, int x1, int y1, int x2, int y2, int x3, int y3);
+ void fl_measure(const char* str, int& x, int& y,
+                          int draw_symbols = 1);
+ void fl_mult_matrix(double a, double b, double c, double d, double x,double y);
+ void fl_overlay_clear();
+ void fl_overlay_rect(int x,int y,int w,int h);
+ void fl_pie(int x, int y, int w, int h, double a1, double a2);
+ void fl_point(int x, int y);
+ void fl_polygon(int x, int y, int x1, int y1, int x2, int y2);
+ void fl_polygon(int x, int y, int x1, int y1, int x2, int y2, int x3, int y3);
+ void fl_pop_clip();
+ void fl_pop_matrix();
+ void fl_push_clip(int x, int y, int w, int h);
+ void fl_push_matrix();
+ void fl_push_no_clip();
+ void fl_rect(int x, int y, int w, int h);
+ void fl_rect(int x, int y, int w, int h, Fl_Color c);
+ void fl_rectf(int x, int y, int w, int h);
+ void fl_rectf(int x, int y, int w, int h, Fl_Color c);
+ void fl_rectf(int x, int y, int w, int h, uchar r, uchar g, uchar b);
+ void fl_reset_spot(void);
+ void fl_restore_clip();
+ void fl_rotate(double d);
+ void fl_rtl_draw(const char*, int n, int x, int y);
+ void fl_scale(double x);
+ void fl_scale(double x, double y);
+// void fl_scroll(int X, int Y, int W, int H, int dx, int dy,
+//                         void (*draw_area)(void*, int,int,int,int), void* data);
+ void fl_set_spot(int font, int size, int X, int Y, int W, int H, Fl_Window *win=0);
+ void fl_set_status(int X, int Y, int W, int H);
+ void fl_text_extents(const char*, int n, int& dx, int& dy, int& w, int& h);
+ void fl_text_extents(const char*, int& dx, int& dy, int& w, int& h);
+ void fl_transformed_vertex(double xf, double yf);
+ void fl_translate(double x, double y);
+ void fl_vertex(double x, double y);
+ void fl_xyline(int x, int y, int x1);
+ void fl_xyline(int x, int y, int x1, int y2);
+ void fl_xyline(int x, int y, int x1, int y2, int x3);
+ void fl_yxline(int x, int y, int y1);
+ void fl_yxline(int x, int y, int y1, int x2);
+ void fl_yxline(int x, int y, int y1, int x2, int y3);
+
+//misc
+Fl_Color fl_show_colormap(Fl_Color oldcol);
+
+//fl_utf8
+ FILE *fl_fopen(const char *f, const char *mode);
+ char *fl_locale_to_utf8(const char *s, int len, unsigned int codepage);
+ char *fl_utf8_to_locale(const char *s, int len, unsigned int codepage);
+ char fl_make_path( const char *path );
+ char* fl_getcwd( char *buf, int maxlen);
+ char* fl_getenv(const char *name);
+ char* fl_utf2mbcs(const char *src);
+ char* fl_utf8back(const char* p, const char* start, const char* end);
+ char* fl_utf8fwd(const char* p, const char* start, const char* end);
+ int fl_access(const char* f, int mode);
+ int fl_chmod(const char* f, int mode);
+ int fl_execvp(const char *file, char **argv);
+ int fl_mkdir(const char* f, int mode);
+ int fl_nonspacing(unsigned int ucs);
+ int fl_open(const char* f, int o);
+ int fl_rename(const char* f, const char *t);
+ int fl_rmdir(const char *f);
+ int fl_stat( const char *path, struct stat *buffer );
+ int fl_system(const char* f);
+ int fl_tolower(unsigned int ucs);
+ int fl_toupper(unsigned int ucs);
+ int fl_unlink(const char *f);
+ int fl_utf8bytes(unsigned ucs);
+ int fl_utf8encode(unsigned ucs, char* buf);
+ int fl_utf8len(char c);
+ int fl_utf8locale();
+ int fl_utf8test(const char *src, unsigned len);
+ int fl_utf_nb_char(const unsigned char *buf, int len);
+ int fl_utf_strcasecmp(const char *s1, const char *s2);
+ int fl_utf_strncasecmp(const char *s1, const char *s2, int n);
+ int fl_utf_tolower(const unsigned char *str, int len, char *buf);
+ int fl_utf_toupper(const unsigned char *str, int len, char *buf);
+ int fl_wcwidth(const char *src);
+ int fl_wcwidth_(unsigned int ucs);
+ unsigned fl_utf8decode(const char* p, const char* end, int* len);
+ unsigned fl_utf8from_mb(char *dst, unsigned dstlen, const char *src, unsigned srclen);
+ unsigned fl_utf8froma (char *dst, unsigned dstlen, const char *src, unsigned srclen);
+ unsigned fl_utf8fromwc(char *dst, unsigned dstlen, const wchar_t *src, unsigned srclen);
+ unsigned fl_utf8toUtf16(const char* src, unsigned srclen, unsigned short* dst, unsigned dstlen);
+ unsigned fl_utf8to_mb(const char *src, unsigned srclen, char *dst, unsigned dstlen);
+ unsigned fl_utf8toa (const char *src, unsigned srclen, char *dst, unsigned dstlen);
+ unsigned fl_utf8towc(const char *src, unsigned srclen, wchar_t *dst, unsigned dstlen);
+ void fl_make_path_for_file( const char *path );
+ 
+Fl_Labeltype fl_define_FL_SHADOW_LABEL();
+Fl_Labeltype fl_define_FL_ENGRAVED_LABEL();
+Fl_Labeltype fl_define_FL_EMBOSSED_LABEL();
+
+Fl_Boxtype fl_define_FL_ROUND_UP_BOX();
+FL_EXPORT Fl_Boxtype fl_define_FL_SHADOW_BOX();
+FL_EXPORT Fl_Boxtype fl_define_FL_ROUNDED_BOX();
+FL_EXPORT Fl_Boxtype fl_define_FL_RFLAT_BOX();
+FL_EXPORT Fl_Boxtype fl_define_FL_RSHADOW_BOX();
+FL_EXPORT Fl_Boxtype fl_define_FL_DIAMOND_BOX();
+FL_EXPORT Fl_Boxtype fl_define_FL_OVAL_BOX();
+FL_EXPORT Fl_Boxtype fl_define_FL_PLASTIC_UP_BOX();
+FL_EXPORT Fl_Boxtype fl_define_FL_GTK_UP_BOX();
+
+} //endmodule fltk
+
+module flvw {
+
+<verbatim>
+#include <FL/Flv_Style.H>
+#include <FL/Flv_List.H>
+#include <FL/Flv_Table.H>
+#include <FL/Flv_CStyle.H>
+#include <FL/Flve_Input.H>
+#include <FL/Flve_Check_Button.H>
+</verbatim>
+
+#define FLV_ROW_HEADER -1
+#define FLV_ROW_FOOTER -2
+#define FLV_TITLE -3
+
+//	Call back events
+#define FLVE_ROW_CHANGED        1
+#define FLVE_ROWS_CHANGED       2
+#define FLVE_SELECTION_CHANGED  3
+#define FLVE_COL_CHANGED        4
+#define FLVE_COLS_CHANGED       5
+#define FLVE_FEATURE_CHANGED    6
+#define FLVE_CLICKED						7
+#define FLVE_ENTER_PRESSED      8
+#define FLVE_ROW_HEADER_CLICKED 9
+#define FLVE_ROW_FOOTER_CLICKED 10
+#define FLVE_COL_HEADER_CLICKED 11
+#define FLVE_COL_FOOTER_CLICKED 12
+#define FLVE_LABEL_CLICKED			13
+#define FLVE_TITLE_CLICKED			14
+#define FLVE_ALL_CLICKED				15
+
+//	Call back when flags
+#define FLVEcb_ROW_CHANGED        0x0001
+#define FLVEcb_ROWS_CHANGED       0x0002
+#define FLVEcb_SELECTION_CHANGED  0x0004
+#define FLVEcb_COL_CHANGED        0x0008
+#define FLVEcb_COLS_CHANGED       0x0010
+#define FLVEcb_FEATURE_CHANGED    0x0020
+#define FLVEcb_CLICKED						0x0040
+#define FLVEcb_ENTER_PRESSED      0x0080
+#define FLVEcb_ROW_HEADER_CLICKED 0x0100
+#define FLVEcb_ROW_FOOTER_CLICKED 0x0200
+#define FLVEcb_COL_HEADER_CLICKED 0x0400
+#define FLVEcb_COL_FOOTER_CLICKED 0x0800
+#define FLVEcb_LABEL_CLICKED			0x1000
+#define FLVEcb_TITLE_CLICKED			0x2000
+#define FLVEcb_ALL_CLICKED				0x4000
+
+//	Feature list
+#define FLVF_NONE							0
+#define FLVF_ROW_HEADER				1
+#define FLVF_ROW_FOOTER				2
+#define FLVF_ROW_DIVIDER			4
+#define FLVF_COL_HEADER				8
+#define FLVF_COL_FOOTER			 16
+#define FLVF_COL_DIVIDER		 32
+#define FLVF_MULTI_SELECT		 64
+#define FLVF_ROW_SELECT			128
+#define FLVF_PERSIST_SELECT	256
+#define FLVF_FULL_RESIZE    512
+#define FLVF_DIVIDERS			(FLVF_COL_DIVIDER|FLVF_ROW_DIVIDER)
+#define FLVF_HEADERS			(FLVF_ROW_HEADER|FLVF_COL_HEADER)
+#define FLVF_FOOTERS			(FLVF_ROW_FOOTER|FLVF_COL_FOOTER)
+#define FLVF_ROW_ENDS			(FLVF_ROW_HEADER|FLVF_ROW_FOOTER)
+#define FLVF_COL_ENDS			(FLVF_COL_HEADER|FLVF_COL_FOOTER)
+#define FLVF_ALL_ROW			(FLVF_ROW_HEADER|FLVF_ROW_FOOTER|FLVF_ROW_DIVIDER)
+#define FLVF_ALL_COL			(FLVF_COL_HEADER|FLVF_COL_FOOTER|FLVF_COL_DIVIDER)
+
+//	Scroll bar visibility
+#define FLVS_NONE	0
+#define FLVS_HORIZONTAL	1
+#define FLVS_VERTICAL		2
+#define FLVS_BOTH				(FLVS_HORIZONTAL|FLVS_VERTICAL)
+
+#define FLVS_AUTOMATIC	0
+#define FLVS_ALWAYS			4
+
+#define FLVS_HORIZONTAL_ALWAYS	(FLVS_HORIZONTAL|FLVS_ALWAYS)
+#define FLVS_VERTICAL_ALWAYS		(FLVS_VERTICAL|FLVS_ALWAYS)
+//#define FLVS_BOTH_ALWAYS				(FLVS_BOTH|FLVS|FLVS_ALWAYS)
+#define FLVS_BOTH_ALWAYS				(FLVS_BOTH|FLVS_ALWAYS)
+
+//	Edit when constants
+#define FLV_EDIT_ALWAYS				1
+#define FLV_EDIT_AUTOMATIC    2
+#define FLV_EDIT_MANUAL		    3
+
+//	Border constants
+#define FLVB_NONE						0
+#define FLVB_LEFT						1
+#define FLVB_TOP						2
+#define FLVB_RIGHT					4
+#define FLVB_BOTTOM					8
+#define FLVB_INNER_LEFT			16
+#define FLVB_INNER_TOP			32
+#define FLVB_INNER_RIGHT		64
+#define FLVB_INNER_BOTTOM		128
+#define FLVB_OUTER_VERTICALS (FLVB_LEFT|FLVB_RIGHT)
+#define FLVB_OUTER_HORIZONTALS (FLVB_TOP|FLVB_BOTTOM)
+#define FLVB_OUTER_ALL (FLVB_VERTICALS|FLVB_HORIZONTALS)
+#define FLVB_INNER_VERTICALS (FLVB_INNER_LEFT|FLVB_INNER_RIGHT)
+#define FLVB_INNER_HORIZONTALS (FLVB_INNER_TOP|FLVB_INNER_BOTTOM)
+#define FLVB_INNER_ALL (FLVB_INNER_VERTICALS|FLVB_INNER_HORIZONTALS)
+#define FLVB_VERTICALS (FLVB_OUTER_VERTICALS|FLVB_INNER_VERTICALS)
+#define FLVB_HORIZONTALS (FLVB_OUTER_HORIZONTALS|FLVB_INNER_HORIZONTALS)
+#define FLVB_ALL (FLVB_OUTER_ALL|FLVB_INNER_ALL)
+#define FLVB_LEFTS (FLVB_LEFT|FLVB_INNER_LEFT)
+#define FLVB_TOPS (FLVB_TOP|FLVB_INNER_TOP)
+#define FLVB_RIGHTS (FLVB_RIGHT|FLVB_INNER_RIGHT)
+#define FLVB_BOTTOMS (FLVB_BOTTOM|FLVB_INNER_BOTTOM)
+
+class	Flv_Style_List		{
+	public:
+			Flv_Style_List	()	;
+	void		clear	(void)	;
+	bool		clear_current	(void)	;
+	void		compact	(void)	;
+	int		count	(void)	;
+	Flv_Style	*	current	(void)	;
+	Flv_Style	*	find	( int n )	;
+	Flv_Style	*	first	(void)	;
+	bool		insert	( Flv_Style *n )	;
+	Flv_Style	*	next	(void)	;
+	Flv_Style	*	prior	(void)	;
+	void		release	(void)	;
+	bool		release_current	(void)	;
+	Flv_Style	*	skip_to	(int v )	;
+	//Flv_Style& operator[] (int value);	//	Note: this could be a little
+	Flv_Style& get(int value);
+};
+
+class	Flv_Style		{
+	public:
+			Flv_Style	()	;
+			Flv_Style	( int value )	;
+	//const Fl_Align& align(void) const;				//	Get drawing alignment
+	//const Fl_Align& align@ set_align(const Fl_Align& n);	//	Set drawing alignment
+	tolua_get_set Fl_Align align();
+	
+	bool		align_defined	(void)	;
+	bool		all_clear	(void)	;
+	bool		all_defined	(void)	;
+	//Fl_Color		background	(void)	;
+	//Fl_Color		background	(Fl_Color n)	;
+	tolua_get_set Fl_Color background();
+	bool		background_defined	(void)	;
+	//int		border	(void)	;
+	//int		border	(int n)	;
+	tolua_get_set int border();
+	//Fl_Color		border_color	(void)	;
+	//Fl_Color		border_color	(Fl_Color n)	;
+	tolua_get_set Fl_Color border_color();
+	bool		border_color_defined	(void)	;
+	bool		border_defined	(void)	;
+	//int		border_spacing	(void)	;
+	//int		border_spacing	(int n)	;
+	tolua_get_set int border_spacing();
+	bool		border_spacing_defined	(void)	;
+	bool		bottom_border	(void)	;
+	void		clear_align	(void)	;
+	void		clear_all	(void)	;
+	void		clear_background	(void)	;
+	void		clear_border	(void)	;
+	void		clear_border_color	(void)	;
+	void		clear_border_spacing	(void)	;
+	void		clear_editor	(void)	;
+	void		clear_font	(void)	;
+	void		clear_font_size	(void)	;
+	void		clear_foreground	(void)	;
+	void		clear_frame	(void)	;
+	void		clear_height	(void)	;
+	void		clear_locked	(void)	;
+	void		clear_resizable	(void)	;
+	void		clear_width	(void)	;
+	void		clear_x_margin	(void)	;
+	void		clear_y_margin	(void)	;
+	//Fl_Widget	*	editor	(void)	;
+	//Fl_Widget	*	editor	(Fl_Widget *v)	;
+	tolua_get_set Fl_Widget* editor();
+	bool		editor_defined	(void)	;
+	bool		font_defined	(void)	;
+	//int		font_size	(void)	;
+	//int		font_size	(int n)	;
+	tolua_get_set Fl_Font font();
+	tolua_get_set int font_size();
+	bool		font_size_defined	(void)	;
+	//Fl_Color		foreground	(void)	;
+	//Fl_Color		foreground	(Fl_Color n)	;
+	tolua_get_set Fl_Color foreground();
+	bool		foreground_defined	(void)	;
+	bool		frame_defined	(void)	;
+	tolua_get_set Fl_Boxtype frame();
+	//int		height	(void)	;
+	//int		height	(int n )	;
+	tolua_get_set int height();
+	bool		height_defined	(void)	;
+	bool		inner_bottom_border	(void)	;
+	bool		inner_left_border	(void)	;
+	bool		inner_right_border	(void)	;
+	bool		inner_top_border	(void)	;
+	bool		left_border	(void)	;
+	//bool		locked	(void)	;
+	//bool		locked	(bool n)	;
+	tolua_get_set bool locked();
+	bool		locked_defined	(void)	;
+	//bool		resizable	(void)	;
+	//bool		resizable	(bool n)	;
+	tolua_get_set bool resizable();
+	bool		resizable_defined	(void)	;
+	bool		right_border	(void)	;
+	bool		top_border	(void)	;
+	//int		width	(void)	;
+	//int		width	(int n)	;
+	tolua_get_set int width();
+	bool		width_defined	(void)	;
+	//int		x_margin	(void)	;
+	//int		x_margin	(int x)	;
+	tolua_get_set int x_margin();
+	bool		x_margin_defined	(void)	;
+	//int		y_margin	(void)	;
+	//int		y_margin	(int y)	;
+	tolua_get_set int y_margin();
+	bool		y_margin_defined	(void)	;
+	
+	//	Cumulative assignment operator
+	//	This will only assign portions that are defined.
+	//const Flv_Style &operator=(const Flv_Style &n);
+	const Flv_Style &add(const Flv_Style &n);
+	
+	Flv_Style_List cell_style;
+};
+
+class	Flv_CStyle	 :public Flv_Style	{
+	public:
+			Flv_CStyle	()	;
+	//int		x	(void)	;
+	//int		x	(int n)	;
+	tolua_get_set int x();
+	//int		y	(void)	;
+	//int		y	(int n)	;
+	tolua_get_set int y();
+};
+
+class	Flv_List	 :public Fl_Group	{
+	protected:
+	virtual void draw_row( int Offset, int &X, int &Y, int &W, int &H, int R );
+	
+	public:
+			Flv_List	( int X, int Y, int W, int H, const char *l=0 )	;
+			
+	int		add_callback_when	(int v)	;
+	void	add_selection_style	( Flv_Style &s, int R, int C=0 )	;
+	int		bottom_row	(void)	;
+	bool	callback_on	(int v)	;
+	//int		callback_when	(void)	;
+	//int		callback_when	(int v)	;
+	tolua_get_set int callback_when();
+	void	cancel_edit	(void)	;
+	int		clear_callback_when	(int v)	;
+	void	clear_clicks	(void)	;
+	char	clicks	()	;
+	//Fl_Color		dead_space_color	(void)	;
+	//Fl_Color		dead_space_color	(Fl_Color &n)	;
+	tolua_get_set Fl_Color dead_space_color();
+	//int		edit_when	(void)	;
+	//int		edit_when	( int v )	;
+	tolua_get_set int edit_when();
+	Fl_Widget	*	editor	(void)	;
+	void		end_edit	(void)	;
+	//Flv_Feature		feature	(void)	;
+	//Flv_Feature		feature	(Flv_Feature v)	;
+	tolua_get_set Flv_Feature feature();
+	Flv_Feature		feature_add	(Flv_Feature v)	;
+	Flv_Feature		feature_remove	(Flv_Feature v)	;
+	bool		feature_test	(Flv_Feature v)	;
+	bool		full_resize	(void)	;
+virtual	bool		get_cell_bounds	( int &X, int &Y, int &W, int &H, int R, int C=0 )	;
+	void		get_default_style	( Flv_Style &s )	;
+	int		get_row	( int x, int y )	;
+virtual	void		get_style	(Flv_Style &s, int R, int C=0)	;
+	//Flv_ShowScrollbar		has_scrollbar	(void)	;
+	//Flv_ShowScrollbar		has_scrollbar	( Flv_ShowScrollbar v )	;
+	tolua_get_set Flv_ShowScrollbar has_scrollbar();
+virtual	void		load_editor	( Fl_Widget *e, int R, int C=0 )	;
+	//char		max_clicks	(void)	;
+	//char		max_clicks	(unsigned char n)	;
+	tolua_get_set unsigned char max_clicks();
+	bool		move_row	(int amount)	;
+	bool		multi_select	(void)	;
+	bool		persist_select	(void)	;
+virtual	void		position_editor	( Fl_Widget *e, int x, int y, int w, int h, Flv_Style &s )	;
+	//int		row	(void)	;
+	//int		row	(int n)	;
+	tolua_get_set int row();
+	bool		row_divider	(void)	;
+	bool		row_footer	(void)	;
+	bool		row_header	(void)	;
+virtual	int		row_height	( int n )	;
+virtual	int		row_height@set_row_height	( int n, int R )	;
+	//int		row_offset	(void)	;
+	//int		row_offset	( int n )	;
+	tolua_get_set int row_offset();
+	bool		row_resizable	( int r )	;
+	bool		row_resizable@set_row_resizable	( bool n, int r )	;
+	bool		row_selected	(int n)	;
+	//int		row_width	(void)	;
+	//int		row_width	( int n )	;
+	tolua_get_set int row_width();
+	//int		rows	(void)	;
+	//int		rows	(int n)	;
+	tolua_get_set int rows();
+	//int		rows_per_page	(void)	;
+	//int		rows_per_page	( int n )	;
+	tolua_get_set int rows_per_page();
+virtual	void		save_editor	( Fl_Widget *e, int R, int C=0 )	;
+	//int		scrollbar_width	(void)	;
+	//int		scrollbar_width	(int n)	;
+	tolua_get_set int scrollbar_width();
+	//bool		select_locked	(void)	;
+	//bool		select_locked	(bool n)	;
+	tolua_get_set bool select_locked();
+	//int		select_start_row	(void)	;
+	//int		select_start_row	(int n)	;
+	tolua_get_set int select_start_row();
+	void		start_edit	(void)	;
+	//int		top_row	(void)	;
+	//int		top_row	(int v)	;
+	tolua_get_set int top_row();
+	//int		why_event	()	;
+	//int		why_event	( int n )	;
+	tolua_get_set int why_event();
+	//	Style routines
+	Flv_Style global_style;		//	Global style
+	Flv_Style_List row_style;	//	Row styles	
+	
+virtual	int		handle	(int event)	;	
+};
+
+#define FLV_COL_HEADER -1
+#define FLV_COL_FOOTER -2
+
+#define FLV_MOVE_ON_ENTER_ROW_COL   1
+#define FLV_MOVE_ON_ENTER_COL_ROW   2
+#define FLV_MOVE_ON_ENTER_NEVER     3
+
+#define FLV_BUTTON1 1
+#define FLV_BUTTON2 2
+#define FLV_BUTTON3 4
+
+class	Flv_Table	 :public Flv_List	{
+	protected:
+	//virtual void draw_row( int Offset, int &X, int &Y, int &W, int &H, int R );
+	virtual void draw_cell( int Offset, int &X, int &Y, int &W, int &H, int R, int C );
+
+	public:
+			Flv_Table	( int X, int Y, int W, int H, const char *l=0 )	;
+	void		add_selection_style	( Flv_Style &s, int R, int C=0 )	;
+	//int		buttons	(void)	;
+	//int		buttons	(int v)	;
+	tolua_get_set int buttons();
+	void		cancel_edit	(void)	;
+	void		cell_area	( int &X, int &Y, int &W, int &H)	;
+	bool		cell_selected	(int R, int C)	;
+	//int		col	(void)	;
+	//int		col	( int n )	;
+	tolua_get_set int col();
+	bool		col_divider	(void)	;
+	bool		col_footer	(void)	;
+	bool		col_header	(void)	;
+	bool		col_resizable	(int c)	;
+	bool		col_resizable@set_col_resizable	( bool n, int c)	;
+	bool		col_selected	(int n)	;
+virtual	int		col_width	(int c)	;
+virtual	int		col_width@set_col_width	(int n, int c)	;
+	//int		cols	(void)	;
+	//int		cols	( int n )	;
+	tolua_get_set int cols();
+	//int		edit_when	(void)	;
+	//int		edit_when	( int v )	;
+	tolua_get_set int edit_when();
+	void		end_edit	(void)	;
+	bool		get_cell_bounds	( int &X, int &Y, int &W, int &H, int R, int C )	;
+	int		get_col	( int x, int y )	;
+virtual	void		get_style	( Flv_Style &s, int R, int C=0 )	;
+	bool		move_col	(int amount)	;
+	//int		move_on_enter	(void)	;
+	//int		move_on_enter	(int v)	;
+	tolua_get_set int move_on_enter();
+	bool		move_row	(int amount)	;
+	//int		row	(void)	;
+	//int		row	(int n)	;
+	tolua_get_set int row();
+	bool		select_row	(void)	;
+	//int		select_start_col	(void)	;
+	//int		select_start_col	(int n)	;
+	tolua_get_set int select_start_col();
+	void		start_edit	(void)	;
+	Flv_Style_List col_style;							//	Column styles
+	
+	//bellow is to force the generation of the Flv_Table__resize
+	virtual void resize(int x, int y, int w, int h);
+	virtual	int		handle	(int event)	;
+};
+
+class	Flve_Check_Button	 :public Fl_Check_Button	{
+	public:
+			Flve_Check_Button	( int X, int Y, int W, int H, const char *l=0 )	;
+};
+
+class	Flve_Input	 :public Fl_Input	{
+	public:
+			Flve_Input	( int X, int Y, int W, int H, const char *l=0 )	;
+};
+
+} //end module flvw
+/*
+module murgaLua {
+
+$#include "Fl_murgaLuaTimer.h"
+
+class Fl_murgaLuaTimer : public Fl_Widget
+{
+  char active;
+  static void stepcb(void *);
+public:
+  virtual void draw();
+  Fl_murgaLuaTimer(int X, int Y, int W, int H, const char *l);
+  ~Fl_murgaLuaTimer();
+  void doWait(double);
+  char isActive();
+};
+
+$[
+-- This creates a dummy time control
+function murgaLua.createFltkTimer()
+    return murgaLua.Fl_murgaLuaTimer(0,0,0,0,"")
+end
+$]
+
+} //end module murgaLua
+*/

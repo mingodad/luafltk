@@ -1,0 +1,5 @@
+
+This example is not elegant, not efficient, and not very usable.
+It's here because I don't yet know a decent way to drag objects.
+
+You may experience lag or even a segmentation fault. Caveat y'all.

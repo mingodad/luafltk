@@ -1,0 +1,9 @@
+This example was originally intended to demonstrate Fl_Pixmap()
+but that particular class is not supported in MurgaLua.
+The script still uses embedded image data as would be used
+with Fl_Pixmap, but instead of drawing it directly, the data
+is saved to a temp file at runtime. The temp file is loaded
+back into murgaLua with Fl_XPM_Image().
+
+The toggle button shows how deimage() is used to set an
+image to a widget for use in its deactivated state.
