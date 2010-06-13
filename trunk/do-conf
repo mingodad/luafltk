@@ -1,2 +1,0 @@
-export LUA=../lua-5.1.4/luasqlite3.exe
-./configure --with-lua-prefix=../lua-5.1.4/src --with-lua-includes=../lua-5.1.4/src --with-lua-libraries=../lua-5.1.4
