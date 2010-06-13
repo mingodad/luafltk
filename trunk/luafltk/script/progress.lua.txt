@@ -1,0 +1,9 @@
+
+This widget displays the percentage of available widget samples
+that have been seen so far in this session.
+The actual code used to create the data for this widget is found
+at the beginning of the main script (widgets.lua), because it
+needs to be updated with each new widget sample displayed.
+
+This data is not exported to the editor window, so this example
+will not work as-is from a preview or exported script.

@@ -1,0 +1,40 @@
+lbitlib.lo: lbitlib.c config.h ../lua-5.1.4/src/lua.h \
+ c:\tdmingw\bin\../lib/gcc/mingw32/4.4.1/include/stdarg.h \
+ c:\tdmingw\bin\../lib/gcc/mingw32/4.4.1/include/stddef.h \
+ ../lua-5.1.4/src/luaconf.h \
+ c:\tdmingw\bin\../lib/gcc/mingw32/4.4.1/../../../../include/limits.h \
+ c:\tdmingw\bin\../lib/gcc/mingw32/4.4.1/../../../../include/_mingw.h \
+ ../lua-5.1.4/src/lauxlib.h \
+ c:\tdmingw\bin\../lib/gcc/mingw32/4.4.1/../../../../include/stdio.h \
+ c:\tdmingw\bin\../lib/gcc/mingw32/4.4.1/../../../../include/sys/types.h \
+ ../lua-5.1.4/src/lua.h bit_limits.h \
+ c:\tdmingw\bin\../lib/gcc/mingw32/4.4.1/../../../../include/stdint.h \
+ c:\tdmingw\bin\../lib/gcc/mingw32/4.4.1/../../../../include/math.h
+
+config.h:
+
+../lua-5.1.4/src/lua.h:
+
+c:\tdmingw\bin\../lib/gcc/mingw32/4.4.1/include/stdarg.h:
+
+c:\tdmingw\bin\../lib/gcc/mingw32/4.4.1/include/stddef.h:
+
+../lua-5.1.4/src/luaconf.h:
+
+c:\tdmingw\bin\../lib/gcc/mingw32/4.4.1/../../../../include/limits.h:
+
+c:\tdmingw\bin\../lib/gcc/mingw32/4.4.1/../../../../include/_mingw.h:
+
+../lua-5.1.4/src/lauxlib.h:
+
+c:\tdmingw\bin\../lib/gcc/mingw32/4.4.1/../../../../include/stdio.h:
+
+c:\tdmingw\bin\../lib/gcc/mingw32/4.4.1/../../../../include/sys/types.h:
+
+../lua-5.1.4/src/lua.h:
+
+bit_limits.h:
+
+c:\tdmingw\bin\../lib/gcc/mingw32/4.4.1/../../../../include/stdint.h:
+
+c:\tdmingw\bin\../lib/gcc/mingw32/4.4.1/../../../../include/math.h:

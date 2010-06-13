@@ -1,0 +1,6 @@
+fltk:Fl_Browser(x_position,y_position,width,height,"text label")
+
+Browser will accept input beginning with format characters,
+such as @b to print the line with a bold font.
+See the FLTK docs for more info:
+Class Reference -> Fl_Browser -> format_char 

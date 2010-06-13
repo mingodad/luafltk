@@ -1,0 +1,26 @@
+/* XPM */
+static char *greenguy[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 4 1",
+"  c #000000",
+". c #00ff00",
+"X c #ffffff",
+"o c None",
+/* pixels */
+"oooooo    oooooo",
+"oooo  ....  oooo",
+"oo  ........  oo",
+"o ............ o",
+"o .   ....   . o",
+" . XXX .. XXX . ",
+" . X X .. X X . ",
+" . XXX .. XXX . ",
+" ..   ....   .. ",
+"o ............ o",
+"o ...      ... o",
+"o   ...  ...   o",
+"      ....      ",
+"                ",
+"oo            oo",
+"ooooo      ooooo"
+};

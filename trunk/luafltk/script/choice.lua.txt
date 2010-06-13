@@ -1,0 +1,4 @@
+fltk:Fl_Choice(x_position,y_position,width,height,"label")
+
+As with Fl_Menu, items are inserted with the "add" method
+

@@ -1,0 +1,101 @@
+
+Beta 2
+
+This program demonstrates various features of MurgaLua, with
+a focus on FLTK widgets (knobs, buttons, etc).
+
+These are mostly very simple examples, and in no way show every
+method of creating usable murgaLua scripts. 
+
+The Lua manual was included to provide more detailed documentation.
+The FLTK manual wasn't included, since it's provided with MurgaLua.
+
+This program requires at least MurgaLua version 0.5.5
+Some features will not be available without version 0.6 or later,
+and version 0.6 will eventually be a requirement. I will attempt
+to continue support for 0.6 after that point, but that will depend
+mainly on future changes in murgaLua and on whether or not anyone
+actually continues to use the older releases.
+
+Present support for an external viewer is very basic.
+The simplest way to view code with syntax hilighting was to allow
+the user to view the code in the text viewer of his choice.
+This can be accomplished by pressing the script title button at
+top right. The eventual goal is to integrate this more naturally
+and to allow the external application to be used as *the* editor.
+________________________________________________________________
+
+KNOWN ISSUES
+
+The edit preview feature does not work for the progress widget,
+because that particular example uses a table that is kept in the
+main script. It is, in my opinion, a minor issue that may just
+be ignored for an indefinite time.
+
+The edit window grabs some global variables in order to use them
+in a preview or exported script. Many examples do not actually use
+these variables, but it was much easier to include them than to
+check every example before loading it into the editor.
+
+Title bars do not always display the correct information.
+
+In the spirit of keeping it simple, this application does not
+do special checks to insure that edited code remains in a buffer.
+If you are making changes to a code sample, those changes will
+be lost immediately if you choose to edit another sample.
+The editor is not entended as a feature-rich text editor, but as
+a simple means to make small changes to widget samples for the
+purpose of "just seeing what this thing does".
+
+Testing on Windows has been infrequent and incomplete, although
+I have made an effort to stay away from system-specific functions
+wherever possible.
+
+The author is an opinionated bastard who often colors his notes
+with personal bias. These colorings should not necessarily be
+read as recommendations, but more as observations.
+________________________________________________________________
+
+CREDITS
+
+The following people have generously provided code samples,
+feedback, help, and inspiration for this project.
+
+John Murga
+Robert Shingledecker (roberts)
+William Griffin (iGame3D)
+Marielle Lange (widged)
+^thehatsrule^
+Juergen
+Christian (chrimo)
+________________________________________________________________
+
+LICENSE
+
+This is free software, provided for non-profit educational
+purposes, with no guarantee of usefulness.
+
+widgets.lua copyright (C) 2007-2008 mikshaw, distributed under
+Creative Commons Attribution-NonCommercial-ShareAlike license:
+http://creativecommons.org/licenses/by-nc-sa/3.0/
+
+All images in the "images" directory were created by mikshaw
+and are redistributable, unaltered, under the
+Creative Commons Attribution-NonCommercial-NoDerivs license:
+http://creativecommons.org/licenses/by-nc-nd/3.0/
+
+Copyrights of individual code samples are held by their
+respective authors and are used here with express consent.
+
+Code samples that were written by mikshaw are released to the
+public without copyright, to be used in any way you like.
+
+MurgaLua Copyright (C) 2006-8 John Murga
+http://www.murga-projects.com/murgaLua/
+
+Lua 5.1 Reference Manual 
+by R. Ierusalimschy, L. H. de Figueiredo, W. Celes 
+Copyright (C) 2006-2007 Lua.org, PUC-Rio.
+Freely available under the terms of the Lua license
+http://www.lua.org/license.html
+

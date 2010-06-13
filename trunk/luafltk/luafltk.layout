@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Release" />
+	<File name="lua.c" open="1" top="0" tabpos="1">
+		<Cursor position="3850" topLine="147" />
+	</File>
+	<File name="..\..\..\..\..\murga\murgaLua\3rd-party\luafilesystem-1.4.1\src\lfs.c" open="1" top="0" tabpos="2">
+		<Cursor position="16559" topLine="651" />
+	</File>
+</CodeBlocks_layout_file>

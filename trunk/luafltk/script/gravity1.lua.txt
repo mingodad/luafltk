@@ -1,0 +1,3 @@
+
+A basic test in interaction of widgets with mouse movement.
+The "fltk._FL_OVAL_BOX" check was done to support murgaLua 0.5

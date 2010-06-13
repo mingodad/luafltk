@@ -1,0 +1,64 @@
+
+albox=fltk:Fl_Box(120,100,200,120,"When you set an image to a widget,\nit becomes a part of its label and will be affected by align()")
+albox:box(fltk.FL_BORDER_BOX)
+albox:image(fltk:Fl_XPM_Image(demo_appdir.."/images/eyes.xpm"))
+
+
+alchoices={
+fltk.FL_ALIGN_CENTER,fltk.FL_ALIGN_TOP,fltk.FL_ALIGN_BOTTOM,fltk.FL_ALIGN_LEFT,fltk.FL_ALIGN_TOP_LEFT,
+fltk.FL_ALIGN_BOTTOM_LEFT,fltk.FL_ALIGN_RIGHT,fltk.FL_ALIGN_TOP_RIGHT,fltk.FL_ALIGN_BOTTOM_RIGHT,
+fltk.FL_ALIGN_INSIDE,fltk.FL_ALIGN_TEXT_OVER_IMAGE,fltk.FL_ALIGN_CLIP,fltk.FL_ALIGN_WRAP,
+}
+
+allabels={
+"FL_ALIGN_CENTER","FL_ALIGN_TOP","FL_ALIGN_BOTTOM","FL_ALIGN_LEFT","FL_ALIGN_TOP_LEFT",
+"FL_ALIGN_BOTTOM_LEFT","FL_ALIGN_RIGHT","FL_ALIGN_TOP_RIGHT","FL_ALIGN_BOTTOM_RIGHT",
+"FL_ALIGN_INSIDE","FL_ALIGN_TEXT_OVER_IMAGE","FL_ALIGN_CLIP","FL_ALIGN_WRAP",
+}
+
+alchoice=fltk:Fl_Choice(120,300,200,30)
+
+-- get the original size of the menu, so we know
+-- what to remove when we're finished with the new menu
+-- subtract one to account for the "terminator" at the end of the menu
+demo_menu_start_size=demo_menu_bar:size()-1
+
+-- Any secondary menu apparently needs special treatment
+-- Here a hidden submenu is being added to the main menu
+-- and is being pointed to from this new dropdown menu
+for i = 1,table.getn(alchoices) do
+demo_menu_bar:add("temp/"..alchoices[i].." : "..allabels[i])
+end
+al_menu=demo_menu_bar:find_item("temp/"..alchoices[1].." : "..allabels[1]) -- create a pointer to the new submenu contents
+alchoice:menu(al_menu) -- use the new submenu as the dropdown menu
+temp_menu=demo_menu_bar:find_item("temp") -- create a pointer to the submenu (for hiding)
+temp_menu:hide() -- hide the new submenu on the main menu bar
+
+alchoice:value(0) -- select the first item
+
+alchoice:callback(
+function(alchoice_cb)
+  for i=1,table.getn(alchoices) do
+    if alchoice:text() == alchoices[i].." : "..allabels[i] then
+      albox:hide()
+      albox:align(alchoices[i])
+      albox:show()
+      break
+    end
+  end
+end
+)
+
+ukslide = fltk:Fl_Value_Slider(20,340,400,30)
+ukslide:type(fltk.FL_HORIZONTAL)
+ukslide:align(fltk.FL_ALIGN_TOP)
+ukslide:step(1)
+ukslide:minimum(0)
+ukslide:maximum(128)
+ukslide:callback(
+function(ukslide_cb)
+  albox:hide()
+  albox:align(ukslide:value())
+  albox:show()
+end
+)

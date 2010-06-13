@@ -1,0 +1,57 @@
+TODO:
+	Fix inconsistent enable/disable of menu items
+	Fix title to always show what's in the window
+	Rebuild menu with murgaLua 0.6 features & remove 0.5 support
+
+2008-02-01:
+	* Beta 2 released
+	* Fixed edit preview to use needed global variables
+	* Preview runs in a separate process (requires murgaLua 0.6+)
+	* Some README updates
+	* Added examples:
+	   sliding tiles
+	   more gravity tests
+
+2008-01-22:
+	* Beta 1 released
+	* Fixed draw loop segfault when viewing notes
+	* Added some features to Fl_File_Browser
+	* Added support for external code viewer
+	* Fixed the labeltypes widget (requires murgaLua 0.6+)
+	* Fixed boxtypes to display properly in both 0.5 and 0.6
+	* Removed some old/broken scripts
+	* Added examples:
+	   Fl_File_Icon (added to main script)
+	   positioner
+	   box types
+	   marquee
+	   embedded XPM (murgaLua 0.6+)
+	   draggable box
+	   gravity tests
+
+2007-09-11:
+	* Alpha 2 released
+	* Removed dropdown menu from align.lua
+	* A few minor changes for easier keyboard control
+	* Added notes for various widgets
+	* Fixed some filename path issues for Windows
+	* Added some image manipulation to image widgets
+	* Added examples:
+	    system fonts
+	    curve drawing
+	    freehand drawing
+	    line drawing
+	    secret input
+	    scroll
+	    progress bar
+	    PNG image
+	    PNM image
+	    label symbols
+	    cursors
+	    fl_dir_chooser
+	    window
+	    radio buttons
+	    tooltips
+2007-08-18:
+	* Alpha 1 released
+
